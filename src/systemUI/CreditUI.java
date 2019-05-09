@@ -23,8 +23,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-import credit_management.completed_credit;
-import credit_management.completed_credit_list;
+import creditManagement.CompletedCredit;
+import creditManagement.CompletedCreditList;
 
 public class CreditUI extends JPanel{
 	private UserInterface MAIN;
@@ -93,7 +93,7 @@ public class CreditUI extends JPanel{
 					credit_JList = SemesterList.getCredit_JList();
 					int index = credit_JList.getSelectedIndex();
 					
-					if(index >= 0 && !(credit_JList.getSelectedValue() == completed_credit_list.NO_LIST)) {
+					if(index >= 0 && !(credit_JList.getSelectedValue() == CompletedCreditList.NO_LIST)) {
 						contents_print(st_id, isapped, RBAL);
 					}
 				}
@@ -126,11 +126,11 @@ public class CreditUI extends JPanel{
 	
 	class CreditSemester extends JPanel{
 		private JList<String> credit_JList;
-		private completed_credit_list c_list;
+		private CompletedCreditList c_list;
 
 		public CreditSemester(int st_id, boolean isapped) throws ClassNotFoundException {
 			setLayout(null);
-			c_list = completed_credit_list.get_completed_credit_list();
+			c_list = CompletedCreditList.get_completed_credit_list();
 			String[] credit_list_string;
 			if(isapped) {
 				credit_list_string = c_list.semester_list_isapped(st_id);				
@@ -163,11 +163,11 @@ public class CreditUI extends JPanel{
 			this.credit_JList = credit_JList;
 		}
 		
-		public completed_credit_list getC_list() {
+		public CompletedCreditList getC_list() {
 			return c_list;
 		}
 
-		public void setC_list(completed_credit_list c_list) {
+		public void setC_list(CompletedCreditList c_list) {
 			this.c_list = c_list;
 		}
 		
@@ -182,7 +182,7 @@ public class CreditUI extends JPanel{
 		
 		private Object DATA[][];
 		
-		private ArrayList<completed_credit> list = new ArrayList<>();
+		private ArrayList<CompletedCredit> list = new ArrayList<>();
 		private int selected_index = -1;
 		
 		private int year = 0;
@@ -194,7 +194,7 @@ public class CreditUI extends JPanel{
 			year = input_year;
 			semester = input_semester;
 			
-			completed_credit_list c_list = completed_credit_list.get_completed_credit_list();
+			CompletedCreditList c_list = CompletedCreditList.get_completed_credit_list();
 			if(isapped) {
 				list = c_list.applicated_credit_list_print(st_id, year, semester);
 			}
@@ -255,7 +255,7 @@ public class CreditUI extends JPanel{
 			return selected_index;
 		}
 
-		public ArrayList<completed_credit> getList() {
+		public ArrayList<CompletedCredit> getList() {
 			return list;
 		}
 

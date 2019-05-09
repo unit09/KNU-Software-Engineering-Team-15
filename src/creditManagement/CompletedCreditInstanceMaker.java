@@ -1,8 +1,8 @@
-package credit_management;
+package creditManagement;
 
-public class completed_credit_test_instance_maker {
+public class CompletedCreditInstanceMaker {
 //초기화 -> 학점인정 신청(선택적) -> 저장 순서
-	private static completed_credit_list CCList;
+	private static CompletedCreditList CCList;
 	private static String[] nation_list = {"미국", "영국", "중국", "일본"};
 	private static String[][] univ_list = {{"하버드", "MIT"}, {"옥스포드"}, {"산둥"}, {"메이지", "교토", "와세다"}};
 	private static String[] dept_list = {"컴퓨터", "전자"};
@@ -13,7 +13,7 @@ public class completed_credit_test_instance_maker {
 	private static double[] grade_list = {1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3};
 	
 	public static void main(String[] args) throws ClassNotFoundException {
-		CCList = completed_credit_list.get_completed_credit_list();
+		CCList = CompletedCreditList.get_completed_credit_list();
 		
 		do_initial(2015123456, 2018, 1, "미국", "하버드", "컴퓨터", "컴퓨터학개론", 3, 3.7, false);
 		do_initial(2015123456, 2018, 1, "미국", "하버드", "컴퓨터", "컴퓨터윤리", 2, 3.3, false);
@@ -40,7 +40,7 @@ public class completed_credit_test_instance_maker {
 		random_initial(2015111111, 2019, 1);
 	}
 	
-	public static void list_add(completed_credit CC) {
+	public static void list_add(CompletedCredit CC) {
 		boolean ismod = false;
 		for(int i = 0; i < CCList.get_instance_list().size() ; i++) {
 			try {
@@ -60,9 +60,9 @@ public class completed_credit_test_instance_maker {
 	}
 	
 	public static void do_initial(int st_id, int year, int semester, String nation, String univ, String dept, String course, int acc_credit, double grade, boolean isapped) {
-		completed_credit s1;
+		CompletedCredit s1;
 		
-		s1 = new completed_credit();
+		s1 = new CompletedCredit();
 		s1.setSt_id(st_id);
 		s1.setYear(year);
 		s1.setSemester(semester);

@@ -1,8 +1,8 @@
-package credit_management;
+package creditManagement;
 
 import java.io.Serializable;
 
-public class completed_credit implements Serializable{
+public class CompletedCredit implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private int st_id = 0;
@@ -17,7 +17,7 @@ public class completed_credit implements Serializable{
 	private boolean application_state = false;
 	
 	public void credit_application() throws ClassNotFoundException { // 학점 인정 신청
-		completed_credit_list list = completed_credit_list.get_completed_credit_list();
+		CompletedCreditList list = CompletedCreditList.get_completed_credit_list();
 		application_state = true;
 		
 		list.completed_credit_list_modify(this);
@@ -26,7 +26,7 @@ public class completed_credit implements Serializable{
 	}
 	
 	public void register_credit() throws ClassNotFoundException { // 파견 이후 새로 생성되는 이수학점 목록들
-		completed_credit_list list = completed_credit_list.get_completed_credit_list();
+		CompletedCreditList list = CompletedCreditList.get_completed_credit_list();
 		
 		list.completed_credit_list_append(this);
 	}

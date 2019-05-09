@@ -1,7 +1,7 @@
 eclipse.preferences.version=1
-encoding//src/credit_management/completed_credit.java=MS949
-encoding//src/credit_management/completed_credit_list.java=MS949
-encoding//src/credit_management/completed_credit_test_instance_maker.java=MS949
+encoding//src/creditManagement/CompletedCredit.java=MS949
+encoding//src/creditManagement/CompletedCreditInstanceMaker.java=MS949
+encoding//src/creditManagement/CompletedCreditList.java=MS949
 encoding//src/exchange/Application.java=MS949
 encoding//src/exchange/Recruitment.java=MS949
 encoding//src/exchange/RecruitmentList.java=MS949

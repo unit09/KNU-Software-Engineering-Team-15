@@ -1,28 +1,28 @@
-package credit_management;
+package creditManagement;
 
 import java.io.*;
 
 import java.util.*;
 
  
-public class completed_credit_list {
-	private static completed_credit_list list_inst = null;
-	private static ArrayList<completed_credit> credit_list;
+public class CompletedCreditList {
+	private static CompletedCreditList list_inst = null;
+	private static ArrayList<CompletedCredit> credit_list;
 	private static final String filename = "database/completed_credit/completed_credit_list_file";
 	
 	public final static String NO_LIST = "내역이 없습니다";
 	
-	private completed_credit_list() {} // singleton으로 생성하기 위해 생성자를 private로
+	private CompletedCreditList() {} // singleton으로 생성하기 위해 생성자를 private로
 	
-	public static completed_credit_list get_completed_credit_list() throws ClassNotFoundException {
+	public static CompletedCreditList get_completed_credit_list() throws ClassNotFoundException {
 		if(list_inst == null) {
-			list_inst = new completed_credit_list();
+			list_inst = new CompletedCreditList();
 			credit_list  = new ArrayList<>();
 			list_download();
 		}
 		return list_inst;
 	}
-	public ArrayList<completed_credit> get_instance_list(){
+	public ArrayList<CompletedCredit> get_instance_list(){
 		return credit_list;
 	}
 	
@@ -35,7 +35,7 @@ public class completed_credit_list {
 			file = new FileInputStream(filename);
 			obj = new ObjectInputStream(file);
 
-			credit_list = (ArrayList<completed_credit>) obj.readObject();
+			credit_list = (ArrayList<CompletedCredit>) obj.readObject();
 			obj.close();
 			file.close();
 		}
@@ -76,7 +76,7 @@ public class completed_credit_list {
 	}
 	
 	//instance initial용도
-	public boolean completed_credit_list_append(completed_credit input) throws ClassNotFoundException {
+	public boolean completed_credit_list_append(CompletedCredit input) throws ClassNotFoundException {
 		
 		list_download(); // 기존에 저장된 리스트 불러옴
 		
@@ -86,7 +86,7 @@ public class completed_credit_list {
 			int st_id = input.getSt_id(), year = input.getYear(), semester = input.getSemester();
 			String univ = input.getUniv(), course = input.getCourse();
 			boolean overlap = false;
-			for(completed_credit one : credit_list) {
+			for(CompletedCredit one : credit_list) {
 				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
 					overlap = true;
 				}
@@ -105,14 +105,14 @@ public class completed_credit_list {
 		
 	}
 	
-	public boolean completed_credit_list_modify(completed_credit input) throws ClassNotFoundException {
+	public boolean completed_credit_list_modify(CompletedCredit input) throws ClassNotFoundException {
 		boolean ischanged = false;
 		try{
 			// 수정된 사항을 저장하기 위해 리스트의 인스턴스 내에 바뀌지 않을 데이터로 기존 값 찾음. 인덱스 쓰기에는 더 복잡해짐.
 			int st_id = input.getSt_id(), year = input.getYear(), semester = input.getSemester();
 			String course = input.getCourse();
 			int i = 0;
-			for(completed_credit one : credit_list) {
+			for(CompletedCredit one : credit_list) {
 				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
 					one = input;
 					ischanged = true;
@@ -128,7 +128,7 @@ public class completed_credit_list {
 	
 	public int count_std_term_credit(int st_id, int year, int semester) {
 		int count = 0;
-		for(completed_credit one : credit_list) {
+		for(CompletedCredit one : credit_list) {
 			if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester) {
 				count ++;
 			}
@@ -137,7 +137,7 @@ public class completed_credit_list {
 	}
 	public int count_std_term_credit_isapped(int st_id, int year, int semester) {
 		int count = 0;
-		for(completed_credit one : credit_list) {
+		for(CompletedCredit one : credit_list) {
 			if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
 				count ++;
 			}
@@ -205,12 +205,12 @@ public class completed_credit_list {
 		return SemeList_isapped;
 	}
 	
-	public ArrayList<completed_credit> completed_credit_list_print(int st_id, int year, int semester) { // 학기별 이수한 학점 목록 출력
+	public ArrayList<CompletedCredit> completed_credit_list_print(int st_id, int year, int semester) { // 학기별 이수한 학점 목록 출력
 		int count = count_std_term_credit(st_id, year, semester);
-		ArrayList<completed_credit> CCLP = new ArrayList<>();
+		ArrayList<CompletedCredit> CCLP = new ArrayList<>();
 		
 		if(count > 0) {
-			for(completed_credit one : credit_list) {
+			for(CompletedCredit one : credit_list) {
 				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester) {
 					CCLP.add(one);
 				}
@@ -219,12 +219,12 @@ public class completed_credit_list {
 		return CCLP;
 	}
 	
-	public ArrayList<completed_credit> applicated_credit_list_print(int st_id, int year, int semester) { // 이수한 학점 목록 중 신청한 학점 목록 출력
+	public ArrayList<CompletedCredit> applicated_credit_list_print(int st_id, int year, int semester) { // 이수한 학점 목록 중 신청한 학점 목록 출력
 		int count = count_std_term_credit_isapped(st_id, year, semester);
-		ArrayList<completed_credit> ACLP = new ArrayList<>();
+		ArrayList<CompletedCredit> ACLP = new ArrayList<>();
 		
 		if(count > 0) {
-			for(completed_credit one : credit_list) {
+			for(CompletedCredit one : credit_list) {
 				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
 					ACLP.add(one);
 				}
