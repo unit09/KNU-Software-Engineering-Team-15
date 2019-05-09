@@ -1,4 +1,4 @@
-package Exchange;
+package exchange;
 
 import javax.swing.*;
 import java.io.Serializable;

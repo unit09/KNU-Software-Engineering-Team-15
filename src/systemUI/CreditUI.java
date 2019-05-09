@@ -1,4 +1,4 @@
-package System_UI;
+package systemUI;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -26,8 +26,7 @@ import javax.swing.table.TableColumnModel;
 import credit_management.completed_credit;
 import credit_management.completed_credit_list;
 
-
-public class credit_UI extends JPanel{
+public class CreditUI extends JPanel{
 	private UserInterface MAIN;
 	
 	private int count = 0;
@@ -35,13 +34,13 @@ public class credit_UI extends JPanel{
 	private JPanel contents_bg = null; 
 	private JTable credit_JTable;
 	private JList<String> credit_JList;
-	private Credit_Contents Display = null;
-	private Credit_Contents temp = null;
+	private CreditContents Display = null;
+	private CreditContents temp = null;
 	
 	private int selected_index = -1;
 	private JButton register_button = new JButton("Ω≈√ª");
 	
-	public credit_UI(int st_id, UserInterface MAIN, boolean isapped) throws ClassNotFoundException {
+	public CreditUI(int st_id, UserInterface MAIN, boolean isapped) throws ClassNotFoundException {
 		this.MAIN = MAIN;
 		setLayout(new FlowLayout());
 		setSize(500, 400);
@@ -109,7 +108,7 @@ public class credit_UI extends JPanel{
 			selected_index = -1;
 		}
 		try {
-			temp = new Credit_Contents(st_id, isapped, Integer.parseInt(credit_JList.getSelectedValue().substring(0, 4)), Integer.parseInt(credit_JList.getSelectedValue().substring(6, 7)));
+			temp = new CreditContents(st_id, isapped, Integer.parseInt(credit_JList.getSelectedValue().substring(0, 4)), Integer.parseInt(credit_JList.getSelectedValue().substring(6, 7)));
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -175,7 +174,7 @@ public class credit_UI extends JPanel{
 	}
 	
 	
-	class Credit_Contents extends JPanel implements MouseListener{
+	class CreditContents extends JPanel implements MouseListener{
 		private JTable contents_table;
 		private JScrollPane ScrollList;
 		
@@ -189,7 +188,7 @@ public class credit_UI extends JPanel{
 		private int year = 0;
 		private int semester = 0;
 		
-		public Credit_Contents(int st_id, boolean isapped, int input_year, int input_semester) throws ClassNotFoundException {
+		public CreditContents(int st_id, boolean isapped, int input_year, int input_semester) throws ClassNotFoundException {
 			selected_index = -1;
 			
 			year = input_year;

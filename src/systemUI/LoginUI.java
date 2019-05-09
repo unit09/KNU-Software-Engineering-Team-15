@@ -1,11 +1,13 @@
-package System_UI;
+package systemUI;
 
-import User.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import user.*;
+
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -58,7 +60,7 @@ public class LoginUI extends JFrame {
             FileInputStream fs = new FileInputStream(userD);
             ObjectInputStream os = new ObjectInputStream(fs);
             try {
-                users = (ArrayList<Student>) os.readObject();
+                users = (ArrayList<Student>)os.readObject();
             } catch (Exception e) {
                 System.out.println("read");
             }

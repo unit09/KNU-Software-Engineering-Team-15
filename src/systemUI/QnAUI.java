@@ -1,4 +1,4 @@
-package System_UI;
+package systemUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,11 +20,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import Question.Faq;
-import Question.QnAList;
-import Question.Qna;
+import question.Faq;
+import question.QnAList;
+import question.Qna;
 
-public class QnA_UI extends JPanel{
+public class QnAUI extends JPanel{
 
 	private JPanel contentPane;
 	static Stack<JList> previousPanels = new Stack<JList>(); //
@@ -37,7 +37,7 @@ public class QnA_UI extends JPanel{
 	JButton write;
 	JButton answer;
 
-	public QnA_UI(int id_type) throws ClassNotFoundException {
+	public QnAUI(int id_type) throws ClassNotFoundException {
 		setLayout(null);
 		QnAList.readQnaList();
 		

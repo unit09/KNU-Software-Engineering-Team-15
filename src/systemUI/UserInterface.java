@@ -1,7 +1,8 @@
-package System_UI;
+package systemUI;
 
-import User.*;
-import Exchange.*;
+import exchange.*;
+import user.*;
+
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -15,7 +16,7 @@ public class UserInterface extends JFrame {
     private JList list3;
     private JTabbedPane Tab = new JTabbedPane(JTabbedPane.LEFT);
 
-	private credit_UI CreditViewIsapped;
+	private CreditUI CreditViewIsapped;
 	
     private static RecruitmentList sampleList;
     private static File fp = new File("database/rerucitment/Rerucitment DB.txt");
@@ -80,8 +81,8 @@ public class UserInterface extends JFrame {
         if(userType == 0) {
             Tab.addTab("진행상황 조회", new StateLook());
     		try {
-				Tab.addTab("이수학점 관리", new credit_UI(user.getStudentID(), this, false));
-	    		CreditViewIsapped = new credit_UI(user.getStudentID(), this, true);
+				Tab.addTab("이수학점 관리", new CreditUI(user.getStudentID(), this, false));
+	    		CreditViewIsapped = new CreditUI(user.getStudentID(), this, true);
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
 			}
@@ -89,7 +90,7 @@ public class UserInterface extends JFrame {
         }
         Tab.addTab("파견실적 조회", new JPanel());    //미구현
         try {
-			Tab.addTab("QNA 게시판", new QnA_UI(userinfo.getStudentID()));
+			Tab.addTab("QNA 게시판", new QnAUI(userinfo.getStudentID()));
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
@@ -341,7 +342,7 @@ public class UserInterface extends JFrame {
             add(delet);
         }
     }
-	public credit_UI getCreditViewIsapped() {
+	public CreditUI getCreditViewIsapped() {
 		return CreditViewIsapped;
 	}
 }

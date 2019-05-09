@@ -1,7 +1,8 @@
-package Exchange;
+package exchange;
 
-import User.*;
 import java.io.Serializable;
+
+import user.*;
 
 public class Application implements Serializable {
     private Student applyStudent;

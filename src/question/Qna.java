@@ -1,4 +1,4 @@
-package Question;
+package question;
 import java.io.*;
 
 public class Qna implements Serializable

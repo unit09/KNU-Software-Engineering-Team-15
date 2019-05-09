@@ -1,7 +1,8 @@
-package User;
+package user;
 
-import Exchange.*;
 import java.io.Serializable;
+
+import exchange.*;
 
 public class Administer implements Serializable {
     private String name;
