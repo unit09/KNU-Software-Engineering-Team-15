@@ -77,9 +77,9 @@ public class UserInterface extends JFrame {
         Tab.setBounds(10, 10, 650, 480);
 
         Tab.addTab("메인", new Initial());
-        Tab.addTab("모집공고 조회", new RecruitLook());
+        Tab.addTab("모집공고 조회", new RecruitLook(userType, sampleList, user, list));
         if(userType == 0) {
-            Tab.addTab("진행상황 조회", new StateLook());
+            Tab.addTab("진행상황 조회", new StateLook(sampleList, user, list3));
     		try {
 				Tab.addTab("이수학점 관리", new CreditUI(user.getStudentID(), this, false));
 	    		CreditViewIsapped = new CreditUI(user.getStudentID(), this, true);
@@ -95,16 +95,19 @@ public class UserInterface extends JFrame {
 			e1.printStackTrace();
 		}
         if(userType == 1) {
-            Tab.addTab("모집공고 작성", new RecruitCreate());
-            Tab.addTab("모집공고 삭제", new RecruitDelete());
+            Tab.addTab("모집공고 작성", new RecruitCreate(sampleList, admin, list2));
+            Tab.addTab("모집공고 삭제", new RecruitDelete(sampleList, list2));
         }
 
         Tab.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                list.clearSelection();
-                if(userType == 0)
+            	list.clearSelection();
+            	list.setListData(sampleList.printList());
+                if(userType == 0) {
                     list3.clearSelection();
+                    list3.setListData(sampleList.printState(user.getStudentID()));
+                }
             }
         });
 
@@ -134,12 +137,12 @@ public class UserInterface extends JFrame {
 		private JLabel ment;
 
         public Initial(){
-            list = new JList(sampleList.printList());   //조회에 필요한 리스트
+        	list = new JList(sampleList.printList());   //조회에 필요한 리스트
             list.setVisibleRowCount(20);
             list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             list.setFixedCellHeight(20);
             list.setFixedCellWidth(120);
-
+            
             list2 = new JList(sampleList.printList2());  //삭제에 필요한 리스트
             list2.setVisibleRowCount(20);
             list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -177,171 +180,7 @@ public class UserInterface extends JFrame {
             add(ment);
         }
     }
-    class RecruitLook extends JPanel{
-        private JButton select;
-        private JPanel con;
-
-        public RecruitLook(){
-            setLayout(new FlowLayout());
-            setSize(500, 400);
-
-            add(new JScrollPane(list));
-
-            con = new JPanel();
-            con.setPreferredSize(new Dimension(380,450));
-            con.setBackground(Color.WHITE);
-            add(con);
-
-            list.addListSelectionListener(new ListSelectionListener() {
-                @Override
-                public void valueChanged(ListSelectionEvent e) {
-                    int index = list.getSelectedIndex();
-                    con.removeAll();
-                    if(index >= 0) {
-                        con.add(sampleList.printContents(index));
-                        select = new JButton("응시원서 작성");
-
-                        select.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                            	if(sampleList.getRecruitState(index) == 0) {
-                            		if (sampleList.checkUser(index, user.getStudentID()) == false) {
-                                        Application newone = user.ApplicationCreate(sampleList.getRecruitNum(index));
-                                        sampleList.apply(index, newone);
-                                        list3.setListData(sampleList.printState(user.getStudentID()));
-                                        JOptionPane.showMessageDialog(null, "응시원서 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-                                    } else
-                                        JOptionPane.showMessageDialog(null, "이미 응시한 모집공고입니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-                            	}
-                            	else {
-                            		JOptionPane.showMessageDialog(null, "신청할 수 없는 상태입니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-                            	}
-                            }
-                        });
-                        if(userType == 0)
-                            con.add(select);
-                    }
-                    con.revalidate();
-                    con.repaint();
-                }
-            });
-        }
-    }
-    class StateLook extends JPanel{
-        private JButton del;
-        private JButton sel;
-
-        public StateLook(){
-            setLayout(new FlowLayout());
-            setSize(500, 400);
-
-            add(new JScrollPane(list3));
-
-            sel = new JButton("최종 등록");
-            sel.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String test = (String)list3.getSelectedValue();
-                    int in = test.indexOf(".");
-                    test = test.substring(0, in);
-                    sampleList.choiceYo(Integer.parseInt(test), user.getStudentID());
-                    list3.setListData(sampleList.printState(user.getStudentID()));
-                }
-            });
-            add(sel);
-
-            del = new JButton("응시 취소");
-            del.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String test = (String)list3.getSelectedValue();
-                    int in = test.indexOf(".");
-                    test = test.substring(0, in);
-                    sampleList.deleteAplication(Integer.parseInt(test), user.getStudentID());
-                    list3.setListData(sampleList.printState(user.getStudentID()));
-                    JOptionPane.showMessageDialog(null, "취소되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-                }
-            });
-            add(del);
-        }
-    }
-    class RecruitCreate extends JPanel {
-        private JTextField[] format = new JTextField[10];
-        private JTextArea contents = new JTextArea();
-        private JButton confirm;
-
-        public RecruitCreate() {
-            setLayout(new FlowLayout());
-            setSize(500, 400);
-
-            format[0] = new JTextField("Number of Recruitment (ex. 1)", 44);
-            format[1] = new JTextField("Title", 44);
-            format[2] = new JTextField("Nation", 44);
-            format[3] = new JTextField("University", 44);
-            format[4] = new JTextField("Major", 44);
-            format[5] = new JTextField("Start Year", 44);
-            format[6] = new JTextField("Start Semester", 44);
-            format[7] = new JTextField("Period", 44);
-            format[8] = new JTextField("Deadline (ex. 20180908)", 44);
-            format[9] = new JTextField("Resisteration Deadline (ex. 20181010)", 44);
-
-            contents = new JTextArea("Contents");
-            contents.setColumns(44);
-            contents.setRows(8);
-
-            confirm = new JButton("작성완료");
-            confirm.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (sampleList.checkList(Integer.parseInt(format[0].getText())) == false) {
-                        Recruitment newone = admin.createRecruitment(Integer.parseInt(format[0].getText()), format[1].getText(), contents.getText(), Integer.parseInt(format[8].getText()),
-                                Integer.parseInt(format[9].getText()), Integer.parseInt(format[5].getText()), Integer.parseInt(format[6].getText()), Integer.parseInt(format[7].getText()),
-                                format[2].getText(), format[3].getText(), format[4].getText());
-                        sampleList.addList(newone);
-                        list.setListData(sampleList.printList());
-                        list2.setListData(sampleList.printList2());
-                        JOptionPane.showMessageDialog(null, "모집공고 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-                    } else
-                        JOptionPane.showMessageDialog(null, "같은 번호의 모집공고가 이미 존재합니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-                }
-            });
-
-            for (int i = 0; i < 10; i++) {
-                add(format[i]);
-            }
-
-            add(contents);
-            add(confirm);
-        }
-    }
-    class RecruitDelete extends JPanel {
-        private JButton delet;
-
-        public RecruitDelete() {
-            setLayout(new FlowLayout());
-            setSize(500, 400);
-
-            add(new JScrollPane(list2));
-
-            delet = new JButton("삭제");
-            delet.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int index = list2.getSelectedIndex();
-                    if (index == -1)
-                        JOptionPane.showMessageDialog(null, "삭제할 모집공고를 선택하세요.", "알림", JOptionPane.PLAIN_MESSAGE);
-                    else{
-                        sampleList.deleteList(index);
-                        list.setListData(sampleList.printList());
-                        list2.setListData(sampleList.printList2());
-                        JOptionPane.showMessageDialog(null, "모집공고가 삭제되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-                    }
-                }
-            });
-
-            add(delet);
-        }
-    }
+    
 	public CreditUI getCreditViewIsapped() {
 		return CreditViewIsapped;
 	}
