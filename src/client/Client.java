@@ -35,7 +35,6 @@ public class Client {
 	}
 	
 	public void remove(String key) {
-		
 	}
 	
 	//key에 저장되어 있던 데이터 뒤에 새로운 value를 덧붙인다.
@@ -54,19 +53,10 @@ public class Client {
 	
 	private void write(String key, String value) throws IOException {
 		String saved = this.read();
+		JSONObject jsonObject = string2JSONObject(saved);
 		
-		JSONParser parser = new JSONParser();
-		JSONObject jsonObject = null;
-		String message = null;
-		try {
-			jsonObject = (JSONObject) parser.parse(saved);
-		} catch (ParseException e) {
-			//파싱할 게 없는 경우(파일이 비어있거나 공백이거나 JSON 형식이 아닌 이상한 문자가 적혀 있으면 catch로 온다.)
-			jsonObject = new JSONObject();
-		}
 		jsonObject.put(key, value);
-		message = jsonObject.toString();
-		
+		String message = jsonObject.toString();
 		write(message);
 	}
 	
@@ -117,13 +107,15 @@ public class Client {
 		return (buffer == null) ? "" : new String(buffer);
 	}
 	
+	//str에 파싱할 게 없으면 new JSONObject를 return
 	private JSONObject string2JSONObject(String str) {
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = (JSONObject)parser.parse(str);
 		} catch (ParseException e) {
-			e.getStackTrace();
+			//파싱할 게 없는 경우(파일이 비어있거나 공백이거나 JSON 형식이 아닌 이상한 문자가 적혀 있으면 catch로 온다.)
+			jsonObject = new JSONObject();
 		}
 		
 		return jsonObject;
