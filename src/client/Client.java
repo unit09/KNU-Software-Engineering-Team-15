@@ -34,6 +34,10 @@ public class Client {
 		}
 	}
 	
+	public void remove(String key) {
+		
+	}
+	
 	//key에 저장되어 있던 데이터 뒤에 새로운 value를 덧붙인다.
 	//addEnter true이면 "기존 데이터" + "\n" + "새 데이터"
 	//addEnter false이면 "기존 데이터" + "새 데이터"
@@ -87,14 +91,12 @@ public class Client {
 	private String read(String key) {
 		String saved = read();
 		
-		JSONParser parser = new JSONParser();
-		JSONObject jsonObject = null;
-		try {
-			jsonObject = (JSONObject)parser.parse(saved);
-		} catch (ParseException e) {
-			e.getStackTrace();
-		}
-		
+		return read(saved, key);
+	}
+	
+	//saved는 파일에 저장된 텍스트 내용이다. saved에서 key값을 가진 value를 읽어온다
+	private String read(String saved, String key) {
+		JSONObject jsonObject = string2JSONObject(saved);
 		Object value = (Object)jsonObject.get(key);
 		
 		return value == null ? null : jsonObject.get(key).toString();
@@ -113,6 +115,18 @@ public class Client {
 		}
 		
 		return (buffer == null) ? "" : new String(buffer);
+	}
+	
+	private JSONObject string2JSONObject(String str) {
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = (JSONObject)parser.parse(str);
+		} catch (ParseException e) {
+			e.getStackTrace();
+		}
+		
+		return jsonObject;
 	}
 	
 }
