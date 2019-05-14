@@ -34,7 +34,19 @@ public class Client {
 		}
 	}
 	
+	//key와 그에 해당하는 value를 삭제한다
 	public void remove(String key) {
+		String saved = read();
+		if(read(saved, key) != null) { //해당 key로 저장된 값이 있으면
+			JSONObject jsonObject = string2JSONObject(saved);
+			jsonObject.remove(key);
+			try {
+				write(jsonObject.toString());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	//key에 저장되어 있던 데이터 뒤에 새로운 value를 덧붙인다.
@@ -77,7 +89,8 @@ public class Client {
 			buffer.close();
 		}
 	}
-	
+
+	//저장된 key 없으면 null 리턴
 	private String read(String key) {
 		String saved = read();
 		
@@ -85,6 +98,7 @@ public class Client {
 	}
 	
 	//saved는 파일에 저장된 텍스트 내용이다. saved에서 key값을 가진 value를 읽어온다
+	//저장된 key 없으면 null 리턴
 	private String read(String saved, String key) {
 		JSONObject jsonObject = string2JSONObject(saved);
 		Object value = (Object)jsonObject.get(key);
