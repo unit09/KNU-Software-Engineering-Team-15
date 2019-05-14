@@ -4,11 +4,12 @@ public class ClientExample {
 
 	public static void main(String[] args) {
 		Client client = new Client();
-		client.setString("test", "this is a test");
-		client.setString("test2", "this is a test2");
-		client.addString("test2", "is overrided?", true);
-		System.out.println(client.getString("test"));
-		System.out.println(client.getString("test2"));
+		client.setString("key1", "this is a test");
+		client.setString("key2", "apple");
+		client.addString("key2", "banana", true);
+		client.addString("key2", " is yelllow", false);
+		System.out.println(client.getString("key1"));
+		System.out.println(client.getString("key2"));
 	}
 
 }
