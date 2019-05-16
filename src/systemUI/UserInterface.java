@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.io.*;
-import java.util.Calendar;
+import java.util.*;
 
 public class UserInterface extends JFrame {
     private JList list;
@@ -19,14 +19,15 @@ public class UserInterface extends JFrame {
 	private CreditUI CreditViewIsapped;
 	
     private static RecruitmentList sampleList;
+    private static ArrayList<DispatchRecord> record;
     private static File fp = new File("database/rerucitment/Rerucitment DB.txt");
+    private static File fp2;
 
     Student user;
     Administer admin;
     Guest guest;
     int userType;
     int year, month, date;
-    
     
     public UserInterface(Student userinfo) {
         super("교환학생 프로그램");
@@ -62,6 +63,7 @@ public class UserInterface extends JFrame {
         else{
             sampleList = new RecruitmentList();
         }
+        record = new ArrayList<DispatchRecord>();
         
         //오늘 날짜를 불러와서 모집공고들의 상태를 바꿔주는 부분
         Calendar cal = Calendar.getInstance();
@@ -88,7 +90,7 @@ public class UserInterface extends JFrame {
 			}
     		Tab.addTab("등록학점 조회", CreditViewIsapped);
         }
-        Tab.addTab("파견실적 조회", new JPanel());    //미구현
+        Tab.addTab("파견실적 조회", new DispatchUI(record));
         try {
 			Tab.addTab("QNA 게시판", new QnAUI(userinfo.getStudentID()));
 		} catch (ClassNotFoundException e1) {
@@ -156,7 +158,7 @@ public class UserInterface extends JFrame {
                 list3.setFixedCellHeight(19);
                 list3.setFixedCellWidth(500);
             }
-
+            
             setLayout(null);
             JLabel intro;
             if(userType == 0){
