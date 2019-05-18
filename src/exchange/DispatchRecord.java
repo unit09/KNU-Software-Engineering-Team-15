@@ -1,8 +1,9 @@
 package exchange;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class DispatchRecord {
+public class DispatchRecord implements Serializable {
 	private String nation;
 	private String university;
 	private int startYear;

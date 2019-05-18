@@ -126,7 +126,7 @@ public class Recruitment implements Serializable {
         }
     }
     
-    public void setPass() {	//원래는 외국대학에서 응시원서를 받아서 보고 처리하지만 시연을 위해 학점이 4.0 이상이면 자동 합격하도록 설정
+    public void setPass() {	//원래는 외국대학에서 응시원서를 받아서 보고 처리하지만 여기서는 학점이 4.0 이상이면 자동 합격하도록 설정
     	for(int i = 0; i < applications.size(); i++) {
     		if(applications.get(i).getScore() >= 4.0)
     			applications.get(i).setPass(true);

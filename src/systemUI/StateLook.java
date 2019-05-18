@@ -3,20 +3,21 @@ package systemUI;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
-import exchange.RecruitmentList;
+import exchange.*;
 import user.Student;
 
 public class StateLook extends JPanel{
     private JButton del;
     private JButton sel;
 
-    public StateLook(RecruitmentList sampleList, Student user, JList list){
+    public StateLook(RecruitmentList sampleList, Student user, JList list, ArrayList<DispatchRecord> records){
         setLayout(new FlowLayout());
         setSize(500, 400);
-
+        
         add(new JScrollPane(list));
 
         sel = new JButton("최종 등록");
@@ -27,8 +28,11 @@ public class StateLook extends JPanel{
             		String test = (String)list.getSelectedValue();
             		int in = test.indexOf(".");
             		test = test.substring(0, in);
-            		sampleList.choiceYo(Integer.parseInt(test), user.getStudentID());
+            		int index = sampleList.choiceYo(Integer.parseInt(test), user.getStudentID());
             		list.setListData(sampleList.printState(user.getStudentID()));
+            		
+            		DispatchRecord newone = new DispatchRecord(sampleList.getNation(index), sampleList.getUniv(index), sampleList.getYear(index), sampleList.getSemester(index), sampleList.getPeriod(index), sampleList.getMajor(index));
+            		records.add(newone); 
             	}
             }
         });

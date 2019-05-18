@@ -8,11 +8,7 @@ import java.util.Vector;
 public class RecruitmentList implements Serializable {
     private ArrayList<Recruitment> recruitments = new ArrayList<Recruitment>();
 
-    private String searchNation;
-    private int searchYear;
-    private int searchSemester;
-    private String searchUniv;
-    private String searchMajor;
+    //생성자 자동 생성
 
     public void addList(Recruitment newThing){
         recruitments.add(newThing);
@@ -96,10 +92,11 @@ public class RecruitmentList implements Serializable {
         }
     }
 
-    public void choiceYo(int num, int stID){
+    public int choiceYo(int num, int stID){
+    	int index = 0;
         for(int i = 0; i < recruitments.size(); i++) {
             if (num == recruitments.get(i).getRecruitNum()) {
-                int index = recruitments.get(i).checkUser(stID);
+                index = recruitments.get(i).checkUser(stID);
                 if(recruitments.get(i).getProgress() == 2){
                     recruitments.get(i).finalChoice(index);
                 }
@@ -108,6 +105,8 @@ public class RecruitmentList implements Serializable {
                 break;
             }
         }
+        
+        return index;
     }
 
     public void setRecruitState(int year, int month, int date) {	//시연을 위해 심사단계를 넘어가서 바로 합격처리를 함
@@ -150,7 +149,7 @@ public class RecruitmentList implements Serializable {
     	}
     }
 
-    //getter & setter
+    //getter
     public int getRecruitNum(int index){
         return recruitments.get(index).getRecruitNum();
     }
@@ -158,35 +157,23 @@ public class RecruitmentList implements Serializable {
     	return recruitments.get(index).getProgress();
     }
     
-    public int getSearchSemester() {
-        return searchSemester;
+    public int getSemester(int index) {
+        return recruitments.get(index).getStartSemester();
     }
-    public int getSearchYear() {
-        return searchYear;
+    public int getYear(int index) {
+        return recruitments.get(index).getStartYear();
     }
-    public String getSearchMajor() {
-        return searchMajor;
+    public String getMajor(int index) {
+        return recruitments.get(index).getMajor();
     }
-    public String getSearchNation() {
-        return searchNation;
+    public String getNation(int index) {
+        return recruitments.get(index).getNation();
     }
-    public String getSearchUniv() {
-        return searchUniv;
+    public String getUniv(int index) {
+        return recruitments.get(index).getUniversity();
     }
-
-    public void setSearchMajor(String searchMajor) {
-        this.searchMajor = searchMajor;
+    public int getPeriod(int index) {
+    	return recruitments.get(index).getPeriod();
     }
-    public void setSearchNation(String searchNation) {
-        this.searchNation = searchNation;
-    }
-    public void setSearchSemester(int searchSemester) {
-        this.searchSemester = searchSemester;
-    }
-    public void setSearchUniv(String searchUniv) {
-        this.searchUniv = searchUniv;
-    }
-    public void setSearchYear(int searchYear) {
-        this.searchYear = searchYear;
-    }
+    
 }

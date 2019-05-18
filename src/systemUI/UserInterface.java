@@ -21,7 +21,7 @@ public class UserInterface extends JFrame {
     private static RecruitmentList sampleList;
     private static ArrayList<DispatchRecord> record;
     private static File fp = new File("database/rerucitment/Rerucitment DB.txt");
-    private static File fp2;
+    private static File fp2 = new File("database/dispatch_record/Dispatch Record.txt");
 
     Student user;
     Administer admin;
@@ -63,7 +63,26 @@ public class UserInterface extends JFrame {
         else{
             sampleList = new RecruitmentList();
         }
-        record = new ArrayList<DispatchRecord>();
+        
+        if(fp2.length() > 0) {
+            try {
+                FileInputStream fis = new FileInputStream(fp2);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                try {
+                    record = (ArrayList<DispatchRecord>) ois.readObject();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                System.out.println("fp2 로드 에러");
+                System.exit(1);
+            }
+        }
+        else{
+        	record = new ArrayList<DispatchRecord>();
+        	System.out.println("why?");
+        }
+        
         
         //오늘 날짜를 불러와서 모집공고들의 상태를 바꿔주는 부분
         Calendar cal = Calendar.getInstance();
@@ -81,7 +100,7 @@ public class UserInterface extends JFrame {
         Tab.addTab("메인", new Initial());
         Tab.addTab("모집공고 조회", new RecruitLook(userType, sampleList, user, list));
         if(userType == 0) {
-            Tab.addTab("진행상황 조회", new StateLook(sampleList, user, list3));
+            Tab.addTab("진행상황 조회", new StateLook(sampleList, user, list3, record));
     		try {
 				Tab.addTab("이수학점 관리", new CreditUI(user.getStudentID(), this, false));
 	    		CreditViewIsapped = new CreditUI(user.getStudentID(), this, true);
@@ -130,6 +149,21 @@ public class UserInterface extends JFrame {
                 }catch (Exception ex){
                     System.out.println("파일입출력 에러");
                     System.exit(1);
+                }
+                
+                if(!record.isEmpty()) {
+                	try {
+                		FileOutputStream fos = new FileOutputStream(fp2);
+                		ObjectOutputStream oos = new ObjectOutputStream(fos);
+                		try{
+                			oos.writeObject(record);
+                		}catch (Exception ex){
+                			ex.printStackTrace();
+                		}
+                	}catch (Exception ex){
+                			System.out.println(ex);
+                			System.exit(1);
+                	}
                 }
             }
         });
