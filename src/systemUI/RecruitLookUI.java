@@ -13,11 +13,11 @@ import javax.swing.event.ListSelectionListener;
 import exchange.*;
 import user.*;
 
-public class RecruitLook extends JPanel{
+public class RecruitLookUI extends JPanel{
     private JButton select;
     private JPanel con;
 
-    public RecruitLook(int userType, RecruitmentList sampleList, Student user, JList list){
+    public RecruitLookUI(int userType, RecruitmentList sampleList, Student user, JList list){
     	
         
         setLayout(new FlowLayout());

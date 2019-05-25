@@ -45,7 +45,7 @@ public class UserInterface extends JFrame {
             userType = 0;
         }
 
-        //DB를 불러오는 부분
+        //DB를 불러오는 부분 - 나중에 사라질 예정
         if(fp.length() > 0) {
             try {
                 FileInputStream fis = new FileInputStream(fp);
@@ -80,7 +80,6 @@ public class UserInterface extends JFrame {
         }
         else{
         	record = new ArrayList<DispatchRecord>();
-        	System.out.println("why?");
         }
         
         
@@ -89,7 +88,6 @@ public class UserInterface extends JFrame {
         year = cal.get(cal.YEAR);
         month = cal.get(cal.MONTH) + 1;
         date = cal.get(cal.DATE);
-        
         sampleList.setRecruitState(year, month, date);
         
 
@@ -98,9 +96,9 @@ public class UserInterface extends JFrame {
         Tab.setBounds(10, 10, 650, 480);
 
         Tab.addTab("메인", new Initial());
-        Tab.addTab("모집공고 조회", new RecruitLook(userType, sampleList, user, list));
+        Tab.addTab("모집공고 조회", new RecruitLookUI(userType, sampleList, user, list));
         if(userType == 0) {
-            Tab.addTab("진행상황 조회", new StateLook(sampleList, user, list3, record));
+            Tab.addTab("진행상황 조회", new StateLookUI(sampleList, user, list3, record));
     		try {
 				Tab.addTab("이수학점 관리", new CreditUI(user.getStudentID(), this, false));
 	    		CreditViewIsapped = new CreditUI(user.getStudentID(), this, true);
@@ -116,10 +114,11 @@ public class UserInterface extends JFrame {
 			e1.printStackTrace();
 		}
         if(userType == 1) {
-            Tab.addTab("모집공고 작성", new RecruitCreate(sampleList, admin, list2));
-            Tab.addTab("모집공고 삭제", new RecruitDelete(sampleList, list2));
+            Tab.addTab("모집공고 작성", new RecruitCreateUI(sampleList, admin, list2));
+            Tab.addTab("모집공고 삭제", new RecruitDeleteUI(sampleList, list2));
         }
 
+        // 겹치는 부분 업데이트하는 부분인데 이거 observer만 잘 적용하면 사라질 예정
         Tab.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -134,7 +133,7 @@ public class UserInterface extends JFrame {
 
         add(Tab);
 
-        //종료될때 데이터베이스로 업로드하는 부분
+        //종료될때 데이터베이스로 업로드하는 부분 - 나중에 사라질 예정
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -173,6 +172,7 @@ public class UserInterface extends JFrame {
 		private JLabel ment;
 
         public Initial(){
+        	// 화면 표시에 필요할 리스트 - 나중에 사라질 예정
         	list = new JList(sampleList.printList());   //조회에 필요한 리스트
             list.setVisibleRowCount(20);
             list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -9,10 +9,10 @@ import javax.swing.*;
 import exchange.RecruitmentList;
 import user.Administer;
 
-public class RecruitDelete extends JPanel {
+public class RecruitDeleteUI extends JPanel {
     private JButton delet;
 
-    public RecruitDelete(RecruitmentList sampleList, JList list) {
+    public RecruitDeleteUI(RecruitmentList sampleList, JList list) {
         setLayout(new FlowLayout());
         setSize(500, 400);
 

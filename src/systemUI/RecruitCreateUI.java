@@ -9,12 +9,12 @@ import javax.swing.*;
 import exchange.*;
 import user.*;
 
-public class RecruitCreate extends JPanel {
+public class RecruitCreateUI extends JPanel {
     private JTextField[] format = new JTextField[10];
     private JTextArea contents = new JTextArea();
     private JButton confirm;
 
-    public RecruitCreate(RecruitmentList sampleList, Administer admin, JList list) {
+    public RecruitCreateUI(RecruitmentList sampleList, Administer admin, JList list) {
         setLayout(new FlowLayout());
         setSize(500, 400);
 
@@ -42,7 +42,7 @@ public class RecruitCreate extends JPanel {
                             Integer.parseInt(format[9].getText()), Integer.parseInt(format[5].getText()), Integer.parseInt(format[6].getText()), Integer.parseInt(format[7].getText()),
                             format[2].getText(), format[3].getText(), format[4].getText());
                     sampleList.addList(newone);
-                    //list.setListData(sampleList.printList());
+                    //list.setListData(sampleList.printList());	
                     list.setListData(sampleList.printList2());
                     JOptionPane.showMessageDialog(null, "모집공고 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
                 } else

@@ -89,6 +89,19 @@ public class Recruitment implements Serializable {
 
         return pane;
     }
+    
+    public void finalChoice(int index){
+        if(applications.get(index).isChoice() == true){
+            JOptionPane.showMessageDialog(null, "이미 등록되어있습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+        }
+        else if(applications.get(index).isPass() == true){
+            applications.get(index).setChoice(true);
+            JOptionPane.showMessageDialog(null, "등록되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "등록할 수 있는 상태가 아닙니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
 
     public String printState(int index){
     	if(progress == 0)
@@ -110,19 +123,6 @@ public class Recruitment implements Serializable {
                 return recruitNum + ". " + title + " : 마감 - 최종 등록 완료";
             else
                 return recruitNum + ". " + title + " : 마감";
-        }
-    }
-
-    public void finalChoice(int index){
-        if(applications.get(index).isChoice() == true){
-            JOptionPane.showMessageDialog(null, "이미 등록되어있습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-        }
-        else if(applications.get(index).isPass() == true){
-            applications.get(index).setChoice(true);
-            JOptionPane.showMessageDialog(null, "등록되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "등록할 수 있는 상태가 아닙니다.", "알림", JOptionPane.PLAIN_MESSAGE);
         }
     }
     

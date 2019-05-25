@@ -18,7 +18,7 @@ public class RecruitmentList implements Serializable {
         recruitments.remove(index);
     }
 
-    public Vector<String> printList(){
+    public Vector<String> printList(){	// 모집공고 조회시 필요한 JList를 만들기 위해 vector를 return
         Vector<String> RList = new Vector<String>();
 
         for(int i = 0; i < recruitments.size(); i++){
@@ -29,7 +29,7 @@ public class RecruitmentList implements Serializable {
         return RList;
     }
 
-    public Vector<String> printList2(){
+    public Vector<String> printList2(){	// 모집공고 삭제시 필요한 JList를 만들기 위해 vertor를 return
         Vector<String> RList = new Vector<String>();
 
         for(int i = 0; i < recruitments.size(); i++){
@@ -39,8 +39,26 @@ public class RecruitmentList implements Serializable {
 
         return RList;
     }
+    
+    public Vector<String> printState(int stID){
+        Vector<String> RList = new Vector<String>();
+        int index;
+        for(int i = 0; i < recruitments.size(); i++){
+            index = recruitments.get(i).checkUser(stID);
+            if(index != -1){
+                RList.addElement(recruitments.get(i).printState(index));
+            }
+        }
+        return RList;
+    }
+    
+    public JPanel printContents(int index){
+        Recruitment temp = recruitments.get(index);
+        JPanel temp2 = temp.printRecuritment();
+        return temp2;
+    }
 
-    public boolean checkList(int num){
+    public boolean checkList(int num){	// 모집공고 번호가 num인 모집공고가 존재하는지 체크하는 메소드
         int i;
         for(i = 0; i < recruitments.size(); i ++){
             Recruitment check = recruitments.get(i);
@@ -53,33 +71,15 @@ public class RecruitmentList implements Serializable {
             return true;
     }
 
-    public boolean checkUser(int index, int stID){  //원래 학생안에 신청리스트를 두고 그걸 이용해서 신청했는지 안했는지 확인하려고 했는데 그러면 모집공고 삭제시에 문제가 생겨서 여기로 옮김
+    public boolean checkUser(int index, int stID){  // index번째에 있는 모집공고에 stID인 학생이 신청을 했는지 안했는지 확인하는 메소드
         if(recruitments.get(index).checkUser(stID) != -1)
             return true;
         else
             return false;
     }
 
-    public JPanel printContents(int index){
-        Recruitment temp = recruitments.get(index);
-        JPanel temp2 = temp.printRecuritment();
-        return temp2;
-    }
-
     public void apply(int index, Application newone){
         recruitments.get(index).addList(newone);
-    }
-
-    public Vector<String> printState(int stID){
-        Vector<String> RList = new Vector<String>();
-        int index;
-        for(int i = 0; i < recruitments.size(); i++){
-            index = recruitments.get(i).checkUser(stID);
-            if(index != -1){
-                RList.addElement(recruitments.get(i).printState(index));
-            }
-        }
-        return RList;
     }
 
     public void deleteAplication(int num, int stID){
@@ -101,7 +101,7 @@ public class RecruitmentList implements Serializable {
                     recruitments.get(i).finalChoice(index);
                 }
                 else
-                    JOptionPane.showMessageDialog(null, "등록할 수 없는 상태입니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "등록할 수 없는 상태입니다.", "알림", JOptionPane.PLAIN_MESSAGE);	// 이거 출력 자체는 UI에서 하도록 해야되는데...
                 break;
             }
         }

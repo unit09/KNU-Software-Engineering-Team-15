@@ -10,11 +10,11 @@ import javax.swing.*;
 import exchange.*;
 import user.Student;
 
-public class StateLook extends JPanel{
+public class StateLookUI extends JPanel{
     private JButton del;
     private JButton sel;
 
-    public StateLook(RecruitmentList sampleList, Student user, JList list, ArrayList<DispatchRecord> records){
+    public StateLookUI(RecruitmentList sampleList, Student user, JList list, ArrayList<DispatchRecord> records){
         setLayout(new FlowLayout());
         setSize(500, 400);
         
