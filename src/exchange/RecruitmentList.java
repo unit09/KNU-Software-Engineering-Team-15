@@ -92,7 +92,7 @@ public class RecruitmentList implements Serializable {
         }
     }
 
-    public int choiceYo(int num, int stID){
+    public int finalChoice(int num, int stID){	// 최종등록을 위한 메소드
     	int index = 0;
         for(int i = 0; i < recruitments.size(); i++) {
             if (num == recruitments.get(i).getRecruitNum()) {

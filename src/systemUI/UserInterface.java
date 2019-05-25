@@ -10,7 +10,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 
-public class UserInterface extends JFrame {
+public class UserInterface extends Observable {
     private JList list;
     private JList list2;
     private JList list3;
@@ -18,7 +18,6 @@ public class UserInterface extends JFrame {
 
 	private CreditUI CreditViewIsapped;
 	
-    private static RecruitmentList sampleList;
     private static ArrayList<DispatchRecord> record;
     private static File fp = new File("database/rerucitment/Rerucitment DB.txt");
     private static File fp2 = new File("database/dispatch_record/Dispatch Record.txt");
@@ -30,7 +29,7 @@ public class UserInterface extends JFrame {
     int year, month, date;
     
     public UserInterface(Student userinfo) {
-        super("교환학생 프로그램");
+        super("교환학생 지원 프로그램");
 
         if(userinfo.getStudentID() == -1){
             admin = new Administer(userinfo.getName(), userinfo.getYear());
@@ -51,7 +50,7 @@ public class UserInterface extends JFrame {
                 FileInputStream fis = new FileInputStream(fp);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 try {
-                    sampleList = (RecruitmentList) ois.readObject();
+                    mainList = (RecruitmentList) ois.readObject();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -61,7 +60,7 @@ public class UserInterface extends JFrame {
             }
         }
         else{
-            sampleList = new RecruitmentList();
+            mainList = new RecruitmentList();
         }
         
         if(fp2.length() > 0) {
@@ -88,7 +87,7 @@ public class UserInterface extends JFrame {
         year = cal.get(cal.YEAR);
         month = cal.get(cal.MONTH) + 1;
         date = cal.get(cal.DATE);
-        sampleList.setRecruitState(year, month, date);
+        mainList.setRecruitState(year, month, date);
         
 
         setLayout(null);
@@ -96,9 +95,13 @@ public class UserInterface extends JFrame {
         Tab.setBounds(10, 10, 650, 480);
 
         Tab.addTab("메인", new Initial());
-        Tab.addTab("모집공고 조회", new RecruitLookUI(userType, sampleList, user, list));
+        
+        RecruitLookUI rlUI = new RecruitLookUI(userType, mainList, user);
+        addObserver(rlUI);
+        Tab.addTab("모집공고 조회", rlUI);
+        
         if(userType == 0) {
-            Tab.addTab("진행상황 조회", new StateLookUI(sampleList, user, list3, record));
+            Tab.addTab("진행상황 조회", new StateLookUI(mainList, user, record));
     		try {
 				Tab.addTab("이수학점 관리", new CreditUI(user.getStudentID(), this, false));
 	    		CreditViewIsapped = new CreditUI(user.getStudentID(), this, true);
@@ -107,29 +110,21 @@ public class UserInterface extends JFrame {
 			}
     		Tab.addTab("등록학점 조회", CreditViewIsapped);
         }
+        
         Tab.addTab("파견실적 조회", new DispatchUI(record));
+        
         try {
 			Tab.addTab("QNA 게시판", new QnAUI(userinfo.getStudentID()));
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
+        
         if(userType == 1) {
-            Tab.addTab("모집공고 작성", new RecruitCreateUI(sampleList, admin, list2));
-            Tab.addTab("모집공고 삭제", new RecruitDeleteUI(sampleList, list2));
+            Tab.addTab("모집공고 작성", new RecruitCreateUI(mainList, admin));
+            RecruitDeleteUI rdUI = new RecruitDeleteUI(mainList);
+            addObserver(rdUI);
+            Tab.addTab("모집공고 삭제", rdUI);
         }
-
-        // 겹치는 부분 업데이트하는 부분인데 이거 observer만 잘 적용하면 사라질 예정
-        Tab.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-            	list.clearSelection();
-            	list.setListData(sampleList.printList());
-                if(userType == 0) {
-                    list3.clearSelection();
-                    list3.setListData(sampleList.printState(user.getStudentID()));
-                }
-            }
-        });
 
         add(Tab);
 
@@ -141,7 +136,7 @@ public class UserInterface extends JFrame {
                     FileOutputStream fos = new FileOutputStream(fp);
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     try{
-                        oos.writeObject(sampleList);
+                        oos.writeObject(mainList);
                     }catch (Exception ex){
                         ex.printStackTrace();
                     }
@@ -171,28 +166,7 @@ public class UserInterface extends JFrame {
     class Initial extends JPanel{
 		private JLabel ment;
 
-        public Initial(){
-        	// 화면 표시에 필요할 리스트 - 나중에 사라질 예정
-        	list = new JList(sampleList.printList());   //조회에 필요한 리스트
-            list.setVisibleRowCount(20);
-            list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            list.setFixedCellHeight(20);
-            list.setFixedCellWidth(120);
-            
-            list2 = new JList(sampleList.printList2());  //삭제에 필요한 리스트
-            list2.setVisibleRowCount(20);
-            list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            list2.setFixedCellHeight(20);
-            list2.setFixedCellWidth(300);
-
-            if(userType == 0) {
-                list3 = new JList(sampleList.printState(user.getStudentID()));  //진행상황에 필요한 리스트
-                list3.setVisibleRowCount(19);
-                list3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                list3.setFixedCellHeight(19);
-                list3.setFixedCellWidth(500);
-            }
-            
+        public Initial(){            
             setLayout(null);
             JLabel intro;
             if(userType == 0){

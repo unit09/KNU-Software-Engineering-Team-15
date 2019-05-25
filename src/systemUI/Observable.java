@@ -9,7 +9,7 @@ import exchange.RecruitmentList;
 
 public class Observable extends JFrame {
 	private static Vector observers = new Vector();
-	private static RecruitmentList mainList;
+	protected static RecruitmentList mainList;
 	
 	public void addObserver(Observer observer) {
 		observers.add(observer);
@@ -26,5 +26,7 @@ public class Observable extends JFrame {
 		}
 	}
 	
-	
+	public Observable(String name) {
+		super(name);
+	}
 }
