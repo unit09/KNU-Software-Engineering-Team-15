@@ -38,7 +38,7 @@ public class LoginUI extends JFrame {
     	setBackground(Color.WHITE);
     	
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds((screenSize.width-733)/2, (screenSize.height-501)/2, 556, 514); //100 100 302 205 처음 나오는 UI의 위치와 크기
+        setBounds((screenSize.width-733)/2, (screenSize.height-501)/2, 556, 471); //100 100 302 205 처음 나오는 UI의 위치와 크기
         contentPane = new JPanel();
         contentPane.setForeground(Color.WHITE);
         contentPane.setBackground(new Color(255, 255, 255));
