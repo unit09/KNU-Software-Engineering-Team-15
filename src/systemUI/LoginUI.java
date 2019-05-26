@@ -27,6 +27,7 @@ public class LoginUI extends JFrame {
     private ArrayList<Student> users;
     private Scanner scan;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    int xx,xy;
     /**
      * @wbp.nonvisual location=-29,-36
      */
@@ -37,27 +38,34 @@ public class LoginUI extends JFrame {
     	setBackground(Color.WHITE);
     	
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds((screenSize.width-302)/2, (screenSize.height-205)/2, 302, 205); //100 100 302 205 Ã³À½ ³ª¿À´Â UIÀÇ À§Ä¡¿Í Å©±â
+        setBounds((screenSize.width-733)/2, (screenSize.height-501)/2, 556, 514); //100 100 302 205 Ã³À½ ³ª¿À´Â UIÀÇ À§Ä¡¿Í Å©±â
         contentPane = new JPanel();
+        contentPane.setForeground(Color.WHITE);
+        contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        JLabel lblLogin = new JLabel("Login");
-        lblLogin.setBounds(120, 10, 57, 15);
-        contentPane.add(lblLogin);
+        
+        JLabel lblMemberLogin = new JLabel("Member Login");
+        lblMemberLogin.setFont(new Font("³ª´®½ºÄù¾î ExtraBold", Font.BOLD, 18));
+        lblMemberLogin.setBounds(209, 49, 143, 42);
+        contentPane.add(lblMemberLogin);
 
         pwdPassword = new JPasswordField();
-        pwdPassword.setBounds(40, 66, 211, 21);
+        pwdPassword.setFont(new Font("±¼¸²", Font.PLAIN, 16));
+        pwdPassword.setBounds(177, 190, 211, 42);
         contentPane.add(pwdPassword);
 
         IDField = new JTextField();
-        IDField.setBounds(40, 35, 211, 21);
+        IDField.setFont(new Font("±¼¸²", Font.PLAIN, 16));
+        IDField.setBounds(177, 119, 211, 42);
         contentPane.add(IDField); 
         IDField.setColumns(10);
 
         JButton LoginButton = new JButton("·Î±×ÀÎ");
-        LoginButton.setBounds(40, 111, 79, 23); //195 49 79 23
+        LoginButton.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 14));
+        LoginButton.setBackground(new Color(135, 206, 250));
+        LoginButton.setBounds(177, 252, 211, 42); //195 49 79 23
         contentPane.add(LoginButton);
 
         try {
@@ -132,7 +140,9 @@ public class LoginUI extends JFrame {
        
         
         JButton button = new JButton("ºñÈ¸¿ø ·Î±×ÀÎ");
-        button.setBounds(125, 111, 126, 23);
+        button.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 14));
+        button.setBackground(new Color(135, 206, 250));
+        button.setBounds(177, 305, 211, 42);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,6 +156,59 @@ public class LoginUI extends JFrame {
             } 
         });
         contentPane.add(button);
+        
+        JButton button_join = new JButton("\uD68C\uC6D0\uAC00\uC785");
+        button_join.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        button_join.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 14));
+        button_join.setBackground(new Color(135, 206, 250));
+        button_join.setBounds(177, 359, 211, 42);
+        contentPane.add(button_join);
+        
+        JLabel ID_label = new JLabel("ID");
+        ID_label.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 12));
+        ID_label.setBounds(177, 101, 57, 15);
+        contentPane.add(ID_label);
+        
+        JLabel PASSWD_label = new JLabel("PASSWORD");
+        PASSWD_label.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 12));
+        PASSWD_label.setBounds(177, 171, 86, 15);
+        contentPane.add(PASSWD_label);
+        
+        JLabel lbl_close = new JLabel("X");
+        lbl_close.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		System.exit(0);
+        	}
+        });
+        lbl_close.setForeground(new Color(135, 206, 250));
+        lbl_close.setBackground(new Color(30, 144, 255));
+        lbl_close.setFont(new Font("³ª´®½ºÄù¾î ExtraBold", Font.BOLD, 18));
+        lbl_close.setBounds(521, 5, 13, 15);
+        contentPane.add(lbl_close);
+        
+        JLabel label = new JLabel("");
+        label.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+        		xx = e.getX();
+	        	xy = e.getY();
+        	}
+        });
+        label.addMouseMotionListener(new MouseMotionAdapter() {
+        	@Override
+        	public void mouseDragged(MouseEvent arg0) {
+        		int x = arg0.getXOnScreen();
+        		int y = arg0.getYOnScreen();
+        		LoginUI.this.setLocation(x - xx, y - xy);  
+        	}
+        });
+        label.setIcon(new ImageIcon(LoginUI.class.getResource("/systemUI/image/login.png")));
+        label.setBounds(-9, -51, 590, 569);
+        contentPane.add(label);
     }
 
     public static void main(String[] args) {
@@ -154,6 +217,7 @@ public class LoginUI extends JFrame {
             public void run() {
                 try {
                     LoginUI frame = new LoginUI();
+                    frame.setUndecorated(true);
                     frame.setVisible(true);
                     frame.setResizable(false);
                 } catch (Exception e) {
