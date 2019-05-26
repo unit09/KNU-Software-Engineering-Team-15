@@ -34,6 +34,21 @@ public class Client {
 		return this.readObject(key);
 	}
 	
+	//key 저장된 내용을 읽어온다. 저장된 게 없으면 null을 반환한다.
+	public Object getObject(String key1, String key2) {
+//		JSONObject jsonObject = null;
+//		jsonObject = (JSONObject)this.getObject(key1);
+//		
+//		if(jsonObject == null) {
+//			return null;
+//		} else {
+//			JSONObject jsonObject2 = null;
+//			jsonObject2 = (JSONObject)
+//		}
+		
+		return null;
+	}
+	
 	//key에 저장된 값이 기존에 있었건 없었건간에 덮어 씌운다
 	public void setString(String key, String value) {
 		setObject(key, value);
@@ -46,6 +61,23 @@ public class Client {
 		} catch (IOException e) {
 			e.getStackTrace();
 		}
+	}
+
+	//key에 저장된 값이 기존에 있었건 없었건간에 덮어 씌운다
+	public void setString(String key1, String key2, String value) {
+		this.setObject(key1, key2, value);
+	}
+
+	//key에 저장된 값이 기존에 있었건 없었건간에 덮어 씌운다
+	public void setObject(String key1, String key2, Object o) {
+		JSONObject jsonObject;
+		jsonObject = (JSONObject)this.getObject(key1);
+		if(jsonObject == null) { //key1이 없을 때
+			jsonObject = new JSONObject();
+		}
+		
+		jsonObject.put(key2, o);
+		this.setObject(key1, jsonObject);
 	}
 	
 	//key와 그에 해당하는 value를 삭제한다
