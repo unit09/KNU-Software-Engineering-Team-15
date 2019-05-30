@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import client.Client;
 import question.Faq;
 import question.QnAList;
 import question.Qna;
@@ -27,7 +28,7 @@ import question.Qna;
 public class QnAUI extends JPanel{
 
 	private JPanel contentPane;
-	static Stack<JList> previousPanels = new Stack<JList>(); //
+	static Stack<JList> previousPanels = new Stack<JList>();
 	static Stack<JPanel> previousButtons = new Stack<JPanel>();
 	JList previousListTemp; //
 	JPanel previousPanelTemp;
@@ -37,9 +38,9 @@ public class QnAUI extends JPanel{
 	JButton write;
 	JButton answer;
 
-	public QnAUI(int id_type) throws ClassNotFoundException {
+	public QnAUI(int id_type, Client client) throws ClassNotFoundException {
 		setLayout(null);
-		QnAList.readQnaList();
+		QnAList.readQnaList(client);
 		
 		DefaultListModel dm = new DefaultListModel();
 		
@@ -67,7 +68,7 @@ public class QnAUI extends JPanel{
         faqTitle.setBounds(40, 210, 95, 15);
         add(faqTitle);
 		
-		QnAList.readFaqList();
+		QnAList.readFaqList(client);
 		
 		for(Faq list1 : QnAList.getFaqList())
 		{
@@ -175,7 +176,7 @@ public class QnAUI extends JPanel{
 					{
 						QnAList.createQna("¿¹½Ã", titleTemp, contextTemp);
 						
-						QnAList.saveQnaList();
+						QnAList.saveQnaList(client);
 					} catch (IOException e1)
 					{
 						e1.printStackTrace();
@@ -347,7 +348,7 @@ public class QnAUI extends JPanel{
 					{
 						QnAList.createFaq(titleTemp, contextTemp, context2Temp);
 						
-						QnAList.saveFaqList();
+						QnAList.saveFaqList(client);
 					} catch (IOException e1)
 					{
 						e1.printStackTrace();
@@ -641,7 +642,7 @@ public class QnAUI extends JPanel{
 						
 						temp.getAnswer(contextTemp);
 						
-						QnAList.saveQnaList();	
+						QnAList.saveQnaList(client);	
 						
 						updateIndex = list2.getSelectedIndex();
 						

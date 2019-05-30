@@ -34,6 +34,7 @@ public class RecruitDeleteUI extends JPanel implements Observer{
                     JOptionPane.showMessageDialog(null, "삭제할 모집공고를 선택하세요.", "알림", JOptionPane.PLAIN_MESSAGE);
                 else{
                     mainList.deleteList(index);
+                    Observable.uploadData();
                     Observable.notifyObservers();
                     JOptionPane.showMessageDialog(null, "모집공고가 삭제되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
                 }

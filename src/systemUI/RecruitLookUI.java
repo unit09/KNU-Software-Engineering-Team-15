@@ -51,6 +51,9 @@ public class RecruitLookUI extends JPanel implements Observer {
                         		if (mainList.checkUser(index, user.getStudentID()) == false) {
                                     Application newone = user.ApplicationCreate(mainList.getRecruitNum(index));
                                     mainList.apply(index, newone);
+                                    Observable.uploadData();
+                                    Observable.notifyObservers();
+                                    
                                     JOptionPane.showMessageDialog(null, "응시원서 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
                                 } else
                                     JOptionPane.showMessageDialog(null, "이미 응시한 모집공고입니다.", "알림", JOptionPane.PLAIN_MESSAGE);

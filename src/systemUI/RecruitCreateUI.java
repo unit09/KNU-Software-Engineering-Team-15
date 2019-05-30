@@ -43,6 +43,7 @@ public class RecruitCreateUI extends JPanel {
                             format[2].getText(), format[3].getText(), format[4].getText());
                     mainList.addList(newone);
                     
+                    Observable.uploadData();
                     Observable.notifyObservers();
                     
                     JOptionPane.showMessageDialog(null, "모집공고 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);

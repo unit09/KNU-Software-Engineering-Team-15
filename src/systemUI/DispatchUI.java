@@ -3,6 +3,8 @@ package systemUI;
 import java.awt.FlowLayout;
 import java.util.*;
 import javax.swing.*;
+
+import client.Client;
 import exchange.*;
 
 public class DispatchUI extends JPanel {

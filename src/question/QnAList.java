@@ -6,6 +6,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
+import client.Client;
+
 public class QnAList
 {
 	private static ArrayList<Qna> QnaList = new ArrayList<>();
@@ -59,128 +61,24 @@ public class QnAList
 	}
 	
 	
-	public static void readQnaList()
+	public static void readQnaList(Client client)
 	{
-		Qna temp;
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
-		
-		try
-		{
-			fis = new FileInputStream("database/qna/qna.dat");
-			ois = new ObjectInputStream(fis);
-			
-			while(fis.available() > 0)
-			{
-				temp = (Qna)ois.readObject();
-				getQnaList().add(temp);
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if(fis != null)
-				try {fis.close();} catch(IOException e) {}
-			
-			if(ois != null)
-				try {ois.close();} catch(IOException e) {}
-		}
+		QnaList = (ArrayList<Qna>)client.getObject("QnAList");
 	}
 	
-	public static void saveQnaList()
+	public static void saveQnaList(Client client)
 	{
-		FileOutputStream fos = null;
-		ObjectOutputStream oos = null;
-		
-		try
-		{
-			fos = new FileOutputStream("database/qna/qna.dat");
-			oos = new ObjectOutputStream(fos);
-			
-			for(Qna list : QnAList.getQnaList())
-			{
-				oos.writeObject(list);
-				System.out.println("ok");
-			}
-			
-			System.out.println("save ok!!");
-		} catch (IOException e)
-		{
-			System.out.println(e);
-		}
-		finally
-		{
-			if(fos != null)
-				try {fos.close();} catch(IOException e) {}
-			
-			if(oos != null)
-				try {oos.close();} catch(IOException e) {}
-		}
+		client.setObject("QnAList", QnaList);
 	}
 	
-	public static void readFaqList()
+	public static void readFaqList(Client client)
 	{
-		Faq temp;
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
-		
-		try
-		{
-			fis = new FileInputStream("database/qna/faq.dat");
-			ois = new ObjectInputStream(fis);
-			
-			while(fis.available() > 0)
-			{
-				temp = (Faq)ois.readObject();
-				getFaqList().add(temp);
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if(fis != null)
-				try {fis.close();} catch(IOException e) {}
-			
-			if(ois != null)
-				try {ois.close();} catch(IOException e) {}
-		}
+		FaqList = (ArrayList<Faq>)client.getObject("FAQList");
 	}
 	
-	public static void saveFaqList()
+	public static void saveFaqList(Client client)
 	{
-		FileOutputStream fos = null;
-		ObjectOutputStream oos = null;
-		
-		try
-		{
-			fos = new FileOutputStream("database/qna/faq.dat");
-			oos = new ObjectOutputStream(fos);
-			
-			for(Faq list : QnAList.getFaqList())
-			{
-				oos.writeObject(list);
-				System.out.println("ok");
-			}
-			
-			System.out.println("save ok!!");
-		} catch (IOException e)
-		{
-			System.out.println(e);
-		}
-		finally
-		{
-			if(fos != null)
-				try {fos.close();} catch(IOException e) {}
-			
-			if(oos != null)
-				try {oos.close();} catch(IOException e) {}
-		}
+		client.setObject("FAQList", FaqList);
 	}
 	
 	public static void printQnaList()
