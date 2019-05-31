@@ -11,7 +11,7 @@ import client.Client;
 import exchange.*;
 import user.Student;
 
-public class StateLookUI extends JPanel {
+public class StateLookUI extends JPanel implements Observer {
     private JButton del;
     private JButton sel;
     private JList list;
@@ -78,5 +78,9 @@ public class StateLookUI extends JPanel {
             }
         });
         add(del);
+    }
+    
+    public void update(RecruitmentList mainList) {
+    	list.setListData(mainList.printState(man.getStudentID()));
     }
 }

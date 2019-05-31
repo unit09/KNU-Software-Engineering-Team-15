@@ -14,7 +14,6 @@ public class UserInterface extends Observable {
     private JTabbedPane Tab = new JTabbedPane(JTabbedPane.LEFT);
     
     private static ArrayList<DispatchRecord> records;
-    private static File fp2 = new File("database/dispatch_record/Dispatch Record.txt");
 
     private CreditUI CreditViewIsapped;
     
@@ -24,10 +23,11 @@ public class UserInterface extends Observable {
     int userType;
     int year, month, date;
     
-    public UserInterface(Student userinfo) {
+    public UserInterface(Student userinfo, Client clientpass) {
         super("교환학생 지원 프로그램");
 
-        client = new Client();
+        //client = new Client();
+        client = clientpass;
         
         if(userinfo.getStudentID() == -1){
             admin = new Administer(userinfo.getName(), userinfo.getYear());
@@ -72,8 +72,9 @@ public class UserInterface extends Observable {
         Tab.addTab("모집공고 조회", rlUI);
         
         if(userType == 0) {
-        	
-            Tab.addTab("진행상황 조회", new StateLookUI(mainList, user, records, client));
+        	StateLookUI slUI = new StateLookUI(mainList, user, records, client);
+        	addObserver(slUI);
+            Tab.addTab("진행상황 조회", slUI);
             
     		try {
 				Tab.addTab("이수학점 관리", new CreditUI(user.getStudentID(), this, false));
@@ -100,23 +101,8 @@ public class UserInterface extends Observable {
             addObserver(rdUI);
             Tab.addTab("모집공고 삭제", rdUI);
         }
-
-        /*Tab.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                Observable.downloadData();
-                Observable.notifyObservers();
-            }
-        });*/
         
         add(Tab);
-
-        /*addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-            	client.setObject("DispatchRecord", records);
-            }
-        });*/
     }
 
     class Initial extends JPanel{
