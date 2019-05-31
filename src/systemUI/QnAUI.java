@@ -167,80 +167,43 @@ public class QnAUI extends JPanel{
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					String titleTemp = titleFormat.getText();
-					System.out.println(titleTemp);
-					String contextTemp = contextFormat.getText();
-					System.out.println(contextTemp);
-					
-					try
-					{
-						QnAList.createQna("예시", titleTemp, contextTemp);
+					String[] buttons = {"작성", "취소"};
+					int result = 0;
+					result = JOptionPane.showOptionDialog(null, "작성하시겠습니까?", "QnA 등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+					if(result == 0) {
+						String titleTemp = titleFormat.getText();
+						System.out.println(titleTemp);
+						String contextTemp = contextFormat.getText();
+						System.out.println(contextTemp);
 						
-						QnAList.saveQnaList(client);
-					} catch (IOException e1)
-					{
-						e1.printStackTrace();
-					}					
-					
-					Qna q = QnAList.getQnaList().get(QnAList.getQnaList().size() - 1);
-					
-					String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestionName() + " " + q.getQuestioner();
-					
-					if(q.getState() == 0)
-						ttemp = ttemp + " 답변 진행중";
-					else
-						ttemp = ttemp + " 답변 완료";
-					
-					dm.addElement(ttemp);
-					
-					removeAll(); 
-					
-			        previousListTemp = previousPanels.pop();
-			        previousListTemp.setBounds(40, 230, 300, 150);
-			        add(previousListTemp);	
-			        
-					previousListTemp = previousPanels.pop();									
-					previousListTemp.setBounds(40, 45, 300, 150);
-					add(previousListTemp);
-					
-					previousPanelTemp = previousButtons.pop();
-					previousPanelTemp.setBounds(365, 233, 85, 30);
-					add(previousPanelTemp, BorderLayout.EAST);
-					
-					previousPanelTemp = previousButtons.pop();
-					previousPanelTemp.setBounds(365, 48, 85, 30);
-					add(previousPanelTemp, BorderLayout.EAST);
-					
-			        JLabel qnaTitle = new JLabel("<QnA 게시판>");
-			        qnaTitle.setBounds(40, 25, 95, 15);
-			        add(qnaTitle);
-			        
-					revalidate();
-					repaint();
-				}
-			};
-			
-			ActionListener backButtonPressHandler = new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					if(e.getSource() == back)
-					{
-						removeAll();
+						try
+						{
+							QnAList.createQna("예시", titleTemp, contextTemp);
+							
+							QnAList.saveQnaList(client);
+						} catch (IOException e1)
+						{
+							e1.printStackTrace();
+						}					
 						
-				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
-				        qnaTitle.setBounds(40, 25, 95, 15);
-				        add(qnaTitle);
-				        
-				        JLabel faqTitle = new JLabel("<FAQ 게시판>");
-				        faqTitle.setBounds(40, 210, 95, 15);
-				        add(faqTitle);
-				        
+						Qna q = QnAList.getQnaList().get(QnAList.getQnaList().size() - 1);
+						
+						String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestionName() + " " + q.getQuestioner();
+						
+						if(q.getState() == 0)
+							ttemp = ttemp + " 답변 진행중";
+						else
+							ttemp = ttemp + " 답변 완료";
+						
+						dm.addElement(ttemp);
+						
+						removeAll(); 
+						
 				        previousListTemp = previousPanels.pop();
 				        previousListTemp.setBounds(40, 230, 300, 150);
-				        add(previousListTemp);			        
+				        add(previousListTemp);	
 				        
-						previousListTemp = previousPanels.pop();
+						previousListTemp = previousPanels.pop();									
 						previousListTemp.setBounds(40, 45, 300, 150);
 						add(previousListTemp);
 						
@@ -252,8 +215,56 @@ public class QnAUI extends JPanel{
 						previousPanelTemp.setBounds(365, 48, 85, 30);
 						add(previousPanelTemp, BorderLayout.EAST);
 						
+				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
+				        qnaTitle.setBounds(40, 25, 95, 15);
+				        add(qnaTitle);
+				        
 						revalidate();
 						repaint();
+						JOptionPane.showMessageDialog(null, "작성되었습니다", "알림", JOptionPane.PLAIN_MESSAGE);
+					}
+				}
+			};
+			
+			ActionListener backButtonPressHandler = new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					if(e.getSource() == back)
+					{
+						String[] buttons = {"돌아가기", "취소"};
+						int result = 0;
+						result = JOptionPane.showOptionDialog(null, "작성을 멈추고 이전 메뉴로 돌아가시겠습니까?", "QnA 등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+						if(result == 0) {
+							removeAll();
+							
+					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
+					        qnaTitle.setBounds(40, 25, 95, 15);
+					        add(qnaTitle);
+					        
+					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
+					        faqTitle.setBounds(40, 210, 95, 15);
+					        add(faqTitle);
+					        
+					        previousListTemp = previousPanels.pop();
+					        previousListTemp.setBounds(40, 230, 300, 150);
+					        add(previousListTemp);			        
+					        
+							previousListTemp = previousPanels.pop();
+							previousListTemp.setBounds(40, 45, 300, 150);
+							add(previousListTemp);
+							
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 233, 85, 30);
+							add(previousPanelTemp, BorderLayout.EAST);
+							
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 48, 85, 30);
+							add(previousPanelTemp, BorderLayout.EAST);
+							
+							revalidate();
+							repaint();
+						}
 					}
 				}
 			};
@@ -267,7 +278,9 @@ public class QnAUI extends JPanel{
 			JPanel create2Display = new JPanel(new BorderLayout());
 			
 			public void actionPerformed(ActionEvent e)
-			{				
+			{			
+				//FAQ 작성하기
+				
 				removeAll();
 				
 				previousButtons.push(createButtonDisplay);
@@ -337,81 +350,41 @@ public class QnAUI extends JPanel{
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					String titleTemp = title2Format.getText();
-					//System.out.println(titleTemp);
-					String contextTemp = context2Format.getText();
-					//System.out.println(contextTemp);
-					String context2Temp = context3Format.getText();
-					//System.out.println(context2Temp);
+					String[] buttons = {"등록", "취소"};
+					int result = 0;
+					result = JOptionPane.showOptionDialog(null, "작성한 FAQ를 등록하시겠습니까?", "FAQ 작성", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
 					
-					try
-					{
-						QnAList.createFaq(titleTemp, contextTemp, context2Temp);
+					if(result == 0) {
+						String titleTemp = title2Format.getText();
+						//System.out.println(titleTemp);
+						String contextTemp = context2Format.getText();
+						//System.out.println(contextTemp);
+						String context2Temp = context3Format.getText();
+						//System.out.println(context2Temp);
 						
-						QnAList.saveFaqList(client);
-					} catch (IOException e1)
-					{
-						e1.printStackTrace();
-					}					
-					
-					Faq q = QnAList.getFaqList().get(QnAList.getFaqList().size() - 1);
-					
-					String ttemp = "< Q " + q.getFaqNum() + " > " + q.getQuestionName();
-					
-					dm2.addElement(ttemp);
-					
-					removeAll(); 
-					
-			        previousListTemp = previousPanels.pop();
-			        previousListTemp.setBounds(40, 230, 300, 150);
-			        add(previousListTemp);	
-			        
-					previousListTemp = previousPanels.pop();									
-					previousListTemp.setBounds(40, 45, 300, 150);
-					add(previousListTemp);
-					
-					previousPanelTemp = previousButtons.pop();
-					previousPanelTemp.setBounds(365, 233, 85, 30);
-					add(previousPanelTemp, BorderLayout.EAST);
-					
-					previousPanelTemp = previousButtons.pop();
-					previousPanelTemp.setBounds(365, 48, 85, 30);
-					add(previousPanelTemp, BorderLayout.EAST);
-					
-			        JLabel qnaTitle = new JLabel("<QnA 게시판>");
-			        qnaTitle.setBounds(40, 25, 95, 15);
-			        add(qnaTitle);
-			        
-			        JLabel faqTitle = new JLabel("<FAQ 게시판>");
-			        faqTitle.setBounds(40, 210, 95, 15);
-			        add(faqTitle);
-			        
-					revalidate();
-					repaint();
-				}
-			};
-			
-			ActionListener backButton2PressHandler = new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					if(e.getSource() == back)
-					{
-						removeAll();
+						try
+						{
+							QnAList.createFaq(titleTemp, contextTemp, context2Temp);
+							
+							QnAList.saveFaqList(client);
+						} catch (IOException e1)
+						{
+							e1.printStackTrace();
+						}					
 						
-				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
-				        qnaTitle.setBounds(40, 25, 95, 15);
-				        add(qnaTitle);
-				        
-				        JLabel faqTitle = new JLabel("<FAQ 게시판>");
-				        faqTitle.setBounds(40, 210, 95, 15);
-				        add(faqTitle);
-				        
+						Faq q = QnAList.getFaqList().get(QnAList.getFaqList().size() - 1);
+						
+						String ttemp = "< Q " + q.getFaqNum() + " > " + q.getQuestionName();
+						
+						dm2.addElement(ttemp);
+						
+						removeAll(); 
+						
 				        previousListTemp = previousPanels.pop();
 				        previousListTemp.setBounds(40, 230, 300, 150);
-				        add(previousListTemp);			        
+				        add(previousListTemp);	
 				        
-						previousListTemp = previousPanels.pop();
+						previousListTemp = previousPanels.pop();									
 						previousListTemp.setBounds(40, 45, 300, 150);
 						add(previousListTemp);
 						
@@ -423,8 +396,59 @@ public class QnAUI extends JPanel{
 						previousPanelTemp.setBounds(365, 48, 85, 30);
 						add(previousPanelTemp, BorderLayout.EAST);
 						
+				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
+				        qnaTitle.setBounds(40, 25, 95, 15);
+				        add(qnaTitle);
+				        
+				        JLabel faqTitle = new JLabel("<FAQ 게시판>");
+				        faqTitle.setBounds(40, 210, 95, 15);
+				        add(faqTitle);
+				        
 						revalidate();
 						repaint();
+					}
+				}
+			};
+			
+			ActionListener backButton2PressHandler = new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					if(e.getSource() == back)
+					{
+						String[] buttons = {"돌아가기", "취소"};
+						int result = 0;
+						result = JOptionPane.showOptionDialog(null, "작성을 멈추고 이전 메뉴로 돌아가시겠습니까?", "FAQ 작성", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+						if(result == 0) {
+							removeAll();
+							
+					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
+					        qnaTitle.setBounds(40, 25, 95, 15);
+					        add(qnaTitle);
+					        
+					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
+					        faqTitle.setBounds(40, 210, 95, 15);
+					        add(faqTitle);
+					        
+					        previousListTemp = previousPanels.pop();
+					        previousListTemp.setBounds(40, 230, 300, 150);
+					        add(previousListTemp);			        
+					        
+							previousListTemp = previousPanels.pop();
+							previousListTemp.setBounds(40, 45, 300, 150);
+							add(previousListTemp);
+							
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 233, 85, 30);
+							add(previousPanelTemp, BorderLayout.EAST);
+							
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 48, 85, 30);
+							add(previousPanelTemp, BorderLayout.EAST);
+							
+							revalidate();
+							repaint();
+						}
 					}
 				}
 			};
@@ -456,6 +480,8 @@ public class QnAUI extends JPanel{
 				
 				if(index >= 0)
 				{
+					//QnA선택해서 보기
+					
 					removeAll();
 					
 					previousButtons.push(createButtonDisplay);
@@ -544,6 +570,8 @@ public class QnAUI extends JPanel{
 				{
 					if(e.getSource() == back)
 					{
+						//QnA 다 보고 돌아가기
+						
 						removeAll();
 						
 				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
@@ -585,6 +613,8 @@ public class QnAUI extends JPanel{
 				{
 					if(temp.getState() == 0)
 					{
+						//QnA 작성버튼 누르기
+						
 						removeAll();
 					
 						remove(answerButtonDisplay);
@@ -637,6 +667,10 @@ public class QnAUI extends JPanel{
 				{
 					public void actionPerformed(ActionEvent e)
 					{		
+						String[] buttons = {"등록", "취소"};
+						int result = 0;
+						result = JOptionPane.showOptionDialog(null, "작성한 답변을 등록하시겠습니까?", "QnA 답변등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+						
 						String contextTemp = contextFormat.getText();
 						System.out.println(contextTemp);
 						
@@ -692,34 +726,39 @@ public class QnAUI extends JPanel{
 					{
 						if(e.getSource() == back)
 						{
-							removeAll();
-							
-					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
-					        qnaTitle.setBounds(40, 25, 95, 15);
-					        add(qnaTitle);
-					        
-					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
-					        faqTitle.setBounds(40, 210, 95, 15);
-					        add(faqTitle);
-					        
-					        previousListTemp = previousPanels.pop();
-					        previousListTemp.setBounds(40, 230, 300, 150);
-					        add(previousListTemp);
-					        
-					        previousListTemp = previousPanels.pop();
-					        previousListTemp.setBounds(40, 45, 300, 150);
-					        add(previousListTemp);	 
-							
-							previousPanelTemp = previousButtons.pop();
-							previousPanelTemp.setBounds(365, 233, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
-							
-							previousPanelTemp = previousButtons.pop();
-							previousPanelTemp.setBounds(365, 48, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
-							
-							revalidate();
-							repaint();
+							String[] buttons = {"돌아가기", "취소"};
+							int result = 0;
+							result = JOptionPane.showOptionDialog(null, "작성을 멈추고 이전 메뉴로 돌아가시겠습니까?", "QnA 답변 등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+							if(result == 0) {
+								removeAll();
+								
+						        JLabel qnaTitle = new JLabel("<QnA 게시판>");
+						        qnaTitle.setBounds(40, 25, 95, 15);
+						        add(qnaTitle);
+						        
+						        JLabel faqTitle = new JLabel("<FAQ 게시판>");
+						        faqTitle.setBounds(40, 210, 95, 15);
+						        add(faqTitle);
+						        
+						        previousListTemp = previousPanels.pop();
+						        previousListTemp.setBounds(40, 230, 300, 150);
+						        add(previousListTemp);
+						        
+						        previousListTemp = previousPanels.pop();
+						        previousListTemp.setBounds(40, 45, 300, 150);
+						        add(previousListTemp);	 
+								
+								previousPanelTemp = previousButtons.pop();
+								previousPanelTemp.setBounds(365, 233, 85, 30);
+								add(previousPanelTemp, BorderLayout.EAST);
+								
+								previousPanelTemp = previousButtons.pop();
+								previousPanelTemp.setBounds(365, 48, 85, 30);
+								add(previousPanelTemp, BorderLayout.EAST);
+								
+								revalidate();
+								repaint();
+							}
 						}
 					}
 				};
@@ -740,6 +779,8 @@ public class QnAUI extends JPanel{
 				
 				if(index >= 0)
 				{
+					//FAQ 선택해서 보기
+					
 					removeAll();
 					
 					previousButtons.push(createButtonDisplay);
@@ -808,6 +849,8 @@ public class QnAUI extends JPanel{
 				{
 					if(e.getSource() == back)
 					{
+						//FAQ 보고 돌아가기
+						
 						removeAll();
 						
 				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
