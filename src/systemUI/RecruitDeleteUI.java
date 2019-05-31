@@ -33,10 +33,15 @@ public class RecruitDeleteUI extends JPanel implements Observer{
                 if (index == -1)
                     JOptionPane.showMessageDialog(null, "삭제할 모집공고를 선택하세요.", "알림", JOptionPane.PLAIN_MESSAGE);
                 else{
-                    mainList.deleteList(index);
-                    Observable.uploadData();
-                    Observable.notifyObservers();
-                    JOptionPane.showMessageDialog(null, "모집공고가 삭제되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+                	String[] buttons = {"삭제", "취소"};
+    				int result = 0;
+    				result = JOptionPane.showOptionDialog(null, "등록된 모집공고를 삭제하시겠습니까?", "모집공고 삭제", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+    				if(result == 0) {
+	                    mainList.deleteList(index);
+	                    Observable.uploadData();
+	                    Observable.notifyObservers();
+	                    JOptionPane.showMessageDialog(null, "모집공고가 삭제되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+    				}
                 }
             }
         });

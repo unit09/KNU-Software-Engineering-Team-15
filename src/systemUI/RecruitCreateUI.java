@@ -37,16 +37,21 @@ public class RecruitCreateUI extends JPanel {
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (mainList.checkList(Integer.parseInt(format[0].getText())) == false) {
-                    Recruitment newone = admin.createRecruitment(Integer.parseInt(format[0].getText()), format[1].getText(), contents.getText(), Integer.parseInt(format[8].getText()),
-                            Integer.parseInt(format[9].getText()), Integer.parseInt(format[5].getText()), Integer.parseInt(format[6].getText()), Integer.parseInt(format[7].getText()),
-                            format[2].getText(), format[3].getText(), format[4].getText());
-                    mainList.addList(newone);
-                    
-                    Observable.uploadData();
-                    Observable.notifyObservers();
-                    
-                    JOptionPane.showMessageDialog(null, "모집공고 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+            	String[] buttons = {"등록", "취소"};
+				int result = 0;
+				result = JOptionPane.showOptionDialog(null, "해당 정보로 모집공고를 등록하시겠습니까??", "모집공고 등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+				if(result == 0) {
+	                if (mainList.checkList(Integer.parseInt(format[0].getText())) == false) {
+	                    Recruitment newone = admin.createRecruitment(Integer.parseInt(format[0].getText()), format[1].getText(), contents.getText(), Integer.parseInt(format[8].getText()),
+	                            Integer.parseInt(format[9].getText()), Integer.parseInt(format[5].getText()), Integer.parseInt(format[6].getText()), Integer.parseInt(format[7].getText()),
+	                            format[2].getText(), format[3].getText(), format[4].getText());
+	                    mainList.addList(newone);
+	                    
+	                    Observable.uploadData();
+	                    Observable.notifyObservers();
+	                    
+	                    JOptionPane.showMessageDialog(null, "모집공고 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+	                }
                 } else
                     JOptionPane.showMessageDialog(null, "같은 번호의 모집공고가 이미 존재합니다.", "알림", JOptionPane.PLAIN_MESSAGE);
             }

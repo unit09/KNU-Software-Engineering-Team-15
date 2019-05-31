@@ -49,12 +49,17 @@ public class RecruitLookUI extends JPanel implements Observer {
                         public void actionPerformed(ActionEvent e) {
                         	if(mainList.getRecruitState(index) == 0) {
                         		if (mainList.checkUser(index, user.getStudentID()) == false) {
-                                    Application newone = user.ApplicationCreate(mainList.getRecruitNum(index));
-                                    mainList.apply(index, newone);
-                                    Observable.uploadData();
-                                    Observable.notifyObservers();
-                                    
-                                    JOptionPane.showMessageDialog(null, "응시원서 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+                        			String[] buttons = {"신청", "취소"};
+                    				int result = 0;
+                    				result = JOptionPane.showOptionDialog(null, "신청하시겠습니까?", "응시원서 작성", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+                    				if(result == 0) {
+	                                    Application newone = user.ApplicationCreate(mainList.getRecruitNum(index));
+	                                    mainList.apply(index, newone);
+	                                    Observable.uploadData();
+	                                    Observable.notifyObservers();
+	                                    
+	                                    JOptionPane.showMessageDialog(null, "응시원서 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+                    				}
                                 } else
                                     JOptionPane.showMessageDialog(null, "이미 응시한 모집공고입니다.", "알림", JOptionPane.PLAIN_MESSAGE);
                         	}
