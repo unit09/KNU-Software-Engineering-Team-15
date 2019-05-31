@@ -19,7 +19,6 @@ public class UserInterface extends Observable {
     
     Student user;
     Administer admin;
-    Guest guest;
     int userType;
     int year, month, date;
     
@@ -34,7 +33,6 @@ public class UserInterface extends Observable {
             userType = 1;
         }
         else if(userinfo.getStudentID() == -2){
-            guest = new Guest();
             userType = 2;
         }
         else{
