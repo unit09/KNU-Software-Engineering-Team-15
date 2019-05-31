@@ -41,7 +41,9 @@ public class RecruitCreateUI extends JPanel {
 				int result = 0;
 				result = JOptionPane.showOptionDialog(null, "해당 정보로 모집공고를 등록하시겠습니까??", "모집공고 등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
 				if(result == 0) {
+					//여기서 일단 모집공고 번호가 Int형인지 체크하고
 	                if (mainList.checkList(Integer.parseInt(format[0].getText())) == false) {
+	                	//각 경우에 대해 체크해서 오류 알림
 	                    Recruitment newone = admin.createRecruitment(Integer.parseInt(format[0].getText()), format[1].getText(), contents.getText(), Integer.parseInt(format[8].getText()),
 	                            Integer.parseInt(format[9].getText()), Integer.parseInt(format[5].getText()), Integer.parseInt(format[6].getText()), Integer.parseInt(format[7].getText()),
 	                            format[2].getText(), format[3].getText(), format[4].getText());

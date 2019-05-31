@@ -5,6 +5,9 @@ import java.awt.event.*;
 import java.io.File;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import client.Client;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -20,12 +23,15 @@ public class LoginUI extends JFrame {
     private JTextField pwdPassword;
     private JTextField IDField;
 
+    private Client client;
+    
     private File login = new File("database/login/login DB.txt");
     private File userD = new File("database/login/User DB.txt");
     private ArrayList<String> IDList = new ArrayList<>();
     private ArrayList<String> password = new ArrayList<>();
     private ArrayList<Student> users;
     private Scanner scan;
+    
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int xx,xy;
     /**
@@ -34,6 +40,8 @@ public class LoginUI extends JFrame {
     private final JPanel panel = new JPanel();
 
     public LoginUI() {
+    	client = new Client();
+    	
     	setTitle("Login");
     	setBackground(Color.WHITE);
     	
@@ -68,7 +76,7 @@ public class LoginUI extends JFrame {
         LoginButton.setBounds(177, 252, 211, 42); //195 49 79 23
         contentPane.add(LoginButton);
 
-        try {
+        try {	// 데이터 베이스를 읽어오는 부분 - 곧 사라질 예정
             scan = new Scanner(login);
         }catch (Exception e){
             e.printStackTrace();
@@ -92,10 +100,6 @@ public class LoginUI extends JFrame {
             String buf = scan.next();
         }
         
-       
-       
-
-       
 
         LoginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -106,13 +110,13 @@ public class LoginUI extends JFrame {
                     JOptionPane.showMessageDialog(null, "ID를 입력해주세요.", "caution", JOptionPane.DEFAULT_OPTION);
                 else if(pw.length() == 0)
                     JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "caution", JOptionPane.DEFAULT_OPTION);
-                else{
+                else{	
                     int j;
                     for(j = 0; j < IDList.size(); j++){
-                        if(id.equals(IDList.get(j)) && pw.equals(password.get(j))){
+                        if(id.equals(IDList.get(j)) && pw.equals(password.get(j))){	// 아이디와 비밀번호를 체크하는 부분
                             dispose();
 
-                            UserInterface UI = new UserInterface(users.get(j));
+                            UserInterface UI = new UserInterface(users.get(j), client);
                             UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
                             UI.setVisible(true);
@@ -120,7 +124,7 @@ public class LoginUI extends JFrame {
                             break;
                         }
                     }
-                    if(j == IDList.size())
+                    if(j == IDList.size())	// 아이디 비밀번호 입력 오류시 출력
                         JOptionPane.showMessageDialog(null, "ID 혹은 비밀번호가 잘못되었습니다.", "로그인 에러", JOptionPane.DEFAULT_OPTION);
                 }
             }
@@ -148,7 +152,7 @@ public class LoginUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose(); //종료하는것
  
-                UserInterface UI = new UserInterface(new Student(-2,"guest", " ", 0, 0, " ", " "));
+                UserInterface UI = new UserInterface(new Student(-2,"guest", " ", 0, 0, " ", " "), client);	// 비회원 로그인 관련
                 UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
                 UI.setVisible(true);
@@ -157,9 +161,12 @@ public class LoginUI extends JFrame {
         });
         contentPane.add(button);
         
-        JButton button_join = new JButton("\uD68C\uC6D0\uAC00\uC785");
+        JButton button_join = new JButton("\uD68C\uC6D0\uAC00\uC785");	// 회원가입 버튼
         button_join.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
+        		// 회원가입 창 띄우기
+        		
+        		JOptionPane.showMessageDialog(null, "테스트용 아이디 생성 완료", "caution", JOptionPane.DEFAULT_OPTION);
         	}
         });
         button_join.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
