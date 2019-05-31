@@ -36,17 +36,14 @@ public class Client {
 	
 	//key 저장된 내용을 읽어온다. 저장된 게 없으면 null을 반환한다.
 	public Object getObject(String key1, String key2) {
-//		JSONObject jsonObject = null;
-//		jsonObject = (JSONObject)this.getObject(key1);
-//		
-//		if(jsonObject == null) {
-//			return null;
-//		} else {
-//			JSONObject jsonObject2 = null;
-//			jsonObject2 = (JSONObject)
-//		}
+		JSONObject jsonObject = null;
+		jsonObject = (JSONObject)this.getObject(key1);
 		
-		return null;
+		if(jsonObject == null) {
+			return null;
+		} else {
+			return jsonObject.get(key2);
+		}
 	}
 	
 	//key에 저장된 값이 기존에 있었건 없었건간에 덮어 씌운다
