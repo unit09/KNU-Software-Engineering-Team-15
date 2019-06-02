@@ -37,6 +37,7 @@ public class QnAUI extends JPanel{
 	JButton create2;
 	JButton write;
 	JButton answer;
+	JButton delete;
 
 	public QnAUI(int id_type, Client client) throws ClassNotFoundException {
 		setLayout(null);
@@ -46,14 +47,16 @@ public class QnAUI extends JPanel{
 		
 		for(Qna list1 : QnAList.getQnaList())
 		{
-			String ttemp = "< " + list1.getQnaNum() + " > " + list1.getQuestionName() + " " + list1.getQuestioner();
-			
-			if(list1.getState() == 0)
-				ttemp = ttemp + " 답변 진행중";
-			else
-				ttemp = ttemp + " 답변 완료";
-			
-			dm.addElement(ttemp);
+			if(id_type == -1 || Integer.toString(id_type).equals(list1.getQuestioner())) {
+				String ttemp = "< " + list1.getQnaNum() + " > " + list1.getQuestioner() + " " + list1.getQuestionName();
+				
+				if(list1.getState() == 0)
+					ttemp = ttemp + " 답변 진행중";
+				else
+					ttemp = ttemp + " 답변 완료";
+				
+				dm.addElement(ttemp);
+			}
 		}
 		
 		JList<String> list2 = new JList<String>();
@@ -178,7 +181,7 @@ public class QnAUI extends JPanel{
 						
 						try
 						{
-							QnAList.createQna("예시", titleTemp, contextTemp);
+							QnAList.createQna(Integer.toString(id_type), titleTemp, contextTemp);
 							
 							QnAList.saveQnaList(client);
 						} catch (IOException e1)
@@ -188,7 +191,7 @@ public class QnAUI extends JPanel{
 						
 						Qna q = QnAList.getQnaList().get(QnAList.getQnaList().size() - 1);
 						
-						String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestionName() + " " + q.getQuestioner();
+						String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestioner() + " " + q.getQuestionName();
 						
 						if(q.getState() == 0)
 							ttemp = ttemp + " 답변 진행중";
@@ -551,8 +554,16 @@ public class QnAUI extends JPanel{
 					if(id_type != -1)
 						answer.setVisible(false);
 					
+					JPanel deleteButtonDisplay = new JPanel(new BorderLayout());
+					deleteButtonDisplay.setBounds(365, 85, 85, 30);
+					add(deleteButtonDisplay, BorderLayout.EAST);
+					
+					delete = new JButton("Delete");
+					delete.addActionListener(answerButtonPressHandler);
+					deleteButtonDisplay.add(delete);
+					
 					JPanel backButtonDisplay = new JPanel(new BorderLayout());
-					backButtonDisplay.setBounds(365, 85, 85, 30);
+					backButtonDisplay.setBounds(365, 122, 85, 30);
 					add(backButtonDisplay, BorderLayout.EAST);
 					
 					back = new JButton("Back");
@@ -670,53 +681,54 @@ public class QnAUI extends JPanel{
 						String[] buttons = {"등록", "취소"};
 						int result = 0;
 						result = JOptionPane.showOptionDialog(null, "작성한 답변을 등록하시겠습니까?", "QnA 답변등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+						if(result == 0) {
+							String contextTemp = contextFormat.getText();
+							System.out.println(contextTemp);
+							
+							temp.getAnswer(contextTemp);
+							
+							QnAList.saveQnaList(client);	
+							
+							updateIndex = list2.getSelectedIndex();
+							
+							Qna q = QnAList.getQnaList().get(updateIndex);
+							
+							String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestioner() + " " + q.getQuestionName();
+							
+							ttemp = ttemp + " 답변 완료";
+							
+							dm.add(updateIndex, ttemp);
+							dm.remove(updateIndex+1);
+							
+							removeAll(); 
+							
+					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
+					        qnaTitle.setBounds(40, 25, 95, 15);
+					        add(qnaTitle);
+					        
+					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
+					        faqTitle.setBounds(40, 210, 95, 15);
+					        add(faqTitle);
+					        
+					        previousListTemp = previousPanels.pop();
+					        previousListTemp.setBounds(40, 230, 300, 150);
+					        add(previousListTemp);
+							
+							previousListTemp = previousPanels.pop();										
+							previousListTemp.setBounds(40, 45, 300, 150);
+							add(previousListTemp);
+							
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 233, 85, 30);
+							add(previousPanelTemp, BorderLayout.EAST);
 						
-						String contextTemp = contextFormat.getText();
-						System.out.println(contextTemp);
-						
-						temp.getAnswer(contextTemp);
-						
-						QnAList.saveQnaList(client);	
-						
-						updateIndex = list2.getSelectedIndex();
-						
-						Qna q = QnAList.getQnaList().get(updateIndex);
-						
-						String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestionName() + " " + q.getQuestioner();
-						
-						ttemp = ttemp + " 답변 완료";
-						
-						dm.add(updateIndex, ttemp);
-						dm.remove(updateIndex+1);
-						
-						removeAll(); 
-						
-				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
-				        qnaTitle.setBounds(40, 25, 95, 15);
-				        add(qnaTitle);
-				        
-				        JLabel faqTitle = new JLabel("<FAQ 게시판>");
-				        faqTitle.setBounds(40, 210, 95, 15);
-				        add(faqTitle);
-				        
-				        previousListTemp = previousPanels.pop();
-				        previousListTemp.setBounds(40, 230, 300, 150);
-				        add(previousListTemp);
-						
-						previousListTemp = previousPanels.pop();										
-						previousListTemp.setBounds(40, 45, 300, 150);
-						add(previousListTemp);
-						
-						previousPanelTemp = previousButtons.pop();
-						previousPanelTemp.setBounds(365, 233, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
-					
-						previousPanelTemp = previousButtons.pop();
-						previousPanelTemp.setBounds(365, 48, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
-						
-						revalidate();
-						repaint();
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 48, 85, 30);
+							add(previousPanelTemp, BorderLayout.EAST);
+							
+							revalidate();
+							repaint();
+						}
 					}
 				};
 				
