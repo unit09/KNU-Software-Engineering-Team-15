@@ -41,21 +41,37 @@ public class RecruitCreateUI extends JPanel {
 				int result = 0;
 				result = JOptionPane.showOptionDialog(null, "해당 정보로 모집공고를 등록하시겠습니까??", "모집공고 등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
 				if(result == 0) {
-					//여기서 일단 모집공고 번호가 Int형인지 체크하고
-	                if (mainList.checkList(Integer.parseInt(format[0].getText())) == false) {
-	                	//각 경우에 대해 체크해서 오류 알림
-	                    Recruitment newone = admin.createRecruitment(Integer.parseInt(format[0].getText()), format[1].getText(), contents.getText(), Integer.parseInt(format[8].getText()),
-	                            Integer.parseInt(format[9].getText()), Integer.parseInt(format[5].getText()), Integer.parseInt(format[6].getText()), Integer.parseInt(format[7].getText()),
-	                            format[2].getText(), format[3].getText(), format[4].getText());
-	                    mainList.addList(newone);
-	                    
-	                    Observable.uploadData();
-	                    Observable.notifyObservers();
-	                    
-	                    JOptionPane.showMessageDialog(null, "모집공고 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
-	                }
-                } else
-                    JOptionPane.showMessageDialog(null, "같은 번호의 모집공고가 이미 존재합니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+					if(checkFormat(format[0].getText()) == false) {
+						JOptionPane.showMessageDialog(null, "모집공고 번호의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						if (mainList.checkList(Integer.parseInt(format[0].getText())) == false) {
+			                if(!checkFormat(format[5].getText()))
+			                	JOptionPane.showMessageDialog(null, "시작 연도의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+			                else if(!checkFormat(format[6].getText()))
+			                	JOptionPane.showMessageDialog(null, "시작 학기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+			                else if(!checkFormat(format[7].getText()))
+			                	JOptionPane.showMessageDialog(null, "기간의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+			                else if(!checkFormat(format[8].getText()))
+			                	JOptionPane.showMessageDialog(null, "모집 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+			                else if(!checkFormat(format[9].getText()))
+			                	JOptionPane.showMessageDialog(null, "최종 등록 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+			                else {
+			                	Recruitment newone = admin.createRecruitment(Integer.parseInt(format[0].getText()), format[1].getText(), contents.getText(), Integer.parseInt(format[8].getText()),
+			                            Integer.parseInt(format[9].getText()), Integer.parseInt(format[5].getText()), Integer.parseInt(format[6].getText()), Integer.parseInt(format[7].getText()),
+			                            format[2].getText(), format[3].getText(), format[4].getText());
+			                	mainList.addList(newone);
+			                    
+			                	Observable.uploadData();
+			                	Observable.notifyObservers();
+			                    
+			                	JOptionPane.showMessageDialog(null, "모집공고 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);			                
+			                }
+						}
+			            else
+			                JOptionPane.showMessageDialog(null, "같은 번호의 모집공고가 이미 존재합니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+					}
+				}
             }
         });
 
@@ -67,4 +83,13 @@ public class RecruitCreateUI extends JPanel {
         add(confirm);
     }
     
+    private boolean checkFormat(String s) {
+    	try {
+    		Integer.parseInt(s);
+    		return true;
+    	}
+    	catch(NumberFormatException e) {
+    		return false;
+    	}    	
+    }
 }

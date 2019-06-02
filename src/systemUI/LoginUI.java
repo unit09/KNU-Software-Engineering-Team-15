@@ -2,7 +2,6 @@ package systemUI;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -13,11 +12,6 @@ import javax.swing.JLabel;
 
 import user.*;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class LoginUI extends JFrame {
     private JPanel contentPane;
     private JTextField pwdPassword;
@@ -25,19 +19,11 @@ public class LoginUI extends JFrame {
 
     private Client client;
     
-    private File login = new File("database/login/login DB.txt");
-    private File userD = new File("database/login/User DB.txt");
-    private ArrayList<String> IDList = new ArrayList<>();
-    private ArrayList<String> password = new ArrayList<>();
-    private ArrayList<Student> users;
-    private Scanner scan;
-    
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int xx,xy;
     /**
      * @wbp.nonvisual location=-29,-36
      */
-    private final JPanel panel = new JPanel();
 
     public LoginUI() {
     	client = new Client();
@@ -76,31 +62,6 @@ public class LoginUI extends JFrame {
         LoginButton.setBounds(177, 252, 211, 42); //195 49 79 23
         contentPane.add(LoginButton);
 
-        try {	// 데이터 베이스를 읽어오는 부분 - 곧 사라질 예정
-            scan = new Scanner(login);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        try {
-            FileInputStream fs = new FileInputStream(userD);
-            ObjectInputStream os = new ObjectInputStream(fs);
-            try {
-                users = (ArrayList<Student>)os.readObject();
-            } catch (Exception e) { 
-                System.out.println("read");
-            }
-        } catch (Exception e) {
-            System.out.println("stream");
-        }
-
-        while(scan.hasNext()) {
-            IDList.add(scan.next());
-            password.add(scan.next());
-            String buf = scan.next();
-        }
-        
-
         LoginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String id = IDField.getText();
@@ -110,22 +71,20 @@ public class LoginUI extends JFrame {
                     JOptionPane.showMessageDialog(null, "ID를 입력해주세요.", "caution", JOptionPane.DEFAULT_OPTION);
                 else if(pw.length() == 0)
                     JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "caution", JOptionPane.DEFAULT_OPTION);
-                else{	
-                    int j;
-                    for(j = 0; j < IDList.size(); j++){
-                        if(id.equals(IDList.get(j)) && pw.equals(password.get(j))){	// 아이디와 비밀번호를 체크하는 부분
-                            dispose();
+                else{
+                	Student user = (Student)client.getObject(id, pw);
+                	if(user == null)
+                		JOptionPane.showMessageDialog(null, "ID 혹은 비밀번호가 잘못되었습니다.", "로그인 에러", JOptionPane.DEFAULT_OPTION);
+                	else {
+                		 dispose();	// 현재 창 닫기
 
-                            UserInterface UI = new UserInterface(users.get(j), client);
-                            UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                            UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
-                            UI.setVisible(true);
-                            UI.setResizable(false);
-                            break;
-                        }
-                    }
-                    if(j == IDList.size())	// 아이디 비밀번호 입력 오류시 출력
-                        JOptionPane.showMessageDialog(null, "ID 혹은 비밀번호가 잘못되었습니다.", "로그인 에러", JOptionPane.DEFAULT_OPTION);
+                         UserInterface UI = new UserInterface(user, client);
+                         UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                         UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
+                         UI.setVisible(true);
+                         UI.setResizable(false);
+                      
+                	}
                 }
             }
         });
@@ -165,7 +124,9 @@ public class LoginUI extends JFrame {
         button_join.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		// 회원가입 창 띄우기
-        		
+        		client.setObject("s1123", "1123", new Student(2015123456, "김길동", "컴퓨터학부", 2, 2.14, "test1@naver.com", "010-1264-1231"));
+        		client.setObject("s1132", "1132", new Student(2015111111, "홍길동", "컴퓨터학부", 2, 4.12, "test@naver.com", "010-1234-5678"));
+        		client.setObject("a1124", "1124", new Student(-1, "관리자", "관리자용학생객체", 777, 0, "year가 관리자번호", "010-5667-8931"));
         		JOptionPane.showMessageDialog(null, "테스트용 아이디 생성 완료", "caution", JOptionPane.DEFAULT_OPTION);
         	}
         });
