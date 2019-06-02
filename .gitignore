@@ -55,4 +55,4 @@ local.properties
 .worksheet
 
 
-./src/client/ClientExample.java
+src/client/ClientExample.java
