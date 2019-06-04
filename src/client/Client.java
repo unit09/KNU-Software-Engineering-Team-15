@@ -29,6 +29,20 @@ public class Client {
 		return o == null ? null : o.toString();
 	}
 	
+	//key 저장된 내용을 int로 읽어온다. 저장된 게 없으면 null을 반환한다.
+	public int getInt(String key) {
+		Object o = this.readObject(key);
+		
+		return o == null ? null : (int)o;
+	}
+	
+	//key 저장된 내용을 double로 읽어온다. 저장된 게 없으면 null을 반환한다.
+	public double getDouble(String key) {
+		Object o = this.readObject(key);
+		
+		return o == null ? null : (double)o;
+	}
+	
 	//key 저장된 내용을 읽어온다. 저장된 게 없으면 null을 반환한다.
 	public Object getObject(String key) {
 		return this.readObject(key);
@@ -48,6 +62,16 @@ public class Client {
 	
 	//key에 저장된 값이 기존에 있었건 없었건간에 덮어 씌운다
 	public void setString(String key, String value) {
+		setObject(key, value);
+	}
+	
+	//key에 저장된 값이 기존에 있었건 없었건간에 덮어 씌운다
+	public void setInt(String key, int value) {
+		setObject(key, value);
+	}
+	
+	//key에 저장된 값이 기존에 있었건 없었건간에 덮어 씌운다
+	public void setDouble(String key, double value) {
 		setObject(key, value);
 	}
 
