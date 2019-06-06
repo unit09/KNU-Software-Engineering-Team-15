@@ -48,7 +48,7 @@ public class QnAUI extends JPanel{
 		for(Qna list1 : QnAList.getQnaList())
 		{
 			if(id_type == -1 || Integer.toString(id_type).equals(list1.getQuestioner())) {
-				String ttemp = "< " + list1.getQnaNum() + " > " + list1.getQuestioner() + " " + list1.getQuestionName();
+				String ttemp = list1.getQuestioner() + " " + list1.getQuestionName();
 				
 				if(list1.getState() == 0)
 					ttemp = ttemp + " 답변 진행중";
@@ -191,7 +191,7 @@ public class QnAUI extends JPanel{
 						
 						Qna q = QnAList.getQnaList().get(QnAList.getQnaList().size() - 1);
 						
-						String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestioner() + " " + q.getQuestionName();
+						String ttemp = q.getQuestioner() + " " + q.getQuestionName();
 						
 						if(q.getState() == 0)
 							ttemp = ttemp + " 답변 진행중";
@@ -474,6 +474,8 @@ public class QnAUI extends JPanel{
 			JPanel backButtonDisplay = new JPanel(new BorderLayout());
 			Qna temp;
 			int updateIndex;
+			int count;
+			int deleteIndex = 0;
 			
 			public void mouseClicked(MouseEvent e)
 			{
@@ -484,6 +486,8 @@ public class QnAUI extends JPanel{
 				if(index >= 0)
 				{
 					//QnA선택해서 보기
+					deleteIndex = index;
+					System.out.print(deleteIndex);
 					
 					removeAll();
 					
@@ -492,15 +496,24 @@ public class QnAUI extends JPanel{
 					previousButtons.push(createButton2Display);
 					remove(createButton2Display);
 						
-					Object o = theList.getModel().getElementAt(index);
-					String[] q = o.toString().split(" ");
-					
 					previousPanels.push(list2);
 					remove(ScrollList2);
 					previousPanels.push(list3);
 					remove(ScrollList3);
 					
-					temp = QnAList.getQnaList().get(Integer.parseInt(q[1]) - 1);
+					count = 0;
+					for(Qna one: QnAList.getQnaList())
+					{
+						if(id_type == -1 || Integer.toString(id_type).equals(one.getQuestioner())) {
+							if(count == index) {
+								temp = one;
+								break;
+							}
+							else {
+								count++;
+							}
+						}
+					}
 					
 			        JLabel qnaTitle = new JLabel(temp.getQuestionName());
 			        qnaTitle.setBounds(40, 25, 205, 15);
@@ -559,7 +572,7 @@ public class QnAUI extends JPanel{
 					add(deleteButtonDisplay, BorderLayout.EAST);
 					
 					delete = new JButton("Delete");
-					delete.addActionListener(answerButtonPressHandler);
+					delete.addActionListener(deleteButtonPressHandler);
 					deleteButtonDisplay.add(delete);
 					
 					JPanel backButtonDisplay = new JPanel(new BorderLayout());
@@ -574,6 +587,54 @@ public class QnAUI extends JPanel{
 					repaint();
 				}
 			}
+			
+			ActionListener deleteButtonPressHandler = new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					if(e.getSource() == delete)
+					{
+						//QnA 리스트 삭제
+						String[] buttons = {"삭제", "취소"};
+						int result = 0;
+						result = JOptionPane.showOptionDialog(null, "해당 QnA를 삭제하시겠습니까?", "QnA 삭제", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+						if(result == 0) {
+							QnAList.deleteQna(temp);
+							QnAList.saveQnaList(client);
+							dm.removeElementAt(deleteIndex);
+							
+							removeAll();
+							
+					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
+					        qnaTitle.setBounds(40, 25, 95, 15);
+					        add(qnaTitle);
+					        
+					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
+					        faqTitle.setBounds(40, 210, 95, 15);
+					        add(faqTitle);
+					        
+					        previousListTemp = previousPanels.pop();
+					        previousListTemp.setBounds(40, 230, 300, 150);
+					        add(previousListTemp);	
+					        
+							previousListTemp = previousPanels.pop();
+							previousListTemp.setBounds(40, 45, 300, 150);
+							add(previousListTemp);
+							
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 233, 85, 30);
+							add(previousPanelTemp);
+							
+							previousPanelTemp = previousButtons.pop();
+							previousPanelTemp.setBounds(365, 48, 85, 30);
+							add(previousPanelTemp);
+							
+							revalidate();
+							repaint();
+						}
+					}
+				}
+			};
 			
 			ActionListener backButtonPressHandler = new ActionListener()
 			{
@@ -693,7 +754,7 @@ public class QnAUI extends JPanel{
 							
 							Qna q = QnAList.getQnaList().get(updateIndex);
 							
-							String ttemp = "< " + q.getQnaNum() + " > " + q.getQuestioner() + " " + q.getQuestionName();
+							String ttemp = q.getQuestioner() + " " + q.getQuestionName();
 							
 							ttemp = ttemp + " 답변 완료";
 							

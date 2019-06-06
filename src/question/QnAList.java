@@ -36,6 +36,11 @@ public class QnAList
 		System.out.println("list »ðÀÔ ¿Ï·á");
 	}
 	
+	public static void deleteQna(Qna one)
+	{
+		getQnaList().remove(one);
+	}
+	
 	
 	public static void createFaq(String questionName, String question, String answer) throws IOException
 	{
