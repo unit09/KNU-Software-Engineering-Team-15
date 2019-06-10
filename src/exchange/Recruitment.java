@@ -11,7 +11,7 @@ public class Recruitment implements Serializable {
     private int deadline;
     private int selectDeadline;
     private int startYear;
-    private int startSemester;
+    private int startSemester;	// 3: 여름 계절학기, 4: 겨울 계절학기
     private int period;
     private String nation;
     private String university;
