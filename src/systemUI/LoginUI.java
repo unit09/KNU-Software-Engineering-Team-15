@@ -76,13 +76,12 @@ public class LoginUI extends JFrame {
                 	if(user == null)
                 		JOptionPane.showMessageDialog(null, "ID 혹은 비밀번호가 잘못되었습니다.", "로그인 에러", JOptionPane.DEFAULT_OPTION);
                 	else {
-                		 dispose();	// 현재 창 닫기
-
+                		 dispose();	// 현재 창 닫기                		 
                          UserInterface UI = new UserInterface(user, client);
                          UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                          UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
                          UI.setVisible(true);
-                         UI.setResizable(false);
+                         UI.setResizable(true);
                       
                 	}
                 }
