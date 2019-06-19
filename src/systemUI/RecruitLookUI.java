@@ -59,8 +59,4 @@ public class RecruitLookUI extends JFrame implements Observer {
     public void update(RecruitmentList mainList) {
     	list.setListData(mainList.printList());
     }
-    
-
-  
-   
 }

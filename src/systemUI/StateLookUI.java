@@ -20,6 +20,8 @@ public class StateLookUI extends JFrame implements Observer {
     private JButton sel;
     private JList list;
     private Student man;
+    
+    private static final String deleteMessage = "응시 취소";
 
     public StateLookUI(RecruitmentList mainList, Student user, ArrayList<DispatchRecord> records, Client client){
     	man = user;
@@ -76,16 +78,16 @@ public class StateLookUI extends JFrame implements Observer {
             }
         });
         
-        JButton cancel = new JButton("\uC751\uC2DC \uCDE8\uC18C");
+        JButton cancel = new JButton(deleteMessage);
         cancel.setBounds(399, 514, 105, 27);
         getContentPane().add(cancel);
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(!list.isSelectionEmpty()) {
-            		String[] buttons = {"응시 취소", "취소"};
+            		String[] buttons = {deleteMessage, "취소"};
     				int result = 0;
-    				result = JOptionPane.showOptionDialog(null, "응시된 원서를 취소하시겠습니까?", "응시 취소", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+    				result = JOptionPane.showOptionDialog(null, "응시된 원서를 취소하시겠습니까?", deleteMessage, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
     				if(result == 0) {
 	            		String buf = (String)list.getSelectedValue();
 	            		int in = buf.indexOf(".");
