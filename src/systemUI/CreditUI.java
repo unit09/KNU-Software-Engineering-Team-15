@@ -129,13 +129,14 @@ public class CreditUI extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-		        if(comboBox.getSelectedItem().toString().contentEquals("내역이 없습니다")) {
-		        	
-		        }
-		        else {
+		        if(!comboBox.getSelectedItem().toString().contentEquals("내역이 없습니다")) {
 		        	ContentsPrint(client, st_id, isapped);
 		        	register_button_check();
 		        }
+		        /*else {
+		        	ContentsPrint(client, st_id, isapped);
+		        	register_button_check();
+		        }*/
 			}
 			
 		};
@@ -180,48 +181,51 @@ public class CreditUI extends JFrame implements MouseListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(isapped) {
-			list = c_list.applicated_credit_list_print(st_id, year, semester);
-		}
-		else {
-			list = c_list.completed_credit_list_print(st_id, year, semester);
-		}
-		DATA = new Object[list.size() + 1][7];
-		DATA[0][0] = "국가";
-		DATA[0][1] = "대학";
-		DATA[0][2] = "학과";
-		DATA[0][3] = "과목";
-		DATA[0][4] = "학점";
-		DATA[0][5] = "성적";
-		DATA[0][6] = "비고";
-		for(int i = 0; i < list.size(); i++) {
-			DATA[i + 1][0] = list.get(i).getNation();
-			DATA[i + 1][1] = list.get(i).getUniv();
-			DATA[i + 1][2] = list.get(i).getDept();
-			DATA[i + 1][3] = list.get(i).getCourse();
-			DATA[i + 1][4] = list.get(i).getAccept_credit();
-			DATA[i + 1][5] = list.get(i).getGrade();
-			if(list.get(i).isApplication_state()) {
-				DATA[i + 1][6] = "등록완료";
+		
+		if(c_list != null) {
+			if(isapped) {
+				list = c_list.applicated_credit_list_print(st_id, year, semester);
 			}
 			else {
-				DATA[i + 1][6] = "미신청";
+				list = c_list.completed_credit_list_print(st_id, year, semester);
 			}
+		
+			DATA = new Object[list.size() + 1][7];
+			DATA[0][0] = "국가";
+			DATA[0][1] = "대학";
+			DATA[0][2] = "학과";
+			DATA[0][3] = "과목";
+			DATA[0][4] = "학점";
+			DATA[0][5] = "성적";
+			DATA[0][6] = "비고";
+			for(int i = 0; i < list.size(); i++) {
+				DATA[i + 1][0] = list.get(i).getNation();
+				DATA[i + 1][1] = list.get(i).getUniv();
+				DATA[i + 1][2] = list.get(i).getDept();
+				DATA[i + 1][3] = list.get(i).getCourse();
+				DATA[i + 1][4] = list.get(i).getAccept_credit();
+				DATA[i + 1][5] = list.get(i).getGrade();
+				if(list.get(i).isApplication_state()) {
+					DATA[i + 1][6] = "등록완료";
+				}
+				else {
+					DATA[i + 1][6] = "미신청";
+				}
+			}
+		
+			if(CreditJTable != null) {
+				remove(CreditJTable);
+			}
+			CreditJTable = new JTable(DATA, contents_column);
+			CreditJTable.setBackground(Color.WHITE);
+			CreditJTable.setGridColor(Color.BLACK);
+			CreditJTable.setForeground(Color.BLACK);
+			CreditJTable.setBounds(101, 170, 600, 400);
+			CreditJTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			CreditJTable.addMouseListener(this);
+		
+			resize_rowcol(CreditJTable);
 		}
-		
-		if(CreditJTable != null) {
-			remove(CreditJTable);
-		}
-		CreditJTable = new JTable(DATA, contents_column);
-		CreditJTable.setBackground(Color.WHITE);
-		CreditJTable.setGridColor(Color.BLACK);
-		CreditJTable.setForeground(Color.BLACK);
-		CreditJTable.setBounds(101, 170, 600, 400);
-		CreditJTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		CreditJTable.addMouseListener(this);
-		
-		resize_rowcol(CreditJTable);
-		
 		
 		getContentPane().add(CreditJTable);
 		
