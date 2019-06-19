@@ -3,6 +3,7 @@ package systemUI;
 
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 
 
@@ -66,19 +67,19 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\진행상황조회\\진행상황조회1.gif")); // NOI18N
+        jButton3.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC9C4\uD589\uC0C1\uD669\uC870\uD68C.gif"))); // NOI18N
 
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\이수학점관리\\이수학점관리1.gif")); // NOI18N
+        jButton4.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC774\uC218\uD559\uC810\uAD00\uB9AC.gif"))); // NOI18N
 
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\물음표\\QNA.gif")); // NOI18N
+        jButton2.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/QNA.gif"))); // NOI18N
 
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\등록학점조회\\등록학점조회1.gif")); // NOI18N
+        jButton5.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uB4F1\uB85D\uD559\uC810\uC870\uD68C.gif"))); // NOI18N
 
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\파견실적조회\\파견실적조회1.gif")); // NOI18N
+        jButton6.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uD30C\uACAC\uC2E4\uC801\uC870\uD68C.gif"))); // NOI18N
 
-        jButton7.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\모집공고조회\\모집공고조회.gif")); // NOI18N
+        jButton7.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC870\uD68C.gif"))); // NOI18N
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\경대마크\\경북대학교.gif")); // NOI18N
+        jLabel3.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uACBD\uBD81\uB300\uD559\uAD50.gif"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 51));
@@ -154,7 +155,7 @@ public class MainUI extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 520));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\김근우\\Desktop\\이미지폴더\\배경\\background.jpg")); // NOI18N
+        jLabel2.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/background.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 520));
 
         pack();
