@@ -49,7 +49,7 @@ public class CreditUI extends JFrame implements MouseListener {
 	
 	private JComboBox comboBox;
 	
-	private JTable credit_JTable;
+	private JTable CreditJTable;
 	private CompletedCreditList c_list;
 	ArrayList<CompletedCredit> list;
 	
@@ -209,21 +209,21 @@ public class CreditUI extends JFrame implements MouseListener {
 			}
 		}
 		
-		if(credit_JTable != null) {
-			remove(credit_JTable);
+		if(CreditJTable != null) {
+			remove(CreditJTable);
 		}
-		credit_JTable = new JTable(DATA, contents_column);
-		credit_JTable.setBackground(Color.WHITE);
-		credit_JTable.setGridColor(Color.BLACK);
-		credit_JTable.setForeground(Color.BLACK);
-		credit_JTable.setBounds(101, 170, 600, 400);
-		credit_JTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		credit_JTable.addMouseListener(this);
+		CreditJTable = new JTable(DATA, contents_column);
+		CreditJTable.setBackground(Color.WHITE);
+		CreditJTable.setGridColor(Color.BLACK);
+		CreditJTable.setForeground(Color.BLACK);
+		CreditJTable.setBounds(101, 170, 600, 400);
+		CreditJTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		CreditJTable.addMouseListener(this);
 		
-		resize_rowcol(credit_JTable);
+		resize_rowcol(CreditJTable);
 		
 		
-		getContentPane().add(credit_JTable);
+		getContentPane().add(CreditJTable);
 		
 		revalidate();
 		repaint();	
@@ -313,8 +313,8 @@ public class CreditUI extends JFrame implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(credit_JTable != null) {
-			selected_index = credit_JTable.getSelectedRow();
+		if(CreditJTable != null) {
+			selected_index = CreditJTable.getSelectedRow();
 		}
 		else {
 			selected_index = -1;
