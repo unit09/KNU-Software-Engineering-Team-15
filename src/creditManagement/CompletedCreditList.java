@@ -4,6 +4,9 @@ import java.io.*;
 
 import java.util.*;
 
+import client.Client;
+import question.Qna;
+
  
 public class CompletedCreditList {
 	private static CompletedCreditList list_inst = null;
@@ -14,11 +17,11 @@ public class CompletedCreditList {
 	
 	private CompletedCreditList() {} // singleton으로 생성하기 위해 생성자를 private로
 	
-	public static CompletedCreditList get_completed_credit_list() throws ClassNotFoundException {
+	public static CompletedCreditList get_completed_credit_list(Client client) throws ClassNotFoundException {
 		if(list_inst == null) {
 			list_inst = new CompletedCreditList();
-			credit_list  = new ArrayList<>();
-			list_download();
+			readCreditList(client);
+			//list_download();
 		}
 		return list_inst;
 	}
@@ -26,6 +29,20 @@ public class CompletedCreditList {
 		return credit_list;
 	}
 	
+	public static void readCreditList(Client client)
+	{
+		credit_list = (ArrayList<CompletedCredit>)client.getObject("CreditList");
+		if(credit_list == null) {
+			credit_list = new ArrayList<>();
+		}
+	}
+	
+	public static void saveCreditList(Client client)
+	{
+		client.setObject("CreditList", credit_list);
+	}
+	
+	/*
 	@SuppressWarnings("unchecked")
 	public static void list_download() throws ClassNotFoundException { // 파일로부터 저장된 리스트정보 불러오기
 		FileInputStream file = null;
@@ -47,7 +64,8 @@ public class CompletedCreditList {
 		}
 
 	}
-	
+	*/
+	/*
 	public void list_upload() { // 가지고있는 리스트 정보 파일에 저장시키기
 		FileOutputStream file = null;
 		ObjectOutputStream obj = null;
@@ -74,15 +92,16 @@ public class CompletedCreditList {
 		}
 		
 	}
+	*/
 	
 	//instance initial용도
-	public boolean completed_credit_list_append(CompletedCredit input) throws ClassNotFoundException {
+	public boolean completed_credit_list_append(Client client, CompletedCredit input) throws ClassNotFoundException {
 		
-		list_download(); // 기존에 저장된 리스트 불러옴
-		
+		//list_download(); // 기존에 저장된 리스트 불러옴
+		readCreditList(client);
 		try{
 			// 중복검사 - 한 학생이 수강한 것에서는 학번, 학년도, 학기, 과목은 중복이 될 수 없기에 이것으로 중복검사 (object끼리 비교가 안먹혀서 ㅠㅠ)
-			
+
 			int st_id = input.getSt_id(), year = input.getYear(), semester = input.getSemester();
 			String univ = input.getUniv(), course = input.getCourse();
 			boolean overlap = false;
@@ -94,7 +113,8 @@ public class CompletedCreditList {
 			// 중복 아닐 경우에만 add
 			if(!overlap) {
 				credit_list.add(credit_list.size(), input);
-				list_upload();
+				saveCreditList(client);
+				//list_upload();
 			}
 			
 			return true;
@@ -105,7 +125,7 @@ public class CompletedCreditList {
 		
 	}
 	
-	public boolean completed_credit_list_modify(CompletedCredit input) throws ClassNotFoundException {
+	public boolean completed_credit_list_modify(Client client, CompletedCredit input) throws ClassNotFoundException {
 		boolean ischanged = false;
 		try{
 			// 수정된 사항을 저장하기 위해 리스트의 인스턴스 내에 바뀌지 않을 데이터로 기존 값 찾음. 인덱스 쓰기에는 더 복잡해짐.
@@ -116,7 +136,8 @@ public class CompletedCreditList {
 				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
 					one = input;
 					ischanged = true;
-					list_upload(); // 바꾸고 업데이트
+					//list_upload(); // 바꾸고 업데이트
+					saveCreditList(client);
 				}
 			}
 			
@@ -148,6 +169,9 @@ public class CompletedCreditList {
 	public String[] semester_list(int st_id) {
 		int count = 0;
 		String[] SemeList = {NO_LIST};
+		if(credit_list == null) {
+			return null;
+		}
 		int[][] temp = new int[credit_list.size()][2];
 		
 		for(int i = 0; i < credit_list.size(); i++) {
@@ -178,6 +202,9 @@ public class CompletedCreditList {
 	public String[] semester_list_isapped(int st_id) {
 		int count = 0;
 		String[] SemeList_isapped = {NO_LIST};
+		if(credit_list == null) {
+			return null;
+		}
 		int[][] temp = new int[credit_list.size()][2];
 		
 		for(int i = 0; i < credit_list.size(); i++) {
