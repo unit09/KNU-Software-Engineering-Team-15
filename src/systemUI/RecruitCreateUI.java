@@ -30,6 +30,7 @@ public class RecruitCreateUI extends JFrame {
     private JTextField selectYear;
     private JTextField numField;
     
+    private static final String yearMessage = "년";
 
     public RecruitCreateUI(RecruitmentList mainList, Administer admin) {
     	super("모집공고 작성");
@@ -103,7 +104,7 @@ public class RecruitCreateUI extends JFrame {
         startyearField.setBounds(190, 228, 108, 32);
         add(startyearField);
         
-        JLabel label_1 = new JLabel("\uB144");
+        JLabel label_1 = new JLabel(yearMessage);
         label_1.setHorizontalAlignment(SwingConstants.CENTER);
         label_1.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
         label_1.setBounds(299, 226, 30, 32);
@@ -172,7 +173,7 @@ public class RecruitCreateUI extends JFrame {
         deadYear.setBounds(190, 315, 108, 32);
         add(deadYear);
         
-        JLabel label_2 = new JLabel("\uB144");
+        JLabel label_2 = new JLabel(yearMessage);
         label_2.setHorizontalAlignment(SwingConstants.CENTER);
         label_2.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
         label_2.setBounds(299, 315, 30, 32);
@@ -217,7 +218,7 @@ public class RecruitCreateUI extends JFrame {
         selectYear.setBounds(190, 359, 108, 32);
         add(selectYear);
         
-        JLabel label_8 = new JLabel("\uB144");
+        JLabel label_8 = new JLabel(yearMessage);
         label_8.setHorizontalAlignment(SwingConstants.CENTER);
         label_8.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
         label_8.setBounds(299, 359, 30, 32);
@@ -274,13 +275,7 @@ public class RecruitCreateUI extends JFrame {
 					}
 					else {
 						if (mainList.checkList(Integer.parseInt(numField.getText())) == false) {
-			                if(!checkFormat(startyearField.getText()))
-			                	JOptionPane.showMessageDialog(null, "시작 연도의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
-			                else if(!checkFormat(deadYear.getText()) || !checkFormat(deadMonth.getText()) || !checkFormat(deadDay.getText()))
-			                	JOptionPane.showMessageDialog(null, "모집 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
-			                else if(!checkFormat(selectYear.getText()) || !checkFormat(selectMonth.getText()) || !checkFormat(selectDay.getText()))
-			                	JOptionPane.showMessageDialog(null, "최종 등록 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
-			                else {
+			                if(checkAllFormat()) {
 			                	Recruitment newone = admin.createRecruitment(Integer.parseInt(numField.getText()), titleField.getText(), content.getText(),
 			                            Integer.parseInt(startyearField.getText()), nationField.getText(), univField.getText(), majorField.getText());	
 			                	newone.setDeadlineYear(Integer.parseInt(deadYear.getText()));
@@ -325,6 +320,23 @@ public class RecruitCreateUI extends JFrame {
     	catch(NumberFormatException e) {
     		return false;
     	}    	
+    }
+    
+    private boolean checkAllFormat() {
+    	 if(!checkFormat(startyearField.getText())) {
+         	JOptionPane.showMessageDialog(null, "시작 연도의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+    	 }
+         else if(!checkFormat(deadYear.getText()) || !checkFormat(deadMonth.getText()) || !checkFormat(deadDay.getText())) {
+         	JOptionPane.showMessageDialog(null, "모집 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+         }
+         else if(!checkFormat(selectYear.getText()) || !checkFormat(selectMonth.getText()) || !checkFormat(selectDay.getText())) {
+         	JOptionPane.showMessageDialog(null, "최종 등록 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+         }
+         else {
+        	 return true;
+         }
+    	 
+    	 return false;
     }
 }
 
