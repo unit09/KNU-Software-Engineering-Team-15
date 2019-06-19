@@ -34,13 +34,10 @@ public class Faq implements Serializable
 	{		
 		String line = null;
 		
-		System.out.println("관리자 전용 FAQ 등록");		
-		
-		System.out.println("질문 제목 입력 : ");
-		
+		// 관리자 전용 FAQ 등록, 질문 제목 입력 :
 		this.questionName = br.readLine();
 		
-		System.out.println("질문 내용 입력 : ");
+		// 질문 내용 입력
 		
 		this.question = br.readLine();
 		
@@ -52,8 +49,7 @@ public class Faq implements Serializable
 			this.question = this.question + "\n" + line;
 		}
 		
-		System.out.println("질문 답변 입력 : ");
-		
+		// 질문 답변 입력
 		this.answer = br.readLine();
 		
 		while( (line = br.readLine()) != null)
@@ -63,12 +59,6 @@ public class Faq implements Serializable
 			
 			this.answer = this.answer + "\n" + line;
 		}
-	}
-	
-	public void printFaq()
-	{
-		System.out.println(this.question);
-		System.out.println(this.answer);
 	}
 	
 	public int getFaqNum() {

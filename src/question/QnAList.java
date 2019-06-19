@@ -1,9 +1,5 @@
 package question;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 import client.Client;
@@ -17,11 +13,9 @@ public class QnAList
 	{
 		Qna Q = new Qna(getQnaList().size() + 1, username, questionName, question);
 
-		//Q.typeQuestion();
-		
 		getQnaList().add(Q);
 		
-		System.out.println("list 삽입 완료");
+		//list 삽입 완료
 	}
 	
 	
@@ -33,7 +27,7 @@ public class QnAList
 		
 		getQnaList().add(Q);
 		
-		System.out.println("list 삽입 완료");
+		//list 삽입 완료
 	}
 	
 	public static void deleteQna(Qna one)
@@ -42,15 +36,13 @@ public class QnAList
 	}
 	
 	
-	public static void createFaq(String questionName, String question, String answer) throws IOException
+	public static void createFaq(String questionName, String question, String answer)
 	{
 		Faq F = new Faq(FaqList.size() + 1, questionName, question, answer);
 		
-		//F.typeFaq();
-		
 		FaqList.add(F);
 		
-		System.out.println("자주묻는 질문 등록!");	
+		// 자주묻는 질문 등록	
 	}
 
 	
@@ -62,7 +54,7 @@ public class QnAList
 		
 		FaqList.add(F);
 		
-		System.out.println("자주묻는 질문 등록!");	
+		// 자주묻는 질문 등록	
 	}
 	
 	
@@ -86,32 +78,6 @@ public class QnAList
 		client.setObject("FAQList", FaqList);
 	}
 	
-	public static void printQnaList()
-	{
-		System.out.println("<Qna Num> (QnaName) (Questioner) (QnaState)");
-		
-		for(Qna list : getQnaList())
-		{
-			System.out.print("<" + list.getQnaNum() + "> " + list.getQuestionName() + " " + list.getQuestioner());
-			
-			if(list.getState() == 0)
-				System.out.println(" 답변 진행중");
-			else
-				System.out.println(" 답변 완료");
-		}
-	}
-	
-	public static void printFaqList()
-	{
-		for(Faq list : getFaqList())
-		{
-			System.out.println(list.getFaqNum() + " " + list.getQuestionName());
-			
-			System.out.println(list.getQuestion());
-			System.out.println(list.getAnswer());
-		}
-	}
-
 	public static ArrayList<Qna> getQnaList()
 	{
 		return QnaList;

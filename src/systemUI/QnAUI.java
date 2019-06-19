@@ -365,15 +365,9 @@ public class QnAUI extends JPanel{
 						String context2Temp = context3Format.getText();
 						//System.out.println(context2Temp);
 						
-						try
-						{
-							QnAList.createFaq(titleTemp, contextTemp, context2Temp);
-							
-							QnAList.saveFaqList(client);
-						} catch (IOException e1)
-						{
-							e1.printStackTrace();
-						}					
+						QnAList.createFaq(titleTemp, contextTemp, context2Temp);
+						
+						QnAList.saveFaqList(client);					
 						
 						Faq q = QnAList.getFaqList().get(QnAList.getFaqList().size() - 1);
 						
