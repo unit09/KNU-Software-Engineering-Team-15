@@ -131,16 +131,26 @@ public class MainUI extends Observable {
                 jPanel1MousePressed(evt);
             }
         });
-
-        stateB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC9C4\uD589\uC0C1\uD669\uC870\uD68C.gif"))); // NOI18N
+        
+        if(userType == 1) {
+        	stateB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC791\uC131.gif")));
+        }
+        else {
+        	stateB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC9C4\uD589\uC0C1\uD669\uC870\uD68C.gif"))); // NOI18N
+        }
         stateB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	//state 아직 없음
             }
         });
-
-        creditB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC774\uC218\uD559\uC810\uAD00\uB9AC.gif"))); // NOI18N
+        
+        if(userType == 1) {
+        	creditB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC0AD\uC81C.gif")));
+        }
+        else {
+        	creditB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC774\uC218\uD559\uC810\uAD00\uB9AC.gif"))); // NOI18N
+        }
         creditB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
