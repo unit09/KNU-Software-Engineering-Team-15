@@ -9,112 +9,60 @@ import question.Qna;
 
  
 public class CompletedCreditList {
-	private static CompletedCreditList list_inst = null;
-	private static ArrayList<CompletedCredit> credit_list;
-	private static final String filename = "database/completed_credit/completed_credit_list_file";
+	private static CompletedCreditList ListInstance = null;
+	private static ArrayList<CompletedCredit> CreditList;
 	
 	public final static String NO_LIST = "내역이 없습니다";
 	
 	private CompletedCreditList() {} // singleton으로 생성하기 위해 생성자를 private로
 	
 	public static CompletedCreditList get_completed_credit_list(Client client) throws ClassNotFoundException {
-		if(list_inst == null) {
-			list_inst = new CompletedCreditList();
+		if(ListInstance == null) {
+			ListInstance = new CompletedCreditList();
 			readCreditList(client);
-			//list_download();
 		}
-		return list_inst;
+		return ListInstance;
 	}
 	public ArrayList<CompletedCredit> get_instance_list(){
-		return credit_list;
+		return CreditList;
 	}
 	
 	public static void readCreditList(Client client)
 	{
-		credit_list = (ArrayList<CompletedCredit>)client.getObject("CreditList");
-		if(credit_list == null) {
-			credit_list = new ArrayList<>();
+		CreditList = (ArrayList<CompletedCredit>)client.getObject("CreditList");
+		if(CreditList == null) {
+			CreditList = new ArrayList<>();
 		}
 	}
 	
 	public static void saveCreditList(Client client)
 	{
-		client.setObject("CreditList", credit_list);
+		client.setObject("CreditList", CreditList);
 	}
-	
-	/*
-	@SuppressWarnings("unchecked")
-	public static void list_download() throws ClassNotFoundException { // 파일로부터 저장된 리스트정보 불러오기
-		FileInputStream file = null;
-		ObjectInputStream obj = null;
 		
-		try{
-			file = new FileInputStream(filename);
-			obj = new ObjectInputStream(file);
-
-			credit_list = (ArrayList<CompletedCredit>) obj.readObject();
-			obj.close();
-			file.close();
-		}
-		catch(FileNotFoundException e) { // 최초에 파일이 없을 경우 에러처리는 하되, 그냥 진행
-			//e.printStackTrace();
-		}
-		catch (IOException e){
-			System.out.println("read error");
-		}
-
-	}
-	*/
-	/*
-	public void list_upload() { // 가지고있는 리스트 정보 파일에 저장시키기
-		FileOutputStream file = null;
-		ObjectOutputStream obj = null;
-		
-		try{
-			File backup = new File(filename);
-			File rename = new File("database/completed_credit/credit_backup");
-			backup.renameTo(rename);
-			backup.delete();
-			
-			file = new FileOutputStream(filename);
-			obj = new ObjectOutputStream(file);
-			
-			obj.writeObject(credit_list);
-			obj.flush();
-			obj.close();
-			file.close();
-		}
-		catch(FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e){
-			System.out.println("write error");
-		}
-		
-	}
-	*/
-	
 	//instance initial용도
 	public boolean completed_credit_list_append(Client client, CompletedCredit input) throws ClassNotFoundException {
 		
-		//list_download(); // 기존에 저장된 리스트 불러옴
+		//기존에 저장된 리스트 불러옴
 		readCreditList(client);
 		try{
 			// 중복검사 - 한 학생이 수강한 것에서는 학번, 학년도, 학기, 과목은 중복이 될 수 없기에 이것으로 중복검사 (object끼리 비교가 안먹혀서 ㅠㅠ)
 
-			int st_id = input.getSt_id(), year = input.getYear(), semester = input.getSemester();
-			String univ = input.getUniv(), course = input.getCourse();
+			int st_id = input.getSt_id();
+			int year = input.getYear();
+			int semester = input.getSemester();
+			String univ = input.getUniv();
+			String course = input.getCourse();
 			boolean overlap = false;
-			for(CompletedCredit one : credit_list) {
-				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
+			for(CompletedCredit one : CreditList) {
+				if(one.getSt_id() == st_id && one.getUniv().equals(univ) && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
 					overlap = true;
 				}
 			}
 			// 중복 아닐 경우에만 add
 			if(!overlap) {
-				credit_list.add(credit_list.size(), input);
+				CreditList.add(CreditList.size(), input);
 				saveCreditList(client);
-				//list_upload();
 			}
 			
 			return true;
@@ -129,14 +77,17 @@ public class CompletedCreditList {
 		boolean ischanged = false;
 		try{
 			// 수정된 사항을 저장하기 위해 리스트의 인스턴스 내에 바뀌지 않을 데이터로 기존 값 찾음. 인덱스 쓰기에는 더 복잡해짐.
-			int st_id = input.getSt_id(), year = input.getYear(), semester = input.getSemester();
+			int st_id = input.getSt_id();
+			int year = input.getYear();
+			int semester = input.getSemester();
 			String course = input.getCourse();
+			String univ = input.getUniv();
 			int i = 0;
-			for(CompletedCredit one : credit_list) {
-				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
+			for(CompletedCredit one : CreditList) {
+				if(one.getSt_id() == st_id && one.getUniv().equals(univ) && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
 					one = input;
 					ischanged = true;
-					//list_upload(); // 바꾸고 업데이트
+					// 바꾸고 업데이트
 					saveCreditList(client);
 				}
 			}
@@ -149,7 +100,7 @@ public class CompletedCreditList {
 	
 	public int count_std_term_credit(int st_id, int year, int semester) {
 		int count = 0;
-		for(CompletedCredit one : credit_list) {
+		for(CompletedCredit one : CreditList) {
 			if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester) {
 				count ++;
 			}
@@ -158,7 +109,7 @@ public class CompletedCreditList {
 	}
 	public int count_std_term_credit_isapped(int st_id, int year, int semester) {
 		int count = 0;
-		for(CompletedCredit one : credit_list) {
+		for(CompletedCredit one : CreditList) {
 			if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
 				count ++;
 			}
@@ -169,55 +120,57 @@ public class CompletedCreditList {
 	public String[] semester_list(int st_id) {
 		int count = 0;
 		String[] SemeList = {NO_LIST};
-		if(credit_list == null) {
+		if(CreditList == null) {
 			return null;
 		}
-		int[][] temp = new int[credit_list.size()][2];
-		
-		for(int i = 0; i < credit_list.size(); i++) {
-			if(credit_list.get(i).getSt_id() == st_id) {
-				boolean judge = true;
-				for(int j = 0; j < credit_list.size(); j++) {
-					if(temp[j][0] == credit_list.get(i).getYear() && temp[j][1] == credit_list.get(i).getSemester()) {
-						judge = false;
+		else {
+			int[][] temp = new int[CreditList.size()][2];
+			
+			for(int i = 0; i < CreditList.size(); i++) {
+				if(CreditList.get(i).getSt_id() == st_id) {
+					boolean judge = true;
+					for(int j = 0; j < CreditList.size(); j++) {
+						if(temp[j][0] == CreditList.get(i).getYear() && temp[j][1] == CreditList.get(i).getSemester()) {
+							judge = false;
+						}
+					}
+					if(judge) {
+						temp[count][0] = CreditList.get(i).getYear();
+						temp[count][1] = CreditList.get(i).getSemester();
+						count++;
 					}
 				}
-				if(judge) {
-					temp[count][0] = credit_list.get(i).getYear();
-					temp[count][1] = credit_list.get(i).getSemester();
-					count++;
+			}
+			
+			if(count > 0) {
+				SemeList = new String[count];
+				for(int i = 0; i < count; i++) {
+					SemeList[i] = String.format("%4s년%2s학기", temp[i][0], temp[i][1]);
 				}
 			}
+			return SemeList;
 		}
-		
-		if(count > 0) {
-			SemeList = new String[count];
-			for(int i = 0; i < count; i++) {
-				SemeList[i] = String.format("%4s년%2s학기", temp[i][0], temp[i][1]);
-			}
-		}
-		return SemeList;
 	}
 	
 	public String[] semester_list_isapped(int st_id) {
 		int count = 0;
 		String[] SemeList_isapped = {NO_LIST};
-		if(credit_list == null) {
+		if(CreditList == null) {
 			return null;
 		}
-		int[][] temp = new int[credit_list.size()][2];
+		int[][] temp = new int[CreditList.size()][2];
 		
-		for(int i = 0; i < credit_list.size(); i++) {
-			if(credit_list.get(i).getSt_id() == st_id && credit_list.get(i).isApplication_state()) {
+		for(int i = 0; i < CreditList.size(); i++) {
+			if(CreditList.get(i).getSt_id() == st_id && CreditList.get(i).isApplication_state()) {
 				boolean judge = true;
-				for(int j = 0; j < credit_list.size(); j++) {
-					if(temp[j][0] == credit_list.get(i).getYear() && temp[j][1] == credit_list.get(i).getSemester()) {
+				for(int j = 0; j < CreditList.size(); j++) {
+					if(temp[j][0] == CreditList.get(i).getYear() && temp[j][1] == CreditList.get(i).getSemester()) {
 						judge = false;
 					}
 				}
 				if(judge) {
-					temp[count][0] = credit_list.get(i).getYear();
-					temp[count][1] = credit_list.get(i).getSemester();
+					temp[count][0] = CreditList.get(i).getYear();
+					temp[count][1] = CreditList.get(i).getSemester();
 					count++;
 				}
 			}
@@ -237,7 +190,7 @@ public class CompletedCreditList {
 		ArrayList<CompletedCredit> CCLP = new ArrayList<>();
 		
 		if(count > 0) {
-			for(CompletedCredit one : credit_list) {
+			for(CompletedCredit one : CreditList) {
 				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester) {
 					CCLP.add(one);
 				}
@@ -251,7 +204,7 @@ public class CompletedCreditList {
 		ArrayList<CompletedCredit> ACLP = new ArrayList<>();
 		
 		if(count > 0) {
-			for(CompletedCredit one : credit_list) {
+			for(CompletedCredit one : CreditList) {
 				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
 					ACLP.add(one);
 				}
