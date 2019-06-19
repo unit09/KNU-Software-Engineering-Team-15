@@ -8,7 +8,7 @@ import java.util.Vector;
 public class RecruitmentList implements Serializable {
     private ArrayList<Recruitment> recruitments = new ArrayList<Recruitment>();
 
-    //»ı¼ºÀÚ ÀÚµ¿ »ı¼º
+    //ìƒì„±ì ìë™ ìƒì„±
 
     public void addList(Recruitment newThing){
         recruitments.add(newThing);
@@ -18,7 +18,7 @@ public class RecruitmentList implements Serializable {
         recruitments.remove(index);
     }
 
-    public Vector<String> printList(){	// ¸ğÁı°ø°í Á¶È¸½Ã ÇÊ¿äÇÑ JList¸¦ ¸¸µé±â À§ÇØ vector¸¦ return
+    public Vector<String> printList(){	// ëª¨ì§‘ê³µê³  ì¡°íšŒì‹œ í•„ìš”í•œ JListë¥¼ ë§Œë“¤ê¸° ìœ„í•´ vectorë¥¼ return
         Vector<String> RList = new Vector<String>();
 
         for(int i = 0; i < recruitments.size(); i++){
@@ -29,12 +29,12 @@ public class RecruitmentList implements Serializable {
         return RList;
     }
 
-    public Vector<String> printList2(){	// ¸ğÁı°ø°í »èÁ¦½Ã ÇÊ¿äÇÑ JList¸¦ ¸¸µé±â À§ÇØ vertor¸¦ return
+    public Vector<String> printList2(){	// ëª¨ì§‘ê³µê³  ì‚­ì œì‹œ í•„ìš”í•œ JListë¥¼ ë§Œë“¤ê¸° ìœ„í•´ vertorë¥¼ return
         Vector<String> RList = new Vector<String>();
 
         for(int i = 0; i < recruitments.size(); i++){
             Recruitment temp = recruitments.get(i);
-            RList.add("" + temp.getRecruitNum() + "¹ø ¸ğÁı°ø°í : " + temp.getTitle());
+            RList.add("" + temp.getRecruitNum() + "ë²ˆ ëª¨ì§‘ê³µê³  : " + temp.getTitle());
         }
 
         return RList;
@@ -58,7 +58,7 @@ public class RecruitmentList implements Serializable {
         return temp2;
     }
 
-    public boolean checkList(int num){	// ¸ğÁı°ø°í ¹øÈ£°¡ numÀÎ ¸ğÁı°ø°í°¡ Á¸ÀçÇÏ´ÂÁö Ã¼Å©ÇÏ´Â ¸Ş¼Òµå
+    public boolean checkList(int num){	// ëª¨ì§‘ê³µê³  ë²ˆí˜¸ê°€ numì¸ ëª¨ì§‘ê³µê³ ê°€ ì¡´ì¬í•˜ëŠ”ì§€ ì²´í¬í•˜ëŠ” ë©”ì†Œë“œ
         int i;
         for(i = 0; i < recruitments.size(); i ++){
             Recruitment check = recruitments.get(i);
@@ -71,7 +71,7 @@ public class RecruitmentList implements Serializable {
             return true;
     }
 
-    public boolean checkUser(int index, int stID){  // index¹øÂ°¿¡ ÀÖ´Â ¸ğÁı°ø°í¿¡ stIDÀÎ ÇĞ»ıÀÌ ½ÅÃ»À» Çß´ÂÁö ¾ÈÇß´ÂÁö È®ÀÎÇÏ´Â ¸Ş¼Òµå
+    public boolean checkUser(int index, int stID){  // indexë²ˆì§¸ì— ìˆëŠ” ëª¨ì§‘ê³µê³ ì— stIDì¸ í•™ìƒì´ ì‹ ì²­ì„ í–ˆëŠ”ì§€ ì•ˆí–ˆëŠ”ì§€ í™•ì¸í•˜ëŠ” ë©”ì†Œë“œ
         if(recruitments.get(index).checkUser(stID) != -1)
             return true;
         else
@@ -92,7 +92,7 @@ public class RecruitmentList implements Serializable {
         }
     }
 
-    public int finalChoice(int num, int stID){	// ÃÖÁ¾µî·ÏÀ» À§ÇÑ ¸Ş¼Òµå
+    public int finalChoice(int num, int stID){	// ìµœì¢…ë“±ë¡ì„ ìœ„í•œ ë©”ì†Œë“œ
     	int index = 0;
         for(int i = 0; i < recruitments.size(); i++) {
             if (num == recruitments.get(i).getRecruitNum()) {
@@ -101,7 +101,7 @@ public class RecruitmentList implements Serializable {
                     recruitments.get(i).finalChoice(index);
                 }
                 else
-                    JOptionPane.showMessageDialog(null, "µî·ÏÇÒ ¼ö ¾ø´Â »óÅÂÀÔ´Ï´Ù.", "¾Ë¸²", JOptionPane.PLAIN_MESSAGE);	// ÀÌ°Å Ãâ·Â ÀÚÃ¼´Â UI¿¡¼­ ÇÏµµ·Ï ÇØ¾ßµÇ´Âµ¥...
+                    JOptionPane.showMessageDialog(null, "ë“±ë¡í•  ìˆ˜ ì—†ëŠ” ìƒíƒœì…ë‹ˆë‹¤.", "ì•Œë¦¼", JOptionPane.PLAIN_MESSAGE);	// ì´ê±° ì¶œë ¥ ìì²´ëŠ” UIì—ì„œ í•˜ë„ë¡ í•´ì•¼ë˜ëŠ”ë°...
                 break;
             }
         }
@@ -109,7 +109,7 @@ public class RecruitmentList implements Serializable {
         return index;
     }
 
-    public void setRecruitState(int year, int month, int date) {	//½Ã¿¬À» À§ÇØ ½É»ç´Ü°è¸¦ ³Ñ¾î°¡¼­ ¹Ù·Î ÇÕ°İÃ³¸®¸¦ ÇÔ
+    public void setRecruitState(int year, int month, int date) {	//ì‹œì—°ì„ ìœ„í•´ ì‹¬ì‚¬ë‹¨ê³„ë¥¼ ë„˜ì–´ê°€ì„œ ë°”ë¡œ í•©ê²©ì²˜ë¦¬ë¥¼ í•¨
     	for(int i = 0; i < recruitments.size(); i++) {
     		int t_y = recruitments.get(i).getDeadlineYear();
     		int t_m = recruitments.get(i).getDeadlineMonth();
@@ -155,9 +155,9 @@ public class RecruitmentList implements Serializable {
     	return recruitments.get(index).getProgress();
     }
     
-    public Recruitment getRecruitment(int index) {
+    /*public Recruitment getRecruitment(int index) {
     	return recruitments.get(index);
-    }
+    }*/
     
     public int getSemester(int index) {
         return recruitments.get(index).getStartSemester();
