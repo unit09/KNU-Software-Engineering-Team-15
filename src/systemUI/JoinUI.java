@@ -72,6 +72,9 @@ public class JoinUI extends JFrame {
         			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", "caution", JOptionPane.DEFAULT_OPTION);
         		}
         		else {
+        			if(IDField.getText().equals("") || pwdPassword.getText().equals("") || name_Field.getText().equals("") || textField_4.getText().equals("")) {
+        				JOptionPane.showMessageDialog(null, "입력하지 않은 항목이 있습니다.", "caution", JOptionPane.DEFAULT_OPTION);
+        			}
         			if(!stored.equals(IDField.getText())) {
         				IDcheck = false;
         				JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", "caution", JOptionPane.DEFAULT_OPTION);
@@ -146,7 +149,10 @@ public class JoinUI extends JFrame {
         		String checkID = IDField.getText();
             	JSONObject check = (JSONObject)client.getObject(checkID);
             	
-            	if(check != null) {
+            	if(IDField.getText().equals("")) {
+            		JOptionPane.showMessageDialog(null, "아이디가 공란입니다.", "caution", JOptionPane.DEFAULT_OPTION);
+            	}            	
+            	else if(check != null) {
             		IDcheck = false;
             		JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.", "중복!", JOptionPane.DEFAULT_OPTION);
             	}
