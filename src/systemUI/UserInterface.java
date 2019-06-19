@@ -61,8 +61,7 @@ public class UserInterface extends Observable {
         
         setLayout(null);
 
-        //Tab.setBounds(10, 10, 650, 480);
-        Tab.setBounds(10, 10, 700, 640);
+        Tab.setBounds(10, 10, 650, 480);
 
         Tab.addTab("∏ﬁ¿Œ", new Initial());
         

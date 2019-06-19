@@ -5,8 +5,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import org.json.simple.JSONObject;
-
 import client.Client;
 
 import javax.swing.JFrame;
@@ -18,22 +16,23 @@ public class JoinUI extends JFrame {
     private JPanel contentPane;
     private JTextField pwdPassword;
     private JTextField IDField;
+
+    private Client client;
     
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int xx,xy;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private JTextField name_Field;
     private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_2;
     private JTextField textField_3;
     private JTextField textField_4;
-
-    private boolean IDcheck;
-    private String stored;
+  
     
-    public JoinUI(Client client) {
-    	IDcheck = false;
+
+    public JoinUI() {
+    	client = new Client();
     	
     	setTitle("회원가입");
     	setBackground(Color.WHITE);
@@ -62,34 +61,12 @@ public class JoinUI extends JFrame {
         IDField.setBounds(31, 101, 210, 45);
         contentPane.add(IDField); 
         IDField.setColumns(10);
-        
+        //enter action
         JButton succ_button = new JButton("\uAC00\uC785\uD558\uAE30");
         succ_button.setForeground(Color.WHITE);
         succ_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		if(IDcheck == false) {
-        			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", "caution", JOptionPane.DEFAULT_OPTION);
-        		}
-        		else {
-        			if(!stored.equals(IDField.getText())) {
-        				IDcheck = false;
-        				JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", "caution", JOptionPane.DEFAULT_OPTION);
-        			}        			
-        			if(!pwdPassword.getText().equals(passwordField.getText())) {
-        				JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 확인이 서로 다릅니다.", "caution", JOptionPane.DEFAULT_OPTION);
-        			}
-        			else {
-        				if(!checkFormat(textField.getText()))
-        					JOptionPane.showMessageDialog(null, "학번 입력이 잘못되었습니다.\n정수로 이루어진 학번을 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
-        				else if(!checkFormat(textField_1.getText()))
-        					JOptionPane.showMessageDialog(null, "학년 입력이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
-        				else {
-        					Student temp = new Student(Integer.parseInt(textField.getText()), name_Field.getText(), textField_4.getText(), Integer.parseInt(textField_1.getText()), 3.3, textField_2.getText(), textField_3.getText());
-        					client.setObject(IDField.getText(), pwdPassword.getText(), temp);
-        					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "회원가입 완료", JOptionPane.DEFAULT_OPTION);
-        				}
-        			}
-        		}
+        		//가입하기 버튼 눌렀을때 실행 할 것.
         	}
         });
         
@@ -152,19 +129,7 @@ public class JoinUI extends JFrame {
         id_chack_button.setBackground(new Color(135,206,250));
         id_chack_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		String checkID = IDField.getText();
-            	JSONObject check = (JSONObject)client.getObject(checkID);
-            	
-            	if(check != null) {
-            		IDcheck = false;
-            		JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.", "중복!", JOptionPane.DEFAULT_OPTION);
-            	}
-            	else {
-              		IDcheck = true;
-              		stored = checkID;
-            		JOptionPane.showMessageDialog(null, "사용가능한 아이디입니다.", "가능!", JOptionPane.DEFAULT_OPTION);
-            	}
-            }
+        	}
         });
         id_chack_button.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 18));
         id_chack_button.setBounds(242, 101, 100, 44);
@@ -224,15 +189,5 @@ public class JoinUI extends JFrame {
         label_5.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 12));
         label_5.setBounds(31, 350, 86, 15);
         contentPane.add(label_5);
-    }
-    
-    private boolean checkFormat(String s) {
-    	try {
-    		Integer.parseInt(s);
-    		return true;
-    	}
-    	catch(NumberFormatException e) {
-    		return false;
-    	}    	
     }
 }

@@ -8,30 +8,29 @@ public class Recruitment implements Serializable {
     private int recruitNum;
     private String title;
     private String contents;
+    private int deadline;
+    private int selectDeadline;
     private int startYear;
+    private int startSemester;
+    private int period;
     private String nation;
     private String university;
     private String major;
-    
-    private int startSemester;	//3:여름계절학기, 4:겨울계절학기
-    private int period;
-    
-    private int deadlineYear;
-    private int deadlineMonth;
-    private int deadlineDay;
-    private int selectDeadlineYear;
-    private int selectDeadlineMonth;
-    private int selectDeadlineDay;
 
     private int progress = 0;   //0:모집중, 1:심사중, 2:심사종료, 3:다끝남
 
     private ArrayList<Application> applications = new ArrayList<Application>();
 
-    public Recruitment(int recruitNum, String title, String contents, int startYear, String nation, String university,String major){
+    public Recruitment(int recruitNum, String title, String contents, int deadline, int selectDeadline, int startYear, int startSemester, int period,
+                       String nation, String university,String major){
         this.recruitNum = recruitNum;
         this.title = title;
         this.contents = contents;
+        this.deadline = deadline;
+        this.selectDeadline = selectDeadline;
         this.startYear = startYear;
+        this.startSemester = startSemester;
+        this.period = period;
         this.nation = nation;
         this.university = university;
         this.major = major;
@@ -58,7 +57,7 @@ public class Recruitment implements Serializable {
         applications.remove(index);
     }
 
-    public JPanel printRecuritment(){	//이거 여기 있어도 되나?
+    public JPanel printRecuritment(){
         JPanel pane = new JPanel();
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         JTextField num = new JTextField("모집공고 번호 : " + recruitNum, 32);
@@ -67,8 +66,8 @@ public class Recruitment implements Serializable {
         JTextField st = new JTextField("시작 : " + startYear + "년 " + startSemester + "학기부터 시작", 32);
         JTextField pe = new JTextField("기간 : " + period + "학기동안", 32);
         JTextArea con = new JTextArea(contents, 12, 32);
-        JTextField de = new JTextField("모집기간 : " + deadlineYear + "년 " + deadlineMonth + "월 " + deadlineDay + "일까지", 32);
-        JTextField sde = new JTextField("최종등록 마감일 : " + selectDeadlineYear + "년 " + selectDeadlineMonth +"월 "+ selectDeadlineDay + "일까지", 32);
+        JTextField de = new JTextField("모집기간 : " + deadline + "까지", 32);
+        JTextField sde = new JTextField("최종등록 마감일 : " + selectDeadline + "까지", 32);
 
         num.setEditable(false);
         ti.setEditable(false);
@@ -141,14 +140,8 @@ public class Recruitment implements Serializable {
     public String getTitle() {
         return title;
     }
-    public int getDeadlineYear() {
-        return deadlineYear;
-    }
-    public int getDeadlineMonth() {
-        return deadlineMonth;
-    }
-    public int getDeadlineDay() {
-        return deadlineDay;
+    public int getDeadline() {
+        return deadline;
     }
     public int getPeriod() {
         return period;
@@ -159,14 +152,8 @@ public class Recruitment implements Serializable {
     public int getProgress() {
         return progress;
     }
-    public int getSelectDeadlineYear() {
-        return selectDeadlineYear;
-    }
-    public int getSelectDeadlineMonth() {
-        return selectDeadlineMonth;
-    }
-    public int getSelectDeadlineDay() {
-        return selectDeadlineDay;
+    public int getSelectDeadline() {
+        return selectDeadline;
     }
     public int getStartSemester() {
         return startSemester;
@@ -193,14 +180,8 @@ public class Recruitment implements Serializable {
     public void setContents(String contents) {
         this.contents = contents;
     }
-    public void setDeadlineYear(int deadline) {
-        this.deadlineYear = deadline;
-    }
-    public void setDeadlineMonth(int deadline) {
-        this.deadlineMonth = deadline;
-    }
-    public void setDeadlineDay(int deadline) {
-        this.deadlineDay = deadline;
+    public void setDeadline(int deadline) {
+        this.deadline = deadline;
     }
     public void setNation(String nation) {
         this.nation = nation;
@@ -211,14 +192,8 @@ public class Recruitment implements Serializable {
     public void setProgress(int progress) {
         this.progress = progress;
     }
-    public void setSelectDeadlineYear(int selectDeadline) {
-        this.selectDeadlineYear = selectDeadline;
-    }
-    public void setSelectDeadlineMonth(int selectDeadline) {
-        this.selectDeadlineMonth = selectDeadline;
-    }
-    public void setSelectDeadlineDay(int selectDeadline) {
-        this.selectDeadlineDay = selectDeadline;
+    public void setSelectDeadline(int selectDeadline) {
+        this.selectDeadline = selectDeadline;
     }
     public void setStartSemester(int startSemester) {
         this.startSemester = startSemester;

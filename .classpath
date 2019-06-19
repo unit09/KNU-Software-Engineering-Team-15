@@ -9,6 +9,5 @@
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="lib/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/김근우/Desktop/소프트웨어공학/software engineering git/KNU-Software-Engineering-Team-15/lib/AbsoluteLayout.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
