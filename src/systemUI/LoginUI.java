@@ -141,20 +141,6 @@ public class LoginUI extends JFrame {
         button_join.setBounds(177, 359, 211, 42);
         contentPane.add(button_join);
         
-        JButton btnYoungun = new JButton("youngun");
-        btnYoungun.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        		//ÇÒ°Í
-        		younghun hihi = new younghun(client);
-        		hihi.setUndecorated(false);
-        		hihi.setVisible(true);
-        		hihi.setResizable(false);
-        	}
-        });
-        btnYoungun.setBounds(14, 367, 105, 27);
-        contentPane.add(btnYoungun);
-        
         JLabel ID_label = new JLabel("ID");
         ID_label.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 12));
         ID_label.setBounds(177, 101, 57, 15);
