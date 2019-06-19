@@ -14,10 +14,13 @@ import javax.swing.event.ListSelectionListener;
 
 import exchange.*;
 import user.*;
+import java.awt.event.MouseMotionAdapter;
 
 public class RecruitLookUI extends JFrame implements Observer {
     private JButton select;
     private JList list;
+
+
 
     public RecruitLookUI(int userType, RecruitmentList mainList, Student user){
     	super("모집공고 조회");
@@ -44,10 +47,9 @@ public class RecruitLookUI extends JFrame implements Observer {
         });
         
         JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setBounds(96, 157, 616, 333);
-        
+        scrollPane.setBounds(96, 157, 616, 333);     
         add(scrollPane);
-       
+        
         JLabel background = new JLabel("");
         background.setIcon(new ImageIcon(RecruitLookUI.class.getResource("/systemUI/image/board-crop.jpg")));
         background.setBounds(0, 0, 800, 620);
@@ -57,4 +59,8 @@ public class RecruitLookUI extends JFrame implements Observer {
     public void update(RecruitmentList mainList) {
     	list.setListData(mainList.printList());
     }
+    
+
+  
+   
 }

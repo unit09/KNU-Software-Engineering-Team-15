@@ -139,6 +139,7 @@ public class LoginUI extends JFrame {
         contentPane.add(PASSWD_label);
         
         JLabel lbl_close = new JLabel("X");
+        lbl_close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_close.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {

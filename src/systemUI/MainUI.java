@@ -141,6 +141,7 @@ public class MainUI extends Observable {
         else {
         	stateB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC9C4\uD589\uC0C1\uD669\uC870\uD68C.gif"))); // NOI18N
         }
+        stateB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stateB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -162,6 +163,7 @@ public class MainUI extends Observable {
         else {
         	creditB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC774\uC218\uD559\uC810\uAD00\uB9AC.gif"))); // NOI18N
         }
+        creditB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         creditB.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
@@ -183,6 +185,7 @@ public class MainUI extends Observable {
         });
         
         qnaB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/QNA.gif"))); // NOI18N
+        qnaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         qnaB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -191,6 +194,7 @@ public class MainUI extends Observable {
         });
         
         dispatchB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uD30C\uACAC\uC2E4\uC801\uC870\uD68C.gif"))); // NOI18N
+        dispatchB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         dispatchB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -202,6 +206,7 @@ public class MainUI extends Observable {
         });
         
         recuitB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC870\uD68C.gif"))); // NOI18N
+        recuitB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         recuitB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
