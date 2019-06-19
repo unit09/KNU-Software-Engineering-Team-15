@@ -25,7 +25,7 @@ public class Recruitment implements Serializable {
 
     private int progress = 0;   //0:모집중, 1:심사중, 2:심사종료, 3:다끝남
 
-    private ArrayList<Application> applications = new ArrayList<Application>();
+    private ArrayList<Application> applications = new ArrayList<>();
 
     public Recruitment(int recruitNum, String title, String contents, int startYear, String nation, String university,String major){
         this.recruitNum = recruitNum;
@@ -54,7 +54,7 @@ public class Recruitment implements Serializable {
             return i;
     }
 
-    public void deleteList(int index){ ;
+    public void deleteList(int index){
         applications.remove(index);
     }
     
