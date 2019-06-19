@@ -58,7 +58,7 @@ public class JoinUI extends JFrame {
         contentPane.add(passwordField);
 
         IDField = new JTextField();
-        IDField.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+        IDField.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", Font.PLAIN, 18));
         IDField.setBounds(31, 101, 210, 45);
         contentPane.add(IDField); 
         IDField.setColumns(10);
@@ -87,6 +87,7 @@ public class JoinUI extends JFrame {
         					Student temp = new Student(Integer.parseInt(textField.getText()), name_Field.getText(), textField_4.getText(), Integer.parseInt(textField_1.getText()), 3.3, textField_2.getText(), textField_3.getText());
         					client.setObject(IDField.getText(), pwdPassword.getText(), temp);
         					JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.", "È¸¿ø°¡ÀÔ ¿Ï·á", JOptionPane.DEFAULT_OPTION);
+        					dispose();
         				}
         			}
         		}
@@ -118,21 +119,9 @@ public class JoinUI extends JFrame {
         PASSWD_label.setBounds(31, 155, 86, 15);
         contentPane.add(PASSWD_label);
         
-        JLabel lbl_close = new JLabel("X");
-        lbl_close.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        		System.exit(0);
-        	}
-        });
-        lbl_close.setForeground(new Color(135, 206, 250));
-        lbl_close.setBackground(new Color(30, 144, 255));
-        lbl_close.setFont(new Font("³ª´®½ºÄù¾î ExtraBold", Font.BOLD, 18));
-        lbl_close.setBounds(521, 5, 13, 15);
-        contentPane.add(lbl_close);
         
         name_Field = new JTextField();
-        name_Field.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+        name_Field.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", Font.PLAIN, 18));
         name_Field.setBounds(31, 301, 312, 45);
         contentPane.add(name_Field);
         name_Field.setColumns(10);
@@ -171,7 +160,7 @@ public class JoinUI extends JFrame {
         contentPane.add(id_chack_button);
         
         textField = new JTextField();
-        textField.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+        textField.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", Font.PLAIN, 18));
         textField.setColumns(10);
         textField.setBounds(31, 434, 312, 45);
         contentPane.add(textField);
@@ -182,7 +171,7 @@ public class JoinUI extends JFrame {
         contentPane.add(label_1);
         
         textField_1 = new JTextField();
-        textField_1.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+        textField_1.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", Font.PLAIN, 18));
         textField_1.setColumns(10);
         textField_1.setBounds(31, 505, 312, 45);
         contentPane.add(textField_1);
@@ -193,7 +182,7 @@ public class JoinUI extends JFrame {
         contentPane.add(label_2);
         
         textField_2 = new JTextField();
-        textField_2.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+        textField_2.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", Font.PLAIN, 18));
         textField_2.setColumns(10);
         textField_2.setBounds(31, 576, 312, 45);
         contentPane.add(textField_2);
@@ -204,7 +193,7 @@ public class JoinUI extends JFrame {
         contentPane.add(label_3);
         
         textField_3 = new JTextField();
-        textField_3.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+        textField_3.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", Font.PLAIN, 18));
         textField_3.setColumns(10);
         textField_3.setBounds(31, 647, 312, 45);
         contentPane.add(textField_3);
@@ -215,7 +204,7 @@ public class JoinUI extends JFrame {
         contentPane.add(label_4);
         
         textField_4 = new JTextField();
-        textField_4.setFont(new Font("±¼¸²", Font.PLAIN, 18));
+        textField_4.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Regular", Font.PLAIN, 18));
         textField_4.setColumns(10);
         textField_4.setBounds(31, 366, 312, 45);
         contentPane.add(textField_4);
@@ -224,6 +213,18 @@ public class JoinUI extends JFrame {
         label_5.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå ExtraBold", Font.PLAIN, 12));
         label_5.setBounds(31, 350, 86, 15);
         contentPane.add(label_5);
+        
+        JLabel lblX = new JLabel("X");
+        lblX.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		dispose();
+        	}
+        });
+        lblX.setForeground(new Color(135, 206, 250));
+        lblX.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå ExtraBold", Font.PLAIN, 23));
+        lblX.setBounds(360, 10, 19, 18);
+        contentPane.add(lblX);
     }
     
     private boolean checkFormat(String s) {
