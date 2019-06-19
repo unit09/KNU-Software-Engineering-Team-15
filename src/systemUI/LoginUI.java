@@ -17,7 +17,7 @@ public class LoginUI extends JFrame {
     private JTextField pwdPassword;
     private JTextField IDField;
 
-    private Client client;
+    private static Client client;
     private static final String Liter1 = "³ª´®½ºÄù¾î¶ó¿îµå ExtraBold";
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int xx,xy;
