@@ -41,6 +41,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.SystemColor;
+import java.awt.event.MouseMotionAdapter;
 
 public class CreditUI extends JFrame implements MouseListener {
 	
@@ -58,27 +59,15 @@ public class CreditUI extends JFrame implements MouseListener {
 	private JButton register_button = null;
 	
 	public CreditUI(Client client, int st_id, boolean isapped) throws ClassNotFoundException  {
+		setTitle("\uC774\uC218\uD559\uC810 \uAD00\uB9AC");
+		
 		getContentPane().setBackground(Color.WHITE);
-		setUndecorated(true);
 		setForeground(Color.WHITE);
         setBackground(new Color(246, 245, 247));
         //setBorder(new EmptyBorder(5, 5, 5, 5));
         //setSize(800, 620);
-        setBounds((screenSize.width-800)/2, (screenSize.height-620)/2, 800, 620);
+        setBounds((screenSize.width-800)/2, (screenSize.height-620)/2, 800, 650);
 		getContentPane().setLayout(null);
-		
-		JLabel lblX = new JLabel("X");
-		lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        lblX.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        	dispose();
-        	}
-        });
-        lblX.setForeground(Color.BLACK);
-        lblX.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå ExtraBold", Font.PLAIN, 23));
-        lblX.setBounds(763, 10, 19, 18);
-        getContentPane().add(lblX);
 
 		JLabel label = new JLabel("³âµµ/ÇÐ±â");
 		label.setOpaque(true);
@@ -128,6 +117,8 @@ public class CreditUI extends JFrame implements MouseListener {
         lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
         lblNewLabel.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 25));
+        
+        
 		
 		if (SemesterList != null) remove(SemesterList);
 		
