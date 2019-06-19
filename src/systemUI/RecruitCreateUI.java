@@ -16,7 +16,7 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class RecruitCreateUI extends JPanel {
+public class RecruitCreateUI extends JFrame {
     private JTextField titleField;
     private JTextField nationField;
     private JTextField univField;
@@ -32,231 +32,232 @@ public class RecruitCreateUI extends JPanel {
     
 
     public RecruitCreateUI(RecruitmentList mainList, Administer admin) {
-        setSize(700, 620);
+    	super("∏¡˝∞¯∞Ì ¿€º∫");
+        setSize(800, 620);
         setLayout(null);
         
         JLabel titleLabel = new JLabel("\uBAA8\uC9D1\uACF5\uACE0 \uC791\uC131");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("HY∞ﬂ∞ÌµÒ", Font.PLAIN, 24));
-        titleLabel.setBounds(268, 28, 163, 39);
+        titleLabel.setBounds(318, 28, 163, 39);
         add(titleLabel);
         
         JLabel number = new JLabel("\uBC88\uD638");
         number.setHorizontalAlignment(SwingConstants.CENTER);
         number.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        number.setBounds(50, 81, 53, 32);
+        number.setBounds(104, 79, 53, 32);
         add(number);
         
         numField = new JTextField();
         numField.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         numField.setColumns(10);
-        numField.setBounds(104, 83, 108, 32);
+        numField.setBounds(158, 81, 108, 32);
         add(numField);
         
         JLabel title = new JLabel("\uC81C\uBAA9");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        title.setBounds(50, 138, 53, 32);
+        title.setBounds(104, 136, 53, 32);
         add(title);
         
         titleField = new JTextField();
         titleField.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-        titleField.setBounds(105, 140, 545, 32);
+        titleField.setBounds(159, 138, 545, 32);
         add(titleField);
         titleField.setColumns(10);
         
         JLabel nationLabel = new JLabel("\uAD6D\uAC00");
         nationLabel.setHorizontalAlignment(SwingConstants.CENTER);
         nationLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        nationLabel.setBounds(50, 181, 53, 32);
+        nationLabel.setBounds(104, 179, 53, 32);
         add(nationLabel);
         
         nationField = new JTextField();
         nationField.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         nationField.setColumns(10);
-        nationField.setBounds(105, 184, 164, 32);
+        nationField.setBounds(159, 182, 164, 32);
         add(nationField);
         
         JLabel univLabel = new JLabel("\uB300\uD559");
         univLabel.setHorizontalAlignment(SwingConstants.CENTER);
         univLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        univLabel.setBounds(283, 181, 53, 32);
+        univLabel.setBounds(337, 179, 53, 32);
         add(univLabel);
         
         univField = new JTextField();
         univField.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         univField.setColumns(10);
-        univField.setBounds(340, 184, 310, 32);
+        univField.setBounds(394, 182, 310, 32);
         add(univField);
         
         JLabel startyearLabel = new JLabel("\uC2DC\uC791\uC5F0\uB3C4");
         startyearLabel.setHorizontalAlignment(SwingConstants.CENTER);
         startyearLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        startyearLabel.setBounds(50, 227, 80, 32);
+        startyearLabel.setBounds(104, 225, 80, 32);
         add(startyearLabel);
         
         startyearField = new JTextField();
         startyearField.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         startyearField.setHorizontalAlignment(SwingConstants.RIGHT);
         startyearField.setColumns(10);
-        startyearField.setBounds(136, 230, 108, 32);
+        startyearField.setBounds(190, 228, 108, 32);
         add(startyearField);
         
         JLabel label_1 = new JLabel("\uB144");
         label_1.setHorizontalAlignment(SwingConstants.CENTER);
         label_1.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_1.setBounds(245, 228, 30, 32);
+        label_1.setBounds(299, 226, 30, 32);
         add(label_1);
         
         JLabel statrseLabel = new JLabel("\uC2DC\uC791\uD559\uAE30");
         statrseLabel.setHorizontalAlignment(SwingConstants.CENTER);
         statrseLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        statrseLabel.setBounds(283, 227, 80, 32);
+        statrseLabel.setBounds(337, 225, 80, 32);
         add(statrseLabel);
         
         JComboBox startSe = new JComboBox();
         startSe.setModel(new DefaultComboBoxModel(new String[] {"1\uD559\uAE30", "2\uD559\uAE30", "\uC5EC\uB984 \uACC4\uC808\uD559\uAE30", "\uACA8\uC6B8 \uACC4\uC808\uD559\uAE30"}));
         startSe.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         startSe.setToolTipText("");
-        startSe.setBounds(367, 231, 178, 31);
+        startSe.setBounds(421, 229, 178, 31);
         add(startSe);
         
         JLabel label = new JLabel("\uBD80\uD130 \uC2DC\uC791");
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label.setBounds(546, 228, 80, 32);
+        label.setBounds(600, 226, 80, 32);
         add(label);
         
         JLabel majorLabel = new JLabel("\uC804\uACF5");
         majorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         majorLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        majorLabel.setBounds(50, 271, 53, 32);
+        majorLabel.setBounds(104, 269, 53, 32);
         add(majorLabel);
         
         majorField = new JTextField();
         majorField.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         majorField.setColumns(10);
-        majorField.setBounds(105, 273, 231, 32);
+        majorField.setBounds(159, 271, 231, 32);
         add(majorField);
         
         JLabel periodLabel = new JLabel("\uAE30\uAC04");
         periodLabel.setHorizontalAlignment(SwingConstants.CENTER);
         periodLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        periodLabel.setBounds(350, 271, 53, 32);
+        periodLabel.setBounds(404, 269, 53, 32);
         add(periodLabel);
         
         JComboBox period = new JComboBox();
         period.setModel(new DefaultComboBoxModel(new String[] {"1\uD559\uAE30", "2\uD559\uAE30(1\uB144)", "3\uD559\uAE30", "4\uD559\uAE30(2\uB144) \uC774\uC0C1"}));
         period.setToolTipText("");
         period.setFont(new Font("±º∏≤", Font.PLAIN, 18));
-        period.setBounds(404, 274, 178, 31);
+        period.setBounds(458, 272, 178, 31);
         add(period);
         
         JLabel label_3 = new JLabel("\uB3D9\uC548");
         label_3.setHorizontalAlignment(SwingConstants.CENTER);
         label_3.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_3.setBounds(582, 273, 54, 32);
+        label_3.setBounds(636, 271, 54, 32);
         add(label_3);
         
         JLabel deadLabel = new JLabel("\uBAA8\uC9D1\uAE30\uAC04");
         deadLabel.setHorizontalAlignment(SwingConstants.CENTER);
         deadLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        deadLabel.setBounds(50, 317, 80, 32);
+        deadLabel.setBounds(104, 315, 80, 32);
         add(deadLabel);
         
         deadYear = new JTextField();
         deadYear.setHorizontalAlignment(SwingConstants.RIGHT);
         deadYear.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         deadYear.setColumns(10);
-        deadYear.setBounds(136, 317, 108, 32);
+        deadYear.setBounds(190, 315, 108, 32);
         add(deadYear);
         
         JLabel label_2 = new JLabel("\uB144");
         label_2.setHorizontalAlignment(SwingConstants.CENTER);
         label_2.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_2.setBounds(245, 317, 30, 32);
+        label_2.setBounds(299, 315, 30, 32);
         add(label_2);
         
         deadMonth = new JTextField();
         deadMonth.setHorizontalAlignment(SwingConstants.RIGHT);
         deadMonth.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         deadMonth.setColumns(10);
-        deadMonth.setBounds(279, 317, 108, 32);
+        deadMonth.setBounds(333, 315, 108, 32);
         add(deadMonth);
         
         JLabel label_4 = new JLabel("\uC6D4");
         label_4.setHorizontalAlignment(SwingConstants.CENTER);
         label_4.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_4.setBounds(390, 317, 30, 32);
+        label_4.setBounds(444, 315, 30, 32);
         add(label_4);
         
         deadDay = new JTextField();
         deadDay.setHorizontalAlignment(SwingConstants.RIGHT);
         deadDay.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         deadDay.setColumns(10);
-        deadDay.setBounds(425, 317, 108, 32);
+        deadDay.setBounds(479, 315, 108, 32);
         add(deadDay);
         
         JLabel label_5 = new JLabel("\uC77C \uAE4C\uC9C0");
         label_5.setHorizontalAlignment(SwingConstants.CENTER);
         label_5.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_5.setBounds(535, 317, 67, 32);
+        label_5.setBounds(589, 315, 67, 32);
         add(label_5);
         
         JLabel selectLabel = new JLabel("\uB4F1\uB85D\uB9C8\uAC10");
         selectLabel.setHorizontalAlignment(SwingConstants.CENTER);
         selectLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        selectLabel.setBounds(50, 361, 80, 32);
+        selectLabel.setBounds(104, 359, 80, 32);
         add(selectLabel);
         
         selectYear = new JTextField();
         selectYear.setHorizontalAlignment(SwingConstants.RIGHT);
         selectYear.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         selectYear.setColumns(10);
-        selectYear.setBounds(136, 361, 108, 32);
+        selectYear.setBounds(190, 359, 108, 32);
         add(selectYear);
         
         JLabel label_8 = new JLabel("\uB144");
         label_8.setHorizontalAlignment(SwingConstants.CENTER);
         label_8.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_8.setBounds(245, 361, 30, 32);
+        label_8.setBounds(299, 359, 30, 32);
         add(label_8);
         
         selectMonth = new JTextField();
         selectMonth.setHorizontalAlignment(SwingConstants.RIGHT);
         selectMonth.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         selectMonth.setColumns(10);
-        selectMonth.setBounds(279, 361, 108, 32);
+        selectMonth.setBounds(333, 359, 108, 32);
         add(selectMonth);
         
         JLabel label_7 = new JLabel("\uC6D4");
         label_7.setHorizontalAlignment(SwingConstants.CENTER);
         label_7.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_7.setBounds(390, 361, 30, 32);
+        label_7.setBounds(444, 359, 30, 32);
         add(label_7);
         
         selectDay = new JTextField();
         selectDay.setHorizontalAlignment(SwingConstants.RIGHT);
         selectDay.setFont(new Font("±º∏≤", Font.PLAIN, 18));
         selectDay.setColumns(10);
-        selectDay.setBounds(425, 361, 108, 32);
+        selectDay.setBounds(479, 359, 108, 32);
         add(selectDay);
         
         JLabel label_6 = new JLabel("\uC77C \uAE4C\uC9C0");
         label_6.setHorizontalAlignment(SwingConstants.CENTER);
         label_6.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        label_6.setBounds(535, 361, 67, 32);
+        label_6.setBounds(589, 359, 67, 32);
         add(label_6);
         
         JLabel contentLabel = new JLabel("\uB0B4\uC6A9");
         contentLabel.setHorizontalAlignment(SwingConstants.CENTER);
         contentLabel.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.PLAIN, 18));
-        contentLabel.setBounds(50, 405, 53, 32);
+        contentLabel.setBounds(104, 403, 53, 32);
         add(contentLabel);
         
         JTextArea content = new JTextArea();
         content.setLineWrap(true);
-        content.setBounds(105, 413, 545, 115);
+        content.setBounds(159, 411, 545, 115);
         Border border = BorderFactory.createLineBorder(Color.GRAY); 
         content.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         add(content);
@@ -306,12 +307,12 @@ public class RecruitCreateUI extends JPanel {
 				}
         	}
         });
-        confirm.setBounds(290, 547, 120, 32);
+        confirm.setBounds(344, 545, 120, 32);
         add(confirm);
         
         JLabel background = new JLabel("");
-        background.setIcon(new ImageIcon(RecruitCreateUI.class.getResource("/systemUI/image/sky2.jpg")));
-        background.setBounds(0, 0, 700, 620);
+        background.setIcon(new ImageIcon(RecruitCreateUI.class.getResource("/systemUI/image/sky.jpg")));
+        background.setBounds(0, 0, 800, 620);
         add(background);
 
     }

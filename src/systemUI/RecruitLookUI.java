@@ -13,12 +13,13 @@ import javax.swing.event.ListSelectionListener;
 import exchange.*;
 import user.*;
 
-public class RecruitLookUI extends JPanel implements Observer {
+public class RecruitLookUI extends JFrame implements Observer {
     private JButton select;
     private JList list;
 
     public RecruitLookUI(int userType, RecruitmentList mainList, Student user){
-        setSize(800, 520);
+    	super("모집공고 조회");
+        setSize(800, 620);
         setLayout(null);
         
         list = new JList(mainList.printList());
@@ -37,16 +38,16 @@ public class RecruitLookUI extends JPanel implements Observer {
             }
         });
         
-        JScrollPane scrollPane = new JScrollPane(new JTextArea());
-        scrollPane.setBounds(104, 101, 616, 333);
+        JScrollPane scrollPane = new JScrollPane(list);
+        scrollPane.setBounds(96, 157, 616, 333);
         
         add(scrollPane);
 
         //scrollPane.setVisible(false);
        
         JLabel background = new JLabel("");
-        background.setIcon(new ImageIcon(RecruitLookUI.class.getResource("/systemUI/image/board.jpg")));
-        background.setBounds(0, 0, 800, 520);
+        background.setIcon(new ImageIcon(RecruitLookUI.class.getResource("/systemUI/image/board-crop.jpg")));
+        background.setBounds(0, 0, 800, 620);
         add(background);
     }
     

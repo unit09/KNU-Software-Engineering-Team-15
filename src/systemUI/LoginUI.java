@@ -41,7 +41,7 @@ public class LoginUI extends JFrame {
         contentPane.setLayout(null);
         
         JLabel lblMemberLogin = new JLabel("Member Login");
-        lblMemberLogin.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.BOLD, 18));
+        lblMemberLogin.setFont(new Font("나눔스퀘어 ExtraBold", Font.BOLD, 18));
         lblMemberLogin.setBounds(209, 49, 143, 42);
         contentPane.add(lblMemberLogin);
 
@@ -51,14 +51,13 @@ public class LoginUI extends JFrame {
         contentPane.add(pwdPassword);
 
         IDField = new JTextField();
-        IDField.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 16));
+        IDField.setFont(new Font("굴림", Font.PLAIN, 16));
         IDField.setBounds(177, 119, 211, 42);
         contentPane.add(IDField); 
         IDField.setColumns(10);
 
         JButton LoginButton = new JButton("로그인");
-        LoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        LoginButton.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 14));
+        LoginButton.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
         LoginButton.setBackground(new Color(135, 206, 250));
         LoginButton.setBounds(177, 252, 211, 42); //195 49 79 23
         contentPane.add(LoginButton);
@@ -78,15 +77,9 @@ public class LoginUI extends JFrame {
                 		JOptionPane.showMessageDialog(null, "ID 혹은 비밀번호가 잘못되었습니다.", "로그인 에러", JOptionPane.DEFAULT_OPTION);
                 	else {
                 		 dispose();	// 현재 창 닫기                		 
-                         MainUI UI = new MainUI();//(user, client);
-                         /*UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                         //UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
+                         MainUI UI = new MainUI(user, client);//(user, client);
+                         UI.setLocation((screenSize.width-700)/2, (screenSize.height-550)/2); 
                          UI.setVisible(true);
-                         UI.setResizable(false);*/
-                         //UI.setVisible(true);
-                         UserInterface UIX = new UserInterface(user, client);
-                         UIX.setVisible(true);
-                         UIX.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 1000, 700);
                 	}
                 }
             }
@@ -106,8 +99,7 @@ public class LoginUI extends JFrame {
        
         
         JButton button = new JButton("비회원 로그인");
-        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 14));
+        button.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
         button.setBackground(new Color(135, 206, 250));
         button.setBounds(177, 305, 211, 42);
         button.addActionListener(new ActionListener() {
@@ -115,44 +107,38 @@ public class LoginUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose(); //종료하는것
  
-                MainUI UI = new MainUI();//(new Student(-2,"guest", " ", 0, 0, " ", " "), client);	// 비회원 로그인 관련
-                /*UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                //UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
-                UI.setVisible(true);
-                UI.setResizable(false);*/
+                MainUI UI = new MainUI(new Student(-2,"guest", " ", 0, 0, " ", " "), client);
+                UI.setLocation((screenSize.width-700)/2, (screenSize.height-550)/2);               
                 UI.setVisible(true);
             } 
         });
         contentPane.add(button);
         
         JButton button_join = new JButton("\uD68C\uC6D0\uAC00\uC785");	// 회원가입 버튼
-        button_join.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button_join.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		// 회원가입 창 띄우기
         		JoinUI join = new JoinUI(client);
-        		join.setUndecorated(true);
                 join.setVisible(true);
                 join.setResizable(false);
         	}
         });
-        button_join.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 14));
+        button_join.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
         button_join.setBackground(new Color(135, 206, 250));
         button_join.setBounds(177, 359, 211, 42);
         contentPane.add(button_join);
         
         JLabel ID_label = new JLabel("ID");
-        ID_label.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 12));
+        ID_label.setFont(new Font("나눔스퀘어", Font.PLAIN, 12));
         ID_label.setBounds(177, 101, 57, 15);
         contentPane.add(ID_label);
         
         JLabel PASSWD_label = new JLabel("PASSWORD");
-        PASSWD_label.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 12));
+        PASSWD_label.setFont(new Font("나눔스퀘어", Font.PLAIN, 12));
         PASSWD_label.setBounds(177, 171, 86, 15);
         contentPane.add(PASSWD_label);
         
         JLabel lbl_close = new JLabel("X");
-        lbl_close.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lbl_close.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {

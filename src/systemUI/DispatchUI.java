@@ -1,35 +1,49 @@
 package systemUI;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import java.util.Random;
+
 import client.Client;
 import exchange.*;
+import systemUI.Observable;
 
-public class DispatchUI extends JPanel {
+public class DispatchUI extends JFrame {
 	private JComboBox nations;
 	private JComboBox unis;
 	private JComboBox majors;
+	private JComboBox periods;
 	private JButton search;
-	private DefaultTableModel model;
 	
-	private ArrayList<String> nation = new ArrayList<String>();
-	private ArrayList<String> university = new ArrayList<String>();
-	private ArrayList<String> major = new ArrayList<String>();
-	private ArrayList<Integer> year = new ArrayList<Integer>();
+	private ArrayList<String> nation;
+	private ArrayList<String> university;
+	private ArrayList<String> major;
+	private ArrayList<String> period;
 	
-	//JTable용으로 연도와 학기, 기간에 대한 list가 필요한가?
-	//여기가 아니라 밑에서 1회용으로 선언해야될지도
-	
+	private int[] numbers;
+	private DrawingPanel graph;
+
 	public DispatchUI(ArrayList<DispatchRecord> records) {
+		super("파견실적 조회");
 		setLayout(null);
-		setSize(700, 540);
+		setSize(800, 620);
+		
+		nation = new ArrayList<String>();
+		university = new ArrayList<String>();
+		major = new ArrayList<String>();
+		period = new ArrayList<String>();
+		
+		numbers = new int[6];
 		
 		nation.add("국가 선택");
 		university.add("대학 선택");
 		major.add("전공 선택");
+		period.add("기간 선택");
 		
 		for(int i = 0; i < records.size(); i++) {
 			DispatchRecord record = records.get(i);
@@ -42,39 +56,64 @@ public class DispatchUI extends JPanel {
 			if(!major.contains(record.getMajor())) {
 				major.add(record.getMajor());
 			}
+			if(!period.contains(Integer.toString(record.getPeriod()) + "학기 동안")) {
+				period.add(Integer.toString(record.getPeriod()) + "학기 동안");
+			}
 		}
 		
 		nations = new JComboBox(nation.toArray());
-		nations.setBounds(379, 28, 117, 36);
+		nations.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		nations.setBounds(93, 25, 117, 36);
 		add(nations);
 		
 		unis = new JComboBox(university.toArray());
-		unis.setBounds(117, 28, 117, 36);
+		unis.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		unis.setBounds(224, 25, 117, 36);
 		add(unis);
 		
 		majors = new JComboBox(major.toArray());
-		majors.setBounds(248, 28, 117, 36);
+		majors.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		majors.setBounds(355, 25, 117, 36);
 		add(majors);
 		
+		periods = new JComboBox(period.toArray());
+		periods.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		periods.setBounds(486, 25, 117, 36);
+		add(periods);
+		
+		graph = new DrawingPanel();
+		graph.setBounds(50, 111, 700, 453);
+		add(graph);
+		
 		search = new JButton("검색");
-		search.setBounds(510, 28, 61, 36);
+		search.setBounds(617, 25, 92, 36);
+		search.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		for(int i = 0; i < 6; i++) {
+        			numbers[i] = 0;
+        		}        		
+        		for(int i = 0; i < records.size(); i++) {
+        			DispatchRecord record = records.get(i);
+        			if(nations.getSelectedItem().equals(record.getNation()) || nations.getSelectedIndex() == 0) {
+        				if(unis.getSelectedItem().equals(record.getUniversity()) || unis.getSelectedIndex() == 0) {
+        					if(majors.getSelectedItem().equals(record.getMajor()) || majors.getSelectedIndex() == 0) {
+        						if(periods.getSelectedItem().equals(Integer.toString(record.getPeriod()) + "학기 동안") || periods.getSelectedIndex() == 0) {
+        							numbers[record.getStartYear() - 2014] += 1;
+        						}
+        					}
+        				}
+        			}
+        		}
+        		graph.setList(numbers);
+        		graph.repaint();
+        	}
+        });
 		add(search);
-		
-		String[][] test = { {"test", "", ""}, {"test2", "", ""} };
-		model = new DefaultTableModel(test, major.toArray());
-		
-		//지원 현황과 선발 현황으로 나눠서 표시?
-		
-		//검색 버튼을 누르면 파견실적을 읽으면서 검색 조건에 해당하는 파견실적을 읽고 그에 맞는 JTable을 그린다
-		//그려놓은 표는 새로 검색을 누를때까지 남아있고 새로 검색을 누르면 기존의 표를 삭제하고 다시 그린다
-		//Collections.sort(year);
-		
-		
+				
 		JLabel background = new JLabel("");
-		background.setIcon(new ImageIcon(DispatchUI.class.getResource("/systemUI/image/graph.jpg")));
-		background.setBounds(0, 0, 700, 540);
+		background.setIcon(new ImageIcon(DispatchUI.class.getResource("/systemUI/image/chart.jpg")));
+		background.setBounds(0, 0, 800, 620);
 		add(background);
-		
 		
 	}
 }
