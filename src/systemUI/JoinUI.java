@@ -64,6 +64,7 @@ public class JoinUI extends JFrame {
         IDField.setColumns(10);
         
         JButton succ_button = new JButton("\uAC00\uC785\uD558\uAE30");
+        succ_button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         succ_button.setForeground(Color.WHITE);
         succ_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -137,6 +138,7 @@ public class JoinUI extends JFrame {
         contentPane.add(name_label);
         
         JButton id_chack_button = new JButton("\uC911\uBCF5\uD655\uC778");
+        id_chack_button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         id_chack_button.setForeground(Color.WHITE);
         id_chack_button.setBackground(new Color(135,206,250));
         id_chack_button.addActionListener(new ActionListener() {
@@ -155,7 +157,7 @@ public class JoinUI extends JFrame {
             	}
             }
         });
-        id_chack_button.setFont(new Font("Dialog", Font.PLAIN, 16));
+        id_chack_button.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå ExtraBold", Font.PLAIN, 17));
         id_chack_button.setBounds(242, 101, 100, 44);
         contentPane.add(id_chack_button);
         
@@ -215,6 +217,7 @@ public class JoinUI extends JFrame {
         contentPane.add(label_5);
         
         JLabel lblX = new JLabel("X");
+        lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblX.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
