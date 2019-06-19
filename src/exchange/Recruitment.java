@@ -57,39 +57,6 @@ public class Recruitment implements Serializable {
     public void deleteList(int index){ ;
         applications.remove(index);
     }
-
-    public JPanel printRecuritment(){	//이거 여기 있어도 되나?
-        JPanel pane = new JPanel();
-        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-        JTextField num = new JTextField("모집공고 번호 : " + recruitNum, 32);
-        JTextField ti = new JTextField("제목 : " + title, 32);
-        JTextField na = new JTextField("국가/대학/전공 : " + nation + "/" + university + "/" + major, 32);
-        JTextField st = new JTextField("시작 : " + startYear + "년 " + startSemester + "학기부터 시작", 32);
-        JTextField pe = new JTextField("기간 : " + period + "학기동안", 32);
-        JTextArea con = new JTextArea(contents, 12, 32);
-        JTextField de = new JTextField("모집기간 : " + deadlineYear + "년 " + deadlineMonth + "월 " + deadlineDay + "일까지", 32);
-        JTextField sde = new JTextField("최종등록 마감일 : " + selectDeadlineYear + "년 " + selectDeadlineMonth +"월 "+ selectDeadlineDay + "일까지", 32);
-
-        num.setEditable(false);
-        ti.setEditable(false);
-        na.setEditable(false);
-        st.setEditable(false);
-        pe.setEditable(false);
-        con.setEnabled(false);
-        de.setEditable(false);
-        sde.setEditable(false);
-
-        pane.add(num);
-        pane.add(ti);
-        pane.add(na);
-        pane.add(st);
-        pane.add(pe);
-        pane.add(con);
-        pane.add(de);
-        pane.add(sde);
-
-        return pane;
-    }
     
     public void finalChoice(int index){
         if(applications.get(index).isChoice() == true){

@@ -8,9 +8,9 @@ import javax.swing.event.*;
 import exchange.*;
 import user.*;
 
-public class RecruitContent extends JPanel {
+public class RecruitContent extends JFrame {
 	
-	public RecruitContent(int userType, int index, Recruitment recruitment) {
+	public RecruitContent(int userType, Recruitment recruitment, Student user) {
 		setBackground(Color.LIGHT_GRAY);
 		setLayout(null);
 		setSize(400, 700);
@@ -45,7 +45,7 @@ public class RecruitContent extends JPanel {
 		univ.setBounds(103, 348, 71, 35);
 		add(univ);
 		
-		JLabel label2 = new JLabel(" ");
+		JLabel label2 = new JLabel(recruitment.getUniversity());
 		label2.setForeground(Color.WHITE);
 		label2.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 16));
 		label2.setBounds(204, 348, 182, 35);
@@ -57,7 +57,7 @@ public class RecruitContent extends JPanel {
 		major.setBounds(103, 401, 71, 35);
 		add(major);
 		
-		JLabel label3 = new JLabel(" ");
+		JLabel label3 = new JLabel(recruitment.getMajor());
 		label3.setForeground(Color.WHITE);
 		label3.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 16));
 		label3.setBounds(204, 401, 182, 35);
@@ -69,9 +69,9 @@ public class RecruitContent extends JPanel {
 		start.setBounds(103, 453, 71, 35);
 		add(start);
 		
-		JLabel label4 = new JLabel(" ");
+		JLabel label4 = new JLabel(recruitment.getStartYear() + "년 " + recruitment.getStartSemester() + "학기부터");
 		label4.setForeground(Color.WHITE);
-		label4.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 16));
+		label4.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 14));
 		label4.setBounds(204, 453, 182, 35);
 		add(label4);
 		
@@ -81,7 +81,7 @@ public class RecruitContent extends JPanel {
 		period.setBounds(103, 503, 71, 35);
 		add(period);
 		
-		JLabel label5 = new JLabel(" ");
+		JLabel label5 = new JLabel(recruitment.getPeriod() + "학기 동안");
 		label5.setForeground(Color.WHITE);
 		label5.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 16));
 		label5.setBounds(204, 503, 182, 35);
@@ -93,9 +93,9 @@ public class RecruitContent extends JPanel {
 		deadline.setBounds(103, 550, 71, 35);
 		add(deadline);
 		
-		JLabel label6 = new JLabel(" ");
+		JLabel label6 = new JLabel(recruitment.getDeadlineYear() + "년 " + recruitment.getDeadlineMonth() + "월 " + recruitment.getDeadlineDay() + "일 까지");
 		label6.setForeground(Color.WHITE);
-		label6.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 16));
+		label6.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 14));
 		label6.setBounds(204, 550, 182, 35);
 		add(label6);
 		
@@ -105,17 +105,42 @@ public class RecruitContent extends JPanel {
 		select.setBounds(103, 597, 71, 35);
 		add(select);
 		
-		JLabel label7 = new JLabel(" ");
+		JLabel label7 = new JLabel(recruitment.getSelectDeadlineYear() + "년 " + recruitment.getSelectDeadlineMonth() + "월 " + recruitment.getSelectDeadlineDay() + "일 까지");
 		label7.setForeground(Color.WHITE);
-		label7.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 16));
+		label7.setFont(new Font("맑은 고딕 Semilight", Font.BOLD, 14));
 		label7.setBounds(204, 597, 182, 35);
 		add(label7);
 		
-		JLabel caution = new JLabel("\uBC1C\uD45C \uD6C4 \uBC18\uB4DC\uC2DC \uC9C4\uD589\uC0C1\uD669\uC744 \uD655\uC778\uD558\uC5EC \uCD5C\uC885\uB4F1\uB85D\uD574\uC8FC\uC2DC\uAE30 \uBC14\uB78D\uB2C8\uB2E4.");
-		caution.setForeground(Color.WHITE);
-		caution.setFont(new Font("맑은 고딕 Semilight", Font.PLAIN, 12));
-		caution.setBounds(41, 644, 345, 35);
-		add(caution);
+		if(userType == 0) {
+			JButton apply = new JButton("\uC9C0\uC6D0\uD558\uAE30");
+			apply.setBounds(281, 642, 105, 27);
+			
+			apply.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                	if(recruitment.getProgress() == 0) {
+                		if (recruitment.checkUser(user.getStudentID()) == -1) {
+                			String[] buttons = {"신청", "취소"};
+            				int result = 0;
+            				result = JOptionPane.showOptionDialog(null, "신청하시겠습니까?", "응시원서 작성", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+            				if(result == 0) {
+                                Application newone = user.ApplicationCreate(recruitment.getRecruitNum());
+                                recruitment.addList(newone);
+                                Observable.uploadData();
+                                Observable.notifyObservers();
+                                
+                                JOptionPane.showMessageDialog(null, "응시원서 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+            				}
+                        } else
+                            JOptionPane.showMessageDialog(null, "이미 응시한 모집공고입니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+                	}
+                	else {
+                		JOptionPane.showMessageDialog(null, "신청할 수 없는 상태입니다.", "알림", JOptionPane.PLAIN_MESSAGE);
+                	}
+                }
+            });
+			add(apply);
+		}
 		
 		JLabel background = new JLabel("");
 		background.setIcon(new ImageIcon(RecruitContent.class.getResource("/systemUI/image/\uBAA8\uC9D1\uBC30\uACBD.png")));

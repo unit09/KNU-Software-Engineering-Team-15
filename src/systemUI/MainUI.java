@@ -101,19 +101,6 @@ public class MainUI extends Observable {
         jPanel1 = new JPanel();
         stateB = new JButton();
         creditB = new JButton();
-        creditB.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        		try {
-					CreditUI CRUI = new CreditUI(client, user.getStudentID(), false);
-					CRUI.setVisible(true);
-					CRUI.setResizable(false);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-        	}
-        });
         qnaB = new JButton();
         dispatchB = new JButton();
         recuitB = new JButton();
@@ -130,10 +117,7 @@ public class MainUI extends Observable {
         //각 기능별로 일단 작성
         RecruitLookUI rlUI = new RecruitLookUI(userType, mainList, user);
         addObserver(rlUI);
-        rlUI.setResizable(false);
-        
-        
-        
+        rlUI.setResizable(false);        
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -156,7 +140,7 @@ public class MainUI extends Observable {
         stateB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//state 아직 없음
+            	//qnaUI 아직 없음
             }
         });
         
@@ -166,11 +150,23 @@ public class MainUI extends Observable {
         else {
         	creditB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC774\uC218\uD559\uC810\uAD00\uB9AC.gif"))); // NOI18N
         }
-        creditB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	//creditUI 아직 없음
-            }
+        creditB.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		if(userType == 0) {
+        			try {
+						CreditUI CRUI = new CreditUI(client, user.getStudentID(), false);
+						CRUI.setVisible(true);
+						CRUI.setResizable(false);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        		}
+        		else {
+        			
+        		}
+        	}
         });
         
         qnaB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/QNA.gif"))); // NOI18N
