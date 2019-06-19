@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import client.Client;
 import creditManagement.CompletedCredit;
 import creditManagement.CompletedCreditList;
 
@@ -40,20 +41,20 @@ public class CreditUI extends JPanel{
 	private int selected_index = -1;
 	private JButton register_button = new JButton("신청");
 	
-	public CreditUI(int st_id, UserInterface MAIN, boolean isapped) throws ClassNotFoundException {
+	public CreditUI(Client client, int st_id, UserInterface MAIN, boolean isapped) throws ClassNotFoundException {
 		this.MAIN = MAIN;
 		setLayout(new FlowLayout());
 		setSize(500, 400);
 		
-		setting(st_id, isapped);
+		setting(client, st_id, isapped);
 	}
 	
-	public void setting(int st_id, boolean isapped) throws ClassNotFoundException {
+	public void setting(Client client, int st_id, boolean isapped) throws ClassNotFoundException {
 		
 		if (SemesterList != null) remove(SemesterList);
 		if (contents_bg != null) remove(contents_bg);
 		
-		SemesterList = new CreditSemester(st_id, isapped);
+		SemesterList = new CreditSemester(client, st_id, isapped);
 		add(SemesterList.getCredit_JList());
 		contents_bg = new JPanel();
 		contents_bg.setPreferredSize(new Dimension(380, 400));
@@ -74,11 +75,11 @@ public class CreditUI extends JPanel{
 						result = JOptionPane.showOptionDialog(null, "신청하시겠습니까?", "학점인정 신청", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
 						if(result == 0) {
 							try {
-								temp.getList().get(selected_index).credit_application();
+								temp.getList().get(selected_index).credit_application(client);
 								JOptionPane.showMessageDialog(null, "등록되었습니다", "알림", JOptionPane.PLAIN_MESSAGE);
-								contents_print(st_id, isapped, this);
+								contents_print(client, st_id, isapped, this);
 								MAIN.getCreditViewIsapped().removeAll();
-								MAIN.getCreditViewIsapped().setting(st_id, true);
+								MAIN.getCreditViewIsapped().setting(client, st_id, true);
 							} catch (ClassNotFoundException e1) {};
 						}
 					}
@@ -94,21 +95,21 @@ public class CreditUI extends JPanel{
 					int index = credit_JList.getSelectedIndex();
 					
 					if(index >= 0 && !(credit_JList.getSelectedValue() == CompletedCreditList.NO_LIST)) {
-						contents_print(st_id, isapped, RBAL);
+						contents_print(client, st_id, isapped, RBAL);
 					}
 				}
 			}
 		});
 	}
 	
-	public void contents_print(int st_id, boolean isapped, ActionListener RBAL) {
+	public void contents_print(Client client, int st_id, boolean isapped, ActionListener RBAL) {
 		if(Display != null) {
 			register_button.removeActionListener(RBAL);
 			contents_bg.removeAll();
 			selected_index = -1;
 		}
 		try {
-			temp = new CreditContents(st_id, isapped, Integer.parseInt(credit_JList.getSelectedValue().substring(0, 4)), Integer.parseInt(credit_JList.getSelectedValue().substring(6, 7)));
+			temp = new CreditContents(client, st_id, isapped, Integer.parseInt(credit_JList.getSelectedValue().substring(0, 4)), Integer.parseInt(credit_JList.getSelectedValue().substring(6, 7)));
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -128,9 +129,9 @@ public class CreditUI extends JPanel{
 		private JList<String> credit_JList;
 		private CompletedCreditList c_list;
 
-		public CreditSemester(int st_id, boolean isapped) throws ClassNotFoundException {
+		public CreditSemester(Client client, int st_id, boolean isapped) throws ClassNotFoundException {
 			setLayout(null);
-			c_list = CompletedCreditList.get_completed_credit_list();
+			c_list = CompletedCreditList.get_completed_credit_list(client);
 			String[] credit_list_string;
 			if(isapped) {
 				credit_list_string = c_list.semester_list_isapped(st_id);				
@@ -188,13 +189,13 @@ public class CreditUI extends JPanel{
 		private int year = 0;
 		private int semester = 0;
 		
-		public CreditContents(int st_id, boolean isapped, int input_year, int input_semester) throws ClassNotFoundException {
+		public CreditContents(Client client, int st_id, boolean isapped, int input_year, int input_semester) throws ClassNotFoundException {
 			selected_index = -1;
 			
 			year = input_year;
 			semester = input_semester;
 			
-			CompletedCreditList c_list = CompletedCreditList.get_completed_credit_list();
+			CompletedCreditList c_list = CompletedCreditList.get_completed_credit_list(client);
 			if(isapped) {
 				list = c_list.applicated_credit_list_print(st_id, year, semester);
 			}

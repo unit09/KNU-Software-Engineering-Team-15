@@ -61,8 +61,7 @@ public class UserInterface extends Observable {
         
         setLayout(null);
 
-        //Tab.setBounds(10, 10, 650, 480);
-        Tab.setBounds(10, 10, 1000, 1000);
+        Tab.setBounds(10, 10, 650, 480);
 
         Tab.addTab("메인", new Initial());
         
@@ -76,8 +75,8 @@ public class UserInterface extends Observable {
             Tab.addTab("진행상황 조회", slUI);
             
     		try {
-				Tab.addTab("이수학점 관리", new CreditUI(user.getStudentID(), this, false));
-	    		CreditViewIsapped = new CreditUI(user.getStudentID(), this, true);
+				Tab.addTab("이수학점 관리", new CreditUI(client, user.getStudentID(), this, false));
+	    		CreditViewIsapped = new CreditUI(client, user.getStudentID(), this, true);
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
 			}
