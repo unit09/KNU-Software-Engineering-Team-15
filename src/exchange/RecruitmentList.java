@@ -155,6 +155,10 @@ public class RecruitmentList implements Serializable {
     	return recruitments.get(index).getProgress();
     }
     
+    public Recruitment getRecruitment(int index) {
+    	return recruitments.get(index);
+    }
+    
     public int getSemester(int index) {
         return recruitments.get(index).getStartSemester();
     }
