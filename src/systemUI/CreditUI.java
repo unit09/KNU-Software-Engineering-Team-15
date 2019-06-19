@@ -36,6 +36,11 @@ import javax.swing.table.TableModel;
 import client.Client;
 import creditManagement.CompletedCredit;
 import creditManagement.CompletedCreditList;
+import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Cursor;
+import java.awt.SystemColor;
 
 public class CreditUI extends JFrame implements MouseListener {
 	
@@ -53,49 +58,76 @@ public class CreditUI extends JFrame implements MouseListener {
 	private JButton register_button = null;
 	
 	public CreditUI(Client client, int st_id, boolean isapped) throws ClassNotFoundException  {
+		getContentPane().setBackground(Color.WHITE);
+		setUndecorated(true);
 		setForeground(Color.WHITE);
         setBackground(new Color(246, 245, 247));
         //setBorder(new EmptyBorder(5, 5, 5, 5));
         //setSize(800, 620);
         setBounds((screenSize.width-800)/2, (screenSize.height-620)/2, 800, 620);
-		setLayout(null);
+		getContentPane().setLayout(null);
 		
 		JLabel lblX = new JLabel("X");
+		lblX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblX.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
-        	//	dispose();
+        	dispose();
         	}
         });
         lblX.setForeground(Color.BLACK);
         lblX.setFont(new Font("나눔스퀘어라운드 ExtraBold", Font.PLAIN, 23));
         lblX.setBounds(763, 10, 19, 18);
-        add(lblX);
-        
-        JLabel lblNewLabel = new JLabel("이수학점 관리");
-        lblNewLabel.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 20));
-        lblNewLabel.setBounds(329, 12, 200, 52);
-        add(lblNewLabel);
+        getContentPane().add(lblX);
 
 		JLabel label = new JLabel("년도/학기");
+		label.setOpaque(true);
+		label.setHorizontalTextPosition(SwingConstants.CENTER);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setBorder(new LineBorder(Color.BLACK));
         label.setIcon(null);
         label.setBackground(Color.WHITE);
-        label.setFont(new Font("나눔스퀘어라운드 Light", Font.PLAIN, 18));
-        label.setBounds(79, 120, 84, 34);
-        add(label);
+        label.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 18));
+        label.setBounds(99, 119, 84, 36);
+        getContentPane().add(label);
 
 		comboBox = new JComboBox(CompletedCreditList.get_completed_credit_list(client).semester_list(st_id));
-        comboBox.setBounds(170, 126, 120, 24);
-        add(comboBox);
+		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        comboBox.setBounds(197, 120, 113, 36);
+        getContentPane().add(comboBox);
         
         JButton button = new JButton("조회");
-        button.setBounds(620, 125, 105, 27);
-        add(button);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        button.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 18));
+        button.setBounds(617, 120, 84, 36);
+        getContentPane().add(button);
         
         register_button = new JButton("신청");
-        register_button.setBounds(500, 125, 105, 27);
+        register_button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        register_button.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 18));
+        register_button.setBounds(530, 120, 84, 36);
         register_button.setVisible(false);
-        add(register_button);
+        getContentPane().add(register_button);
+        
+        JLabel lblNewLabel_1 = new JLabel("");
+        lblNewLabel_1.setIcon(new ImageIcon(CreditUI.class.getResource("/systemUI/image/UserInterface/\uD14C\uD22C\uB9AC.gif")));
+        lblNewLabel_1.setBounds(99, 168, 602, 402);
+        getContentPane().add(lblNewLabel_1);
+        
+        JLabel lblNewLabel_2 = new JLabel("............................................................................................................................................................................................................");
+        lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 10));
+        lblNewLabel_2.setBounds(99, 89, 602, 18);
+        getContentPane().add(lblNewLabel_2);
+        
+        JLabel lblNewLabel = new JLabel("이수학점 관리");
+        lblNewLabel.setOpaque(true);
+        lblNewLabel.setBorder(new LineBorder(Color.DARK_GRAY));
+        lblNewLabel.setBounds(315, 40, 169, 37);
+        getContentPane().add(lblNewLabel);
+        lblNewLabel.setBackground(Color.WHITE);
+        lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 25));
 		
 		if (SemesterList != null) remove(SemesterList);
 		
@@ -193,14 +225,14 @@ public class CreditUI extends JFrame implements MouseListener {
 		credit_JTable.setBackground(Color.WHITE);
 		credit_JTable.setGridColor(Color.BLACK);
 		credit_JTable.setForeground(Color.BLACK);
-		credit_JTable.setBounds(90, 170, 600, 400);
+		credit_JTable.setBounds(101, 170, 600, 400);
 		credit_JTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		credit_JTable.addMouseListener(this);
 		
 		resize_rowcol(credit_JTable);
 		
 		
-		add(credit_JTable);
+		getContentPane().add(credit_JTable);
 		
 		revalidate();
 		repaint();	
