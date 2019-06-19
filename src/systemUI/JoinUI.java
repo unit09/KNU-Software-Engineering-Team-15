@@ -32,9 +32,9 @@ public class JoinUI extends JFrame {
     private boolean IDcheck;
     private String stored;
     
-    private static final String message1 = "나눔스퀘어라운드 ExtraBold";
-    private static final String message2 = "나눔스퀘어라운드 Regular";
-    private static final String message3 = "caution";
+    private static final String FONT1 = "나눔스퀘어라운드 ExtraBold";
+    private static final String FONT2 = "나눔스퀘어라운드 Regular";
+    private static final String CAUTION = "caution";
     
     public JoinUI(Client client) {
     	IDcheck = false;
@@ -62,7 +62,7 @@ public class JoinUI extends JFrame {
         contentPane.add(passwordField);
 
         IDField = new JTextField();
-        IDField.setFont(new Font(message2, Font.PLAIN, 18));
+        IDField.setFont(new Font(FONT2, Font.PLAIN, 18));
         IDField.setBounds(31, 101, 210, 45);
         contentPane.add(IDField); 
         IDField.setColumns(10);
@@ -73,7 +73,7 @@ public class JoinUI extends JFrame {
         succ_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		if(IDcheck == false) {
-        			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", message3, JOptionPane.DEFAULT_OPTION);
+        			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", CAUTION, JOptionPane.DEFAULT_OPTION);
         		}
         		else {
         			if(checkIDPWFormat()) {
@@ -99,35 +99,35 @@ public class JoinUI extends JFrame {
         label_6.setIcon(new ImageIcon(JoinUI.class.getResource("/systemUI/image/join3.PNG")));
         label_6.setBounds(79, 12, 218, 68);
         contentPane.add(label_6);
-        succ_button.setFont(new Font(message1, Font.BOLD, 26));
+        succ_button.setFont(new Font(FONT1, Font.BOLD, 26));
         succ_button.setBackground(new Color(135, 206, 250));
         succ_button.setBounds(31, 701, 312, 45);
         contentPane.add(succ_button);
         
         JLabel ID_label = new JLabel("\uC544\uC774\uB514");
-        ID_label.setFont(new Font(message1, Font.PLAIN, 12));
+        ID_label.setFont(new Font(FONT1, Font.PLAIN, 12));
         ID_label.setBounds(31, 85, 57, 15);
         contentPane.add(ID_label);
         
         JLabel PASSWD_label = new JLabel("\uBE44\uBC00\uBC88\uD638");
-        PASSWD_label.setFont(new Font(message1, Font.PLAIN, 12));
+        PASSWD_label.setFont(new Font(FONT1, Font.PLAIN, 12));
         PASSWD_label.setBounds(31, 155, 86, 15);
         contentPane.add(PASSWD_label);
         
         
         name_Field = new JTextField();
-        name_Field.setFont(new Font(message2, Font.PLAIN, 18));
+        name_Field.setFont(new Font(FONT2, Font.PLAIN, 18));
         name_Field.setBounds(31, 301, 312, 45);
         contentPane.add(name_Field);
         name_Field.setColumns(10);
         
         JLabel label = new JLabel("\uBE44\uBC00\uBC88\uD638 \uC7AC\uD655\uC778");
-        label.setFont(new Font(message1, Font.PLAIN, 12));
+        label.setFont(new Font(FONT1, Font.PLAIN, 12));
         label.setBounds(31, 222, 96, 15);
         contentPane.add(label);
         
         JLabel name_label = new JLabel("\uC774\uB984");
-        name_label.setFont(new Font(message1, Font.PLAIN, 12));
+        name_label.setFont(new Font(FONT1, Font.PLAIN, 12));
         name_label.setBounds(31, 285, 86, 15);
         contentPane.add(name_label);
         
@@ -141,11 +141,11 @@ public class JoinUI extends JFrame {
         		String check = (String)client.getString(checkID + "##");
             	
             	if(IDField.getText().equals("")) {
-            		JOptionPane.showMessageDialog(null, "아이디가 공란입니다.", message3, JOptionPane.DEFAULT_OPTION);
+            		JOptionPane.showMessageDialog(null, "아이디가 공란입니다.", CAUTION, JOptionPane.DEFAULT_OPTION);
             	}            	
             	else if(check != null) {
             		IDcheck = false;
-            		JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.", message3, JOptionPane.DEFAULT_OPTION);
+            		JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.", CAUTION, JOptionPane.DEFAULT_OPTION);
             	}
             	else {
               		IDcheck = true;
@@ -154,62 +154,62 @@ public class JoinUI extends JFrame {
             	}
             }
         });
-        id_chack_button.setFont(new Font(message1, Font.PLAIN, 17));
+        id_chack_button.setFont(new Font(FONT1, Font.PLAIN, 17));
         id_chack_button.setBounds(242, 101, 100, 44);
         contentPane.add(id_chack_button);
         
         textField = new JTextField();
-        textField.setFont(new Font(message2, Font.PLAIN, 18));
+        textField.setFont(new Font(FONT2, Font.PLAIN, 18));
         textField.setColumns(10);
         textField.setBounds(31, 434, 312, 45);
         contentPane.add(textField);
         
         JLabel label_1 = new JLabel("\uD559\uBC88");
-        label_1.setFont(new Font(message1, Font.PLAIN, 12));
+        label_1.setFont(new Font(FONT1, Font.PLAIN, 12));
         label_1.setBounds(31, 417, 86, 15);
         contentPane.add(label_1);
         
         textField_1 = new JTextField();
-        textField_1.setFont(new Font(message2, Font.PLAIN, 18));
+        textField_1.setFont(new Font(FONT2, Font.PLAIN, 18));
         textField_1.setColumns(10);
         textField_1.setBounds(31, 505, 312, 45);
         contentPane.add(textField_1);
         
         JLabel label_2 = new JLabel("\uD559\uB144");
-        label_2.setFont(new Font(message1, Font.BOLD, 12));
+        label_2.setFont(new Font(FONT1, Font.BOLD, 12));
         label_2.setBounds(31, 488, 86, 15);
         contentPane.add(label_2);
         
         textField_2 = new JTextField();
-        textField_2.setFont(new Font(message2, Font.PLAIN, 18));
+        textField_2.setFont(new Font(FONT2, Font.PLAIN, 18));
         textField_2.setColumns(10);
         textField_2.setBounds(31, 576, 312, 45);
         contentPane.add(textField_2);
         
         JLabel label_3 = new JLabel("\uC774\uBA54\uC77C");
-        label_3.setFont(new Font(message1, Font.PLAIN, 12));
+        label_3.setFont(new Font(FONT1, Font.PLAIN, 12));
         label_3.setBounds(31, 559, 86, 15);
         contentPane.add(label_3);
         
         textField_3 = new JTextField();
-        textField_3.setFont(new Font(message2, Font.PLAIN, 18));
+        textField_3.setFont(new Font(FONT2, Font.PLAIN, 18));
         textField_3.setColumns(10);
         textField_3.setBounds(31, 647, 312, 45);
         contentPane.add(textField_3);
         
         JLabel label_4 = new JLabel("\uD734\uB300\uD3F0\uBC88\uD638");
-        label_4.setFont(new Font(message1, Font.PLAIN, 12));
+        label_4.setFont(new Font(FONT1, Font.PLAIN, 12));
         label_4.setBounds(31, 630, 86, 15);
         contentPane.add(label_4);
         
         textField_4 = new JTextField();
-        textField_4.setFont(new Font(message2, Font.PLAIN, 18));
+        textField_4.setFont(new Font(FONT2, Font.PLAIN, 18));
         textField_4.setColumns(10);
         textField_4.setBounds(31, 366, 312, 45);
         contentPane.add(textField_4);
         
         JLabel label_5 = new JLabel("\uD559\uACFC");
-        label_5.setFont(new Font(message1, Font.PLAIN, 12));
+        label_5.setFont(new Font(FONT1, Font.PLAIN, 12));
         label_5.setBounds(31, 350, 86, 15);
         contentPane.add(label_5);
         
@@ -222,7 +222,7 @@ public class JoinUI extends JFrame {
         	}
         });
         lblX.setForeground(new Color(135, 206, 250));
-        lblX.setFont(new Font(message1, Font.PLAIN, 23));
+        lblX.setFont(new Font(FONT1, Font.PLAIN, 23));
         lblX.setBounds(360, 10, 19, 18);
         contentPane.add(lblX);
     }
@@ -239,16 +239,16 @@ public class JoinUI extends JFrame {
     
     private boolean checkIDPWFormat() {
     	if(IDField.getText().equals("") || pwdPassword.getText().equals("") || name_Field.getText().equals("") || textField_4.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "입력하지 않은 항목이 있습니다.", message3, JOptionPane.DEFAULT_OPTION);
+			JOptionPane.showMessageDialog(null, "입력하지 않은 항목이 있습니다.", CAUTION, JOptionPane.DEFAULT_OPTION);
 			return false;
 		}
 		if(!stored.equals(IDField.getText())) {
 			IDcheck = false;
-			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", message3, JOptionPane.DEFAULT_OPTION);
+			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", CAUTION, JOptionPane.DEFAULT_OPTION);
 			return false;
 		}        			
 		if(!pwdPassword.getText().equals(passwordField.getText())) {
-			JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 확인이 서로 다릅니다.", message3, JOptionPane.DEFAULT_OPTION);
+			JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 확인이 서로 다릅니다.", CAUTION, JOptionPane.DEFAULT_OPTION);
 			return false;
 		}	
 		return true;
@@ -256,9 +256,9 @@ public class JoinUI extends JFrame {
     
     private boolean checkIntFormat() {
     	if(!checkFormat(textField.getText()))
-			JOptionPane.showMessageDialog(null, "학번 입력이 잘못되었습니다.\n정수로 이루어진 학번을 입력해야합니다.", message3, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "학번 입력이 잘못되었습니다.\n정수로 이루어진 학번을 입력해야합니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
 		else if(!checkFormat(textField_1.getText()))
-			JOptionPane.showMessageDialog(null, "학년 입력이 잘못되었습니다.\n정수를 입력해야합니다.", message3, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "학년 입력이 잘못되었습니다.\n정수를 입력해야합니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
 		else
 			return true;
     	

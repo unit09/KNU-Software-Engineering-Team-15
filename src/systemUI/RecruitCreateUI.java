@@ -30,7 +30,8 @@ public class RecruitCreateUI extends JFrame {
     private JTextField selectYear;
     private JTextField numField;
     
-    private static final String yearMessage = "년";
+    private static final String FONT1 = "함초롬돋움";
+    private static final String YEAR = "년";
 
     public RecruitCreateUI(RecruitmentList mainList, Administer admin) {
     	super("모집공고 작성");
@@ -45,7 +46,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel number = new JLabel("\uBC88\uD638");
         number.setHorizontalAlignment(SwingConstants.CENTER);
-        number.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        number.setFont(new Font(FONT1, Font.PLAIN, 18));
         number.setBounds(104, 79, 53, 32);
         add(number);
         
@@ -57,7 +58,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel title = new JLabel("\uC81C\uBAA9");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        title.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        title.setFont(new Font(FONT1, Font.PLAIN, 18));
         title.setBounds(104, 136, 53, 32);
         add(title);
         
@@ -69,7 +70,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel nationLabel = new JLabel("\uAD6D\uAC00");
         nationLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        nationLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        nationLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         nationLabel.setBounds(104, 179, 53, 32);
         add(nationLabel);
         
@@ -81,7 +82,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel univLabel = new JLabel("\uB300\uD559");
         univLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        univLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        univLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         univLabel.setBounds(337, 179, 53, 32);
         add(univLabel);
         
@@ -93,7 +94,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel startyearLabel = new JLabel("\uC2DC\uC791\uC5F0\uB3C4");
         startyearLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        startyearLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        startyearLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         startyearLabel.setBounds(104, 225, 80, 32);
         add(startyearLabel);
         
@@ -104,15 +105,15 @@ public class RecruitCreateUI extends JFrame {
         startyearField.setBounds(190, 228, 108, 32);
         add(startyearField);
         
-        JLabel label_1 = new JLabel(yearMessage);
+        JLabel label_1 = new JLabel(YEAR);
         label_1.setHorizontalAlignment(SwingConstants.CENTER);
-        label_1.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_1.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_1.setBounds(299, 226, 30, 32);
         add(label_1);
         
         JLabel statrseLabel = new JLabel("\uC2DC\uC791\uD559\uAE30");
         statrseLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        statrseLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        statrseLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         statrseLabel.setBounds(337, 225, 80, 32);
         add(statrseLabel);
         
@@ -125,13 +126,13 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel label = new JLabel("\uBD80\uD130 \uC2DC\uC791");
         label.setHorizontalAlignment(SwingConstants.CENTER);
-        label.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label.setFont(new Font(FONT1, Font.PLAIN, 18));
         label.setBounds(600, 226, 80, 32);
         add(label);
         
         JLabel majorLabel = new JLabel("\uC804\uACF5");
         majorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        majorLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        majorLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         majorLabel.setBounds(104, 269, 53, 32);
         add(majorLabel);
         
@@ -143,7 +144,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel periodLabel = new JLabel("\uAE30\uAC04");
         periodLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        periodLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        periodLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         periodLabel.setBounds(404, 269, 53, 32);
         add(periodLabel);
         
@@ -156,13 +157,13 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel label_3 = new JLabel("\uB3D9\uC548");
         label_3.setHorizontalAlignment(SwingConstants.CENTER);
-        label_3.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_3.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_3.setBounds(636, 271, 54, 32);
         add(label_3);
         
         JLabel deadLabel = new JLabel("\uBAA8\uC9D1\uAE30\uAC04");
         deadLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        deadLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        deadLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         deadLabel.setBounds(104, 315, 80, 32);
         add(deadLabel);
         
@@ -173,9 +174,9 @@ public class RecruitCreateUI extends JFrame {
         deadYear.setBounds(190, 315, 108, 32);
         add(deadYear);
         
-        JLabel label_2 = new JLabel(yearMessage);
+        JLabel label_2 = new JLabel(YEAR);
         label_2.setHorizontalAlignment(SwingConstants.CENTER);
-        label_2.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_2.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_2.setBounds(299, 315, 30, 32);
         add(label_2);
         
@@ -188,7 +189,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel label_4 = new JLabel("\uC6D4");
         label_4.setHorizontalAlignment(SwingConstants.CENTER);
-        label_4.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_4.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_4.setBounds(444, 315, 30, 32);
         add(label_4);
         
@@ -201,13 +202,13 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel label_5 = new JLabel("\uC77C \uAE4C\uC9C0");
         label_5.setHorizontalAlignment(SwingConstants.CENTER);
-        label_5.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_5.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_5.setBounds(589, 315, 67, 32);
         add(label_5);
         
         JLabel selectLabel = new JLabel("\uB4F1\uB85D\uB9C8\uAC10");
         selectLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        selectLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        selectLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         selectLabel.setBounds(104, 359, 80, 32);
         add(selectLabel);
         
@@ -218,9 +219,9 @@ public class RecruitCreateUI extends JFrame {
         selectYear.setBounds(190, 359, 108, 32);
         add(selectYear);
         
-        JLabel label_8 = new JLabel(yearMessage);
+        JLabel label_8 = new JLabel(YEAR);
         label_8.setHorizontalAlignment(SwingConstants.CENTER);
-        label_8.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_8.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_8.setBounds(299, 359, 30, 32);
         add(label_8);
         
@@ -233,7 +234,7 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel label_7 = new JLabel("\uC6D4");
         label_7.setHorizontalAlignment(SwingConstants.CENTER);
-        label_7.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_7.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_7.setBounds(444, 359, 30, 32);
         add(label_7);
         
@@ -246,13 +247,13 @@ public class RecruitCreateUI extends JFrame {
         
         JLabel label_6 = new JLabel("\uC77C \uAE4C\uC9C0");
         label_6.setHorizontalAlignment(SwingConstants.CENTER);
-        label_6.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        label_6.setFont(new Font(FONT1, Font.PLAIN, 18));
         label_6.setBounds(589, 359, 67, 32);
         add(label_6);
         
         JLabel contentLabel = new JLabel("\uB0B4\uC6A9");
         contentLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        contentLabel.setFont(new Font("함초롬돋움", Font.PLAIN, 18));
+        contentLabel.setFont(new Font(FONT1, Font.PLAIN, 18));
         contentLabel.setBounds(104, 403, 53, 32);
         add(contentLabel);
         

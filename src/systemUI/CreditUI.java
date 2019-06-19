@@ -58,6 +58,9 @@ public class CreditUI extends JFrame implements MouseListener {
 	private int selected_index = -1;
 	private JButton register_button = null;
 	
+	private static final String FONT1 = "나눔스퀘어라운드 Bold";
+	private static final String NOLIST = "내역이 없습니다";
+	
 	public CreditUI(Client client, int st_id, boolean isapped) throws ClassNotFoundException  {
 		setTitle("\uC774\uC218\uD559\uC810 \uAD00\uB9AC");
 		
@@ -76,7 +79,7 @@ public class CreditUI extends JFrame implements MouseListener {
 		label.setBorder(new LineBorder(Color.BLACK));
         label.setIcon(null);
         label.setBackground(Color.WHITE);
-        label.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 18));
+        label.setFont(new Font(FONT1, Font.PLAIN, 18));
         label.setBounds(99, 119, 84, 36);
         getContentPane().add(label);
 
@@ -87,13 +90,13 @@ public class CreditUI extends JFrame implements MouseListener {
         
         JButton button = new JButton("조회");
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 18));
+        button.setFont(new Font(FONT1, Font.PLAIN, 18));
         button.setBounds(617, 120, 84, 36);
         getContentPane().add(button);
         
         register_button = new JButton("신청");
         register_button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        register_button.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 18));
+        register_button.setFont(new Font(FONT1, Font.PLAIN, 18));
         register_button.setBounds(530, 120, 84, 36);
         register_button.setVisible(false);
         getContentPane().add(register_button);
@@ -116,7 +119,7 @@ public class CreditUI extends JFrame implements MouseListener {
         lblNewLabel.setBackground(Color.WHITE);
         lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setFont(new Font("나눔스퀘어라운드 Bold", Font.PLAIN, 25));
+        lblNewLabel.setFont(new Font(FONT1, Font.PLAIN, 25));
         
         
 		
@@ -129,7 +132,7 @@ public class CreditUI extends JFrame implements MouseListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-		        if(!comboBox.getSelectedItem().toString().contentEquals("내역이 없습니다")) {
+		        if(!comboBox.getSelectedItem().toString().contentEquals(NOLIST)) {
 		        	ContentsPrint(client, st_id, isapped);
 		        	register_button_check();
 		        }
@@ -271,9 +274,9 @@ public class CreditUI extends JFrame implements MouseListener {
 				
 			}
 			else {
-				semester_Vector.add("내역이 없습니다");
+				semester_Vector.add(NOLIST);
 				
-				String[] JTableData = {"내역이 없습니다"};
+				String[] JTableData = {NOLIST};
 				credit_JList = new JList<String>(JTableData);
 				
 			}

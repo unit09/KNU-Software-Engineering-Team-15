@@ -10,6 +10,7 @@ public class DrawingPanel extends JPanel {
 	private int unit = 2;
 	private int[] numbers = new int[6];
 	
+	@Override
 	public void paint(Graphics g) {
 		 g.clearRect(0,0,getWidth(),getHeight());
 		 g.drawLine(50,400,650,400);

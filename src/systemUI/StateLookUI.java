@@ -21,7 +21,8 @@ public class StateLookUI extends JFrame implements Observer {
     private JList list;
     private Student man;
     
-    private static final String deleteMessage = "응시 취소";
+    private static final String CANCEL = "응시 취소";
+    private static final String FONT1 = "맑은 고딕";
 
     public StateLookUI(RecruitmentList mainList, Student user, ArrayList<DispatchRecord> records, Client client){
     	man = user;
@@ -33,19 +34,19 @@ public class StateLookUI extends JFrame implements Observer {
         Color temp = new Color(240, 240, 240, 80);
         title.setOpaque(true);
         title.setBackground(temp);
-        title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+        title.setFont(new Font(FONT1, Font.BOLD, 22));
         title.setBounds(317, 22, 148, 39);
         getContentPane().add(title);
         
         list = new JList(mainList.printState(user.getStudentID()));
-        list.setFont(new Font("맑은 고딕", Font.PLAIN, 18));
+        list.setFont(new Font(FONT1, Font.PLAIN, 18));
         list.setBounds(85, 125, 612, 377);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         getContentPane().add(list);
         
         JLabel label = new JLabel("\uC9C0\uC6D0\uD55C \uBAA8\uC9D1 \uACF5\uACE0 \uBAA9\uB85D");
         label.setOpaque(true);
-        label.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+        label.setFont(new Font(FONT1, Font.BOLD, 20));
         label.setBackground(new Color(240, 240, 240, 80));
         label.setBounds(98, 85, 207, 34);
         getContentPane().add(label);
@@ -78,16 +79,16 @@ public class StateLookUI extends JFrame implements Observer {
             }
         });
         
-        JButton cancel = new JButton(deleteMessage);
+        JButton cancel = new JButton(CANCEL);
         cancel.setBounds(399, 514, 105, 27);
         getContentPane().add(cancel);
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(!list.isSelectionEmpty()) {
-            		String[] buttons = {deleteMessage, "취소"};
+            		String[] buttons = {CANCEL, "취소"};
     				int result = 0;
-    				result = JOptionPane.showOptionDialog(null, "응시된 원서를 취소하시겠습니까?", deleteMessage, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
+    				result = JOptionPane.showOptionDialog(null, "응시된 원서를 취소하시겠습니까?", CANCEL, JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
     				if(result == 0) {
 	            		String buf = (String)list.getSelectedValue();
 	            		int in = buf.indexOf(".");

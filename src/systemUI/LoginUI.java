@@ -18,7 +18,7 @@ public class LoginUI extends JFrame {
     private JTextField IDField;
 
     private static Client client;
-    private static final String Liter1 = "나눔스퀘어라운드 ExtraBold";
+    private static final String FONT1 = "나눔스퀘어라운드 ExtraBold";
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     int xx,xy;
     /**
@@ -41,7 +41,7 @@ public class LoginUI extends JFrame {
         contentPane.setLayout(null);
         
         JLabel lblMemberLogin = new JLabel("Member Login");
-        lblMemberLogin.setFont(new Font(Liter1, Font.BOLD, 18));
+        lblMemberLogin.setFont(new Font(FONT1, Font.BOLD, 18));
         lblMemberLogin.setBounds(209, 49, 143, 42);
         contentPane.add(lblMemberLogin);
 
@@ -57,7 +57,7 @@ public class LoginUI extends JFrame {
         IDField.setColumns(10);
 
         JButton LoginButton = new JButton("로그인");
-        LoginButton.setFont(new Font(Liter1, Font.PLAIN, 14));
+        LoginButton.setFont(new Font(FONT1, Font.PLAIN, 14));
         LoginButton.setBackground(new Color(135, 206, 250));
         LoginButton.setBounds(177, 252, 211, 42); //195 49 79 23
         contentPane.add(LoginButton);
@@ -99,7 +99,7 @@ public class LoginUI extends JFrame {
        
         
         JButton button = new JButton("비회원 로그인");
-        button.setFont(new Font(Liter1, Font.PLAIN, 14));
+        button.setFont(new Font(FONT1, Font.PLAIN, 14));
         button.setBackground(new Color(135, 206, 250));
         button.setBounds(177, 305, 211, 42);
         button.addActionListener(new ActionListener() {
@@ -123,18 +123,18 @@ public class LoginUI extends JFrame {
                 join.setResizable(false);
         	}
         });
-        button_join.setFont(new Font(Liter1, Font.PLAIN, 14));
+        button_join.setFont(new Font(FONT1, Font.PLAIN, 14));
         button_join.setBackground(new Color(135, 206, 250));
         button_join.setBounds(177, 359, 211, 42);
         contentPane.add(button_join);
         
         JLabel ID_label = new JLabel("ID");
-        ID_label.setFont(new Font(Liter1, Font.PLAIN, 12));
+        ID_label.setFont(new Font(FONT1, Font.PLAIN, 12));
         ID_label.setBounds(177, 101, 57, 15);
         contentPane.add(ID_label);
         
         JLabel PASSWD_label = new JLabel("PASSWORD");
-        PASSWD_label.setFont(new Font(Liter1, Font.PLAIN, 12));
+        PASSWD_label.setFont(new Font(FONT1, Font.PLAIN, 12));
         PASSWD_label.setBounds(177, 171, 86, 15);
         contentPane.add(PASSWD_label);
         
@@ -147,7 +147,7 @@ public class LoginUI extends JFrame {
         });
         lbl_close.setForeground(new Color(135, 206, 250));
         lbl_close.setBackground(new Color(30, 144, 255));
-        lbl_close.setFont(new Font(Liter1, Font.BOLD, 18));
+        lbl_close.setFont(new Font(FONT1, Font.BOLD, 18));
         lbl_close.setBounds(521, 5, 13, 15);
         contentPane.add(lbl_close);
                     

@@ -25,6 +25,9 @@ public class DispatchUI extends JFrame {
 	
 	private int[] numbers;
 	private DrawingPanel graph;
+	
+	private static final String TOOLTIP = "선택하지 않을 경우 전체 범위로 검색합니다.";
+	private static final String PERIOD = "학기 동안";
 
 	public DispatchUI(ArrayList<DispatchRecord> records) {
 		super("파견실적 조회");
@@ -54,28 +57,28 @@ public class DispatchUI extends JFrame {
 			if(!major.contains(record.getMajor())) {
 				major.add(record.getMajor());
 			}
-			if(!period.contains(Integer.toString(record.getPeriod()) + "학기 동안")) {
-				period.add(Integer.toString(record.getPeriod()) + "학기 동안");
+			if(!period.contains(Integer.toString(record.getPeriod()) + PERIOD)) {
+				period.add(Integer.toString(record.getPeriod()) + PERIOD);
 			}
 		}
 		
 		nations = new JComboBox(nation.toArray());
-		nations.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		nations.setToolTipText(TOOLTIP);
 		nations.setBounds(93, 25, 117, 36);
 		add(nations);
 		
 		unis = new JComboBox(university.toArray());
-		unis.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		unis.setToolTipText(TOOLTIP);
 		unis.setBounds(224, 25, 117, 36);
 		add(unis);
 		
 		majors = new JComboBox(major.toArray());
-		majors.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		majors.setToolTipText(TOOLTIP);
 		majors.setBounds(355, 25, 117, 36);
 		add(majors);
 		
 		periods = new JComboBox(period.toArray());
-		periods.setToolTipText("\uC120\uD0DD\uD558\uC9C0 \uC54A\uC744 \uACBD\uC6B0 \uC804\uCCB4 \uBC94\uC704\uB85C \uAC80\uC0C9\uD569\uB2C8\uB2E4.");
+		periods.setToolTipText(TOOLTIP);
 		periods.setBounds(486, 25, 117, 36);
 		add(periods);
 		
@@ -95,7 +98,7 @@ public class DispatchUI extends JFrame {
         			if(nations.getSelectedItem().equals(record.getNation()) || nations.getSelectedIndex() == 0) {
         				if(unis.getSelectedItem().equals(record.getUniversity()) || unis.getSelectedIndex() == 0) {
         					if(majors.getSelectedItem().equals(record.getMajor()) || majors.getSelectedIndex() == 0) {
-        						if(periods.getSelectedItem().equals(Integer.toString(record.getPeriod()) + "학기 동안") || periods.getSelectedIndex() == 0) {
+        						if(periods.getSelectedItem().equals(Integer.toString(record.getPeriod()) + PERIOD) || periods.getSelectedIndex() == 0) {
         							numbers[record.getStartYear() - 2014] += 1;
         						}
         					}
