@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import org.json.simple.JSONObject;
+//import org.json.simple.JSONObject;
 
 import client.Client;
 
@@ -94,6 +94,7 @@ public class JoinUI extends JFrame {
         				else {
         					Student temp = new Student(Integer.parseInt(textField.getText()), name_Field.getText(), textField_4.getText(), Integer.parseInt(textField_1.getText()), 3.3, textField_2.getText(), textField_3.getText());
         					client.setObject(IDField.getText(), pwdPassword.getText(), temp);
+        					client.setString(IDField.getText() + "##", "on");
         					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.", "회원가입 완료", JOptionPane.DEFAULT_OPTION);
         					dispose();
         				}
@@ -151,16 +152,16 @@ public class JoinUI extends JFrame {
         id_chack_button.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		String checkID = IDField.getText();
-        		
+        		String check = (String)client.getString(checkID + "##");
             	//JSONObject check = (JSONObject)client.getObject(checkID);
             	
             	if(IDField.getText().equals("")) {
             		JOptionPane.showMessageDialog(null, "아이디가 공란입니다.", message3, JOptionPane.DEFAULT_OPTION);
             	}            	
-            	/*else if(check != null) {
+            	else if(check != null) {
             		IDcheck = false;
             		JOptionPane.showMessageDialog(null, "이미 존재하는 아이디입니다.", message3, JOptionPane.DEFAULT_OPTION);
-            	}*/
+            	}
             	else {
               		IDcheck = true;
               		stored = checkID;
