@@ -8,6 +8,8 @@ import javax.swing.*;
 
 import exchange.RecruitmentList;
 import user.Administer;
+import java.awt.Font;
+import java.awt.Color;
 
 public class RecruitDeleteUI extends JPanel implements Observer{
     private JButton delet;
@@ -19,13 +21,16 @@ public class RecruitDeleteUI extends JPanel implements Observer{
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setFixedCellHeight(20);
         list.setFixedCellWidth(300);
-    	
-        setLayout(new FlowLayout());
-        setSize(500, 400);
+        setSize(800, 620);
+        setLayout(null);
 
-        add(new JScrollPane(list));
+        JScrollPane scrollPane = new JScrollPane(list);
+        scrollPane.setBounds(70, 141, 662, 326);
+        add(scrollPane);
 
         delet = new JButton("ªË¡¶");
+        delet.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
+        delet.setBounds(369, 497, 98, 33);
         delet.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -47,6 +52,11 @@ public class RecruitDeleteUI extends JPanel implements Observer{
         });
 
         add(delet);
+        
+        JLabel label = new JLabel("");
+        label.setIcon(new ImageIcon(RecruitDeleteUI.class.getResource("/systemUI/image/board-crop.jpg")));
+        label.setBounds(0, 0, 800, 620);
+        add(label);
     }
     
     public void update(RecruitmentList mainList) {
