@@ -41,7 +41,7 @@ public class LoginUI extends JFrame {
         contentPane.setLayout(null);
         
         JLabel lblMemberLogin = new JLabel("Member Login");
-        lblMemberLogin.setFont(new Font("³ª´®½ºÄù¾î ExtraBold", Font.BOLD, 18));
+        lblMemberLogin.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå ExtraBold", Font.BOLD, 18));
         lblMemberLogin.setBounds(209, 49, 143, 42);
         contentPane.add(lblMemberLogin);
 
@@ -51,13 +51,14 @@ public class LoginUI extends JFrame {
         contentPane.add(pwdPassword);
 
         IDField = new JTextField();
-        IDField.setFont(new Font("±¼¸²", Font.PLAIN, 16));
+        IDField.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 16));
         IDField.setBounds(177, 119, 211, 42);
         contentPane.add(IDField); 
         IDField.setColumns(10);
 
         JButton LoginButton = new JButton("·Î±×ÀÎ");
-        LoginButton.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 14));
+        LoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        LoginButton.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 14));
         LoginButton.setBackground(new Color(135, 206, 250));
         LoginButton.setBounds(177, 252, 211, 42); //195 49 79 23
         contentPane.add(LoginButton);
@@ -105,7 +106,8 @@ public class LoginUI extends JFrame {
        
         
         JButton button = new JButton("ºñÈ¸¿ø ·Î±×ÀÎ");
-        button.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 14));
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        button.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 14));
         button.setBackground(new Color(135, 206, 250));
         button.setBounds(177, 305, 211, 42);
         button.addActionListener(new ActionListener() {
@@ -124,26 +126,28 @@ public class LoginUI extends JFrame {
         contentPane.add(button);
         
         JButton button_join = new JButton("\uD68C\uC6D0\uAC00\uC785");	// È¸¿ø°¡ÀÔ ¹öÆ°
+        button_join.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button_join.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		// È¸¿ø°¡ÀÔ Ã¢ ¶ç¿ì±â
         		JoinUI join = new JoinUI(client);
+        		join.setUndecorated(true);
                 join.setVisible(true);
                 join.setResizable(false);
         	}
         });
-        button_join.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 14));
+        button_join.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 14));
         button_join.setBackground(new Color(135, 206, 250));
         button_join.setBounds(177, 359, 211, 42);
         contentPane.add(button_join);
         
         JLabel ID_label = new JLabel("ID");
-        ID_label.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 12));
+        ID_label.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 12));
         ID_label.setBounds(177, 101, 57, 15);
         contentPane.add(ID_label);
         
         JLabel PASSWD_label = new JLabel("PASSWORD");
-        PASSWD_label.setFont(new Font("³ª´®½ºÄù¾î", Font.PLAIN, 12));
+        PASSWD_label.setFont(new Font("³ª´®½ºÄù¾î¶ó¿îµå Bold", Font.PLAIN, 12));
         PASSWD_label.setBounds(177, 171, 86, 15);
         contentPane.add(PASSWD_label);
         
