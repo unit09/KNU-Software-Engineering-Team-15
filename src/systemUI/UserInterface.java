@@ -74,12 +74,12 @@ public class UserInterface extends Observable {
         	addObserver(slUI);
             Tab.addTab("진행상황 조회", slUI);
             
-    		try {
-				Tab.addTab("이수학점 관리", new CreditUI(client, user.getStudentID(), this, false));
-	    		CreditViewIsapped = new CreditUI(client, user.getStudentID(), this, true);
+    	/*	try {
+			//	Tab.addTab("이수학점 관리", new CreditUI(client, user.getStudentID(), this, false));
+	    	//	CreditViewIsapped = new CreditUI(client, user.getStudentID(), this, true);
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
-			}
+			}*/
     		
     		Tab.addTab("등록학점 조회", CreditViewIsapped);
         }

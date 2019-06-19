@@ -17,6 +17,8 @@ import user.Administer;
 import user.Student;
 
 import javax.swing.GroupLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainUI extends Observable {
 	private javax.swing.JButton qnaB;
@@ -99,6 +101,19 @@ public class MainUI extends Observable {
         jPanel1 = new JPanel();
         stateB = new JButton();
         creditB = new JButton();
+        creditB.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		try {
+					CreditUI CRUI = new CreditUI(client, user.getStudentID(), false);
+					CRUI.setVisible(true);
+					CRUI.setResizable(false);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+        });
         qnaB = new JButton();
         dispatchB = new JButton();
         recuitB = new JButton();
