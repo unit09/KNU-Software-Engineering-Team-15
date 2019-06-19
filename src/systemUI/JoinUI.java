@@ -76,22 +76,8 @@ public class JoinUI extends JFrame {
         			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", message3, JOptionPane.DEFAULT_OPTION);
         		}
         		else {
-        			if(IDField.getText().equals("") || pwdPassword.getText().equals("") || name_Field.getText().equals("") || textField_4.getText().equals("")) {
-        				JOptionPane.showMessageDialog(null, "입력하지 않은 항목이 있습니다.", message3, JOptionPane.DEFAULT_OPTION);
-        			}
-        			if(!stored.equals(IDField.getText())) {
-        				IDcheck = false;
-        				JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", message3, JOptionPane.DEFAULT_OPTION);
-        			}        			
-        			if(!pwdPassword.getText().equals(passwordField.getText())) {
-        				JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 확인이 서로 다릅니다.", message3, JOptionPane.DEFAULT_OPTION);
-        			}
-        			else {
-        				if(!checkFormat(textField.getText()))
-        					JOptionPane.showMessageDialog(null, "학번 입력이 잘못되었습니다.\n정수로 이루어진 학번을 입력해야합니다.", message3, JOptionPane.ERROR_MESSAGE);
-        				else if(!checkFormat(textField_1.getText()))
-        					JOptionPane.showMessageDialog(null, "학년 입력이 잘못되었습니다.\n정수를 입력해야합니다.", message3, JOptionPane.ERROR_MESSAGE);
-        				else {
+        			if(checkIDPWFormat()) {
+        				if(checkIntFormat()) {
         					Student temp = new Student(Integer.parseInt(textField.getText()), name_Field.getText(), textField_4.getText(), Integer.parseInt(textField_1.getText()), 3.3, textField_2.getText(), textField_3.getText());
         					client.setObject(IDField.getText(), pwdPassword.getText(), temp);
         					client.setString(IDField.getText() + "##", "on");
@@ -249,5 +235,33 @@ public class JoinUI extends JFrame {
     	catch(NumberFormatException e) {
     		return false;
     	}    	
+    }
+    
+    private boolean checkIDPWFormat() {
+    	if(IDField.getText().equals("") || pwdPassword.getText().equals("") || name_Field.getText().equals("") || textField_4.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "입력하지 않은 항목이 있습니다.", message3, JOptionPane.DEFAULT_OPTION);
+			return false;
+		}
+		if(!stored.equals(IDField.getText())) {
+			IDcheck = false;
+			JOptionPane.showMessageDialog(null, "아이디 중복확인을 해주시기 바랍니다.", message3, JOptionPane.DEFAULT_OPTION);
+			return false;
+		}        			
+		if(!pwdPassword.getText().equals(passwordField.getText())) {
+			JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 확인이 서로 다릅니다.", message3, JOptionPane.DEFAULT_OPTION);
+			return false;
+		}	
+		return true;
+    }
+    
+    private boolean checkIntFormat() {
+    	if(!checkFormat(textField.getText()))
+			JOptionPane.showMessageDialog(null, "학번 입력이 잘못되었습니다.\n정수로 이루어진 학번을 입력해야합니다.", message3, JOptionPane.ERROR_MESSAGE);
+		else if(!checkFormat(textField_1.getText()))
+			JOptionPane.showMessageDialog(null, "학년 입력이 잘못되었습니다.\n정수를 입력해야합니다.", message3, JOptionPane.ERROR_MESSAGE);
+		else
+			return true;
+    	
+    	return false;
     }
 }
