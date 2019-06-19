@@ -111,10 +111,9 @@ public class RecruitmentList implements Serializable {
 
     public void setRecruitState(int year, int month, int date) {	//시연을 위해 심사단계를 넘어가서 바로 합격처리를 함
     	for(int i = 0; i < recruitments.size(); i++) {
-    		int temp = recruitments.get(i).getDeadline();
-    		int t_y = temp / 10000;
-    		int t_m = (temp/100) - (t_y*100);
-    		int t_d = temp - (t_y*10000) - (t_m*100);
+    		int t_y = recruitments.get(i).getDeadlineYear();
+    		int t_m = recruitments.get(i).getDeadlineMonth();
+    		int t_d = recruitments.get(i).getDeadlineDay();
     		if(t_y < year) {	
     			recruitments.get(i).setProgress(2);
     			recruitments.get(i).setPass();
@@ -130,10 +129,9 @@ public class RecruitmentList implements Serializable {
     			}
     		}
     		
-    		temp = recruitments.get(i).getSelectDeadline();
-    		t_y = temp / 10000;
-    		t_m = (temp/100) - (t_y*100);
-    		t_d = temp - (t_y*10000) - (t_m*100);
+    		t_y = recruitments.get(i).getSelectDeadlineYear();
+    		t_m = recruitments.get(i).getSelectDeadlineMonth();
+    		t_d = recruitments.get(i).getSelectDeadlineDay();
     		if(t_y < year) {
     			recruitments.get(i).setProgress(3);
     		}

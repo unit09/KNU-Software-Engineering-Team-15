@@ -76,14 +76,16 @@ public class LoginUI extends JFrame {
                 	if(user == null)
                 		JOptionPane.showMessageDialog(null, "ID 혹은 비밀번호가 잘못되었습니다.", "로그인 에러", JOptionPane.DEFAULT_OPTION);
                 	else {
-                		 dispose();	// 현재 창 닫기
-
-                         UserInterface UI = new UserInterface(user, client);
-                         UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                         UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
+                		 dispose();	// 현재 창 닫기                		 
+                         MainUI UI = new MainUI();//(user, client);
+                         /*UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                         //UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
                          UI.setVisible(true);
-                         UI.setResizable(false);
-                      
+                         UI.setResizable(false);*/
+                         //UI.setVisible(true);
+                         UserInterface UIX = new UserInterface(user, client);
+                         UIX.setVisible(true);
+                         UIX.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 1000, 700);
                 	}
                 }
             }
@@ -111,11 +113,12 @@ public class LoginUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose(); //종료하는것
  
-                UserInterface UI = new UserInterface(new Student(-2,"guest", " ", 0, 0, " ", " "), client);	// 비회원 로그인 관련
-                UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
+                MainUI UI = new MainUI();//(new Student(-2,"guest", " ", 0, 0, " ", " "), client);	// 비회원 로그인 관련
+                /*UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                //UI.setBounds((screenSize.width-700)/2, (screenSize.height-550)/2, 700, 550);
                 UI.setVisible(true);
-                UI.setResizable(false);
+                UI.setResizable(false);*/
+                UI.setVisible(true);
             } 
         });
         contentPane.add(button);
@@ -124,10 +127,9 @@ public class LoginUI extends JFrame {
         button_join.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		// 회원가입 창 띄우기
-        		client.setObject("s1123", "1123", new Student(2015123456, "김길동", "컴퓨터학부", 2, 2.14, "test1@naver.com", "010-1264-1231"));
-        		client.setObject("s1132", "1132", new Student(2015111111, "홍길동", "컴퓨터학부", 2, 4.12, "test@naver.com", "010-1234-5678"));
-        		client.setObject("a1124", "1124", new Student(-1, "관리자", "관리자용학생객체", 777, 0, "year가 관리자번호", "010-5667-8931"));
-        		JOptionPane.showMessageDialog(null, "테스트용 아이디 생성 완료", "caution", JOptionPane.DEFAULT_OPTION);
+        		JoinUI join = new JoinUI(client);
+                join.setVisible(true);
+                join.setResizable(false);
         	}
         });
         button_join.setFont(new Font("나눔스퀘어", Font.PLAIN, 14));
