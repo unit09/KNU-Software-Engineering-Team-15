@@ -114,10 +114,14 @@ public class MainUI extends Observable {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         
-        //각 기능별로 일단 작성
+        //옵저버들 추가
         RecruitLookUI rlUI = new RecruitLookUI(userType, mainList, user);
         addObserver(rlUI);
-        rlUI.setResizable(false);        
+        rlUI.setResizable(false);     
+        
+        RecruitDeleteUI rdUI = new RecruitDeleteUI(mainList);
+        addObserver(rdUI);
+        rdUI.setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -140,7 +144,15 @@ public class MainUI extends Observable {
         stateB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//qnaUI 아직 없음
+            	if(userType == 0) {
+            		
+            	}
+            	else {
+            		RecruitCreateUI rcUI = new RecruitCreateUI(mainList, admin);
+                	rcUI.setResizable(false);
+                	rcUI.setBounds(500, 300, 800, 650);
+                    rcUI.setVisible(true);
+            	}
             }
         });
         
@@ -164,7 +176,8 @@ public class MainUI extends Observable {
 					}
         		}
         		else {
-        			
+        			rdUI.setBounds(500, 300, 800, 650);
+                    rdUI.setVisible(true);
         		}
         	}
         });

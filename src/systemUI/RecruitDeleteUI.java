@@ -11,7 +11,7 @@ import user.Administer;
 import java.awt.Font;
 import java.awt.Color;
 
-public class RecruitDeleteUI extends JPanel implements Observer{
+public class RecruitDeleteUI extends JFrame implements Observer{
     private JButton delet;
     private JList list;
 
@@ -25,12 +25,12 @@ public class RecruitDeleteUI extends JPanel implements Observer{
         setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane(list);
-        scrollPane.setBounds(70, 141, 662, 326);
+        scrollPane.setBounds(71, 163, 662, 326);
         add(scrollPane);
 
         delet = new JButton("ªË¡¶");
         delet.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 20));
-        delet.setBounds(369, 497, 98, 33);
+        delet.setBounds(355, 501, 98, 33);
         delet.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

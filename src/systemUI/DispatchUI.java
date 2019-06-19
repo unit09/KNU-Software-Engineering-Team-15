@@ -8,8 +8,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import java.util.Random;
-
-import client.Client;
 import exchange.*;
 import systemUI.Observable;
 
@@ -43,7 +41,7 @@ public class DispatchUI extends JFrame {
 		nation.add("국가 선택");
 		university.add("대학 선택");
 		major.add("전공 선택");
-		period.add("기간 선택");
+		period.add("기간 선택");	
 		
 		for(int i = 0; i < records.size(); i++) {
 			DispatchRecord record = records.get(i);
