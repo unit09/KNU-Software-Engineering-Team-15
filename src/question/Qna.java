@@ -37,11 +37,11 @@ public class Qna implements Serializable
 	{
 		String line = null;
 		
-		System.out.println("질문 제목 입력 : ");
+		// 질문 제목 입력
 		
 		this.questionName = br.readLine();
 		
-		System.out.println("질문 내용 입력(end입력) : ");
+		// 질문 내용 입력(end입력)
 		
 		this.question = br.readLine();
 		
@@ -58,13 +58,6 @@ public class Qna implements Serializable
 	{
 		this.answer = answer;
 		this.state = 1;
-	}
-	
-	public void printQnA()
-	{
-		System.out.println(this.questionName);
-		System.out.println("");
-		System.out.println(this.question);
 	}
 	
 	public int getQnaNum() {
