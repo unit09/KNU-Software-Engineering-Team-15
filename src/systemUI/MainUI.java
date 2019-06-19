@@ -19,6 +19,7 @@ import user.Student;
 import javax.swing.GroupLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class MainUI extends Observable {
 	private javax.swing.JButton qnaB;
@@ -243,13 +244,34 @@ public class MainUI extends Observable {
                 jLabel1MouseClicked(evt);
             }
         });
+        
+        if(userType == 0) {
+        	idNum = new JLabel(Integer.toString(user.getStudentID()));
+        	idNum.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.BOLD, 20));
+        }
+        else {
+        	idNum = new JLabel("");
+        	idNum.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.BOLD, 20));
+        }
+        
+        name = new JLabel(user.getName());
+        name.setHorizontalAlignment(SwingConstants.LEFT);
+        name.setFont(new Font("«‘√ ∑“µ∏øÚ", Font.BOLD, 20));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
         	jPanel1Layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(39)
-        			.addComponent(jLabel3)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(name, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(39)
+        					.addComponent(jLabel3))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(87)
+        					.addComponent(idNum)))
         			.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
         				.addComponent(qnaB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
@@ -282,11 +304,18 @@ public class MainUI extends Observable {
         						.addComponent(recuitB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
         					.addGap(18)
         					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(dispatchB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
         						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(creditB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-        							.addGap(18)
-        							.addComponent(qnaB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
-        						.addComponent(dispatchB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)))
+        							.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+        								.addComponent(idNum)
+        								.addComponent(creditB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+        							.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        								.addGroup(jPanel1Layout.createSequentialGroup()
+        									.addGap(18)
+        									.addComponent(qnaB, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
+        								.addGroup(jPanel1Layout.createSequentialGroup()
+        									.addPreferredGap(ComponentPlacement.RELATED)
+        									.addComponent(name, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))))
         				.addGroup(jPanel1Layout.createSequentialGroup()
         					.addGap(31)
         					.addComponent(jLabel3)))
@@ -304,6 +333,8 @@ public class MainUI extends Observable {
 
     int xy;
     int xx;
+    private JLabel idNum;
+    private JLabel name;
     
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {                                     
         int x = evt.getXOnScreen();

@@ -153,7 +153,6 @@ public class JoinUI extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		String checkID = IDField.getText();
         		String check = (String)client.getString(checkID + "##");
-            	//JSONObject check = (JSONObject)client.getObject(checkID);
             	
             	if(IDField.getText().equals("")) {
             		JOptionPane.showMessageDialog(null, "아이디가 공란입니다.", message3, JOptionPane.DEFAULT_OPTION);
