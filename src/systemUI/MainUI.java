@@ -45,6 +45,7 @@ public class MainUI extends Observable {
         
         if(userinfo.getStudentID() == -1){
             admin = new Administer(userinfo.getName(), userinfo.getYear());
+            user = userinfo;
             userType = 1;
         }
         else if(userinfo.getStudentID() == -2){
@@ -122,6 +123,10 @@ public class MainUI extends Observable {
         RecruitDeleteUI rdUI = new RecruitDeleteUI(mainList);
         addObserver(rdUI);
         rdUI.setResizable(false);
+        
+        StateLookUI slUI = new StateLookUI(mainList, user, records, client);
+        addObserver(slUI);
+        slUI.setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -135,18 +140,20 @@ public class MainUI extends Observable {
             }
         });
         
+        
+        stateB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         if(userType == 1) {
         	stateB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC791\uC131.gif")));
         }
         else {
         	stateB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC9C4\uD589\uC0C1\uD669\uC870\uD68C.gif"))); // NOI18N
         }
-        stateB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stateB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(userType == 0) {
-            		
+            		slUI.setBounds(500, 300, 800, 650);
+                    slUI.setVisible(true);
             	}
             	else {
             		RecruitCreateUI rcUI = new RecruitCreateUI(mainList, admin);
@@ -157,13 +164,13 @@ public class MainUI extends Observable {
             }
         });
         
+        creditB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         if(userType == 1) {
         	creditB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC0AD\uC81C.gif")));
         }
         else {
         	creditB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uC774\uC218\uD559\uC810\uAD00\uB9AC.gif"))); // NOI18N
         }
-        creditB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         creditB.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
@@ -184,8 +191,8 @@ public class MainUI extends Observable {
         	}
         });
         
-        qnaB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/QNA.gif"))); // NOI18N
         qnaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        qnaB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/QNA.gif"))); // NOI18N
         qnaB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -193,8 +200,8 @@ public class MainUI extends Observable {
             }
         });
         
-        dispatchB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uD30C\uACAC\uC2E4\uC801\uC870\uD68C.gif"))); // NOI18N
         dispatchB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        dispatchB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uD30C\uACAC\uC2E4\uC801\uC870\uD68C.gif"))); // NOI18N
         dispatchB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -205,8 +212,8 @@ public class MainUI extends Observable {
             }
         });
         
-        recuitB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC870\uD68C.gif"))); // NOI18N
         recuitB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        recuitB.setIcon(new ImageIcon(MainUI.class.getResource("/systemUI/image/UserInterface/\uBAA8\uC9D1\uACF5\uACE0\uC870\uD68C.gif"))); // NOI18N
         recuitB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

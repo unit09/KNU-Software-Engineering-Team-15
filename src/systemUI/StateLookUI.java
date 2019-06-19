@@ -13,6 +13,7 @@ import user.Student;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.swing.border.BevelBorder;
 
 public class StateLookUI extends JFrame implements Observer {
     private JButton del;
@@ -34,55 +35,24 @@ public class StateLookUI extends JFrame implements Observer {
         title.setBounds(317, 22, 148, 39);
         getContentPane().add(title);
         
-        JList list_1 = new JList();
-        list_1.setBounds(85, 118, 612, 132);
-        getContentPane().add(list_1);
+        list = new JList(mainList.printState(user.getStudentID()));
+        list.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.PLAIN, 18));
+        list.setBounds(85, 125, 612, 377);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        getContentPane().add(list);
         
-        JLabel label = new JLabel("\uBAA8\uC9D1\uC911");
+        JLabel label = new JLabel("\uC9C0\uC6D0\uD55C \uBAA8\uC9D1 \uACF5\uACE0 \uBAA9\uB85D");
         label.setOpaque(true);
         label.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 20));
         label.setBackground(new Color(240, 240, 240, 80));
-        label.setBounds(98, 78, 60, 34);
+        label.setBounds(98, 85, 207, 34);
         getContentPane().add(label);
         
-        JList list_2 = new JList();
-        list_2.setBounds(85, 315, 612, 132);
-        getContentPane().add(list_2);
+        JButton select = new JButton("\uCD5C\uC885 \uB4F1\uB85D");
+        select.setBounds(267, 514, 105, 27);
+        getContentPane().add(select);
         
-        JLabel label_1 = new JLabel("\uC2EC\uC0AC\uC911 / \uC2EC\uC0AC\uC644\uB8CC");
-        label_1.setOpaque(true);
-        label_1.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 20));
-        label_1.setBackground(new Color(240, 240, 240, 80));
-        label_1.setBounds(98, 276, 169, 34);
-        getContentPane().add(label_1);
-        
-        JButton btnNewButton = new JButton("\uCD5C\uC885 \uB4F1\uB85D");
-        btnNewButton.setBounds(267, 490, 105, 27);
-        getContentPane().add(btnNewButton);
-        
-        JButton button = new JButton("\uC751\uC2DC \uCDE8\uC18C");
-        button.setBounds(399, 490, 105, 27);
-        getContentPane().add(button);
-        
-        JLabel background = new JLabel("");
-        background.setIcon(new ImageIcon(StateLookUI.class.getResource("/systemUI/image/time.jpg")));
-        background.setHorizontalAlignment(SwingConstants.CENTER);
-        background.setBounds(0, 0, 800, 620);
-        getContentPane().add(background);
-        
-        
-        
-        
-        /*list = new JList(mainList.printState(user.getStudentID()));  //¡¯«‡ªÛ»≤ø° « ø‰«— ∏ÆΩ∫∆Æ
-        list.setBounds(0, 285, 335, -285);
-        add(list);
-        list.setVisibleRowCount(19);
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setFixedCellHeight(19);
-        list.setFixedCellWidth(500);*/
-
-        /*sel = new JButton("√÷¡æ µÓ∑œ");
-        sel.addActionListener(new ActionListener() {
+        select.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(!list.isSelectionEmpty()) {
@@ -105,10 +75,11 @@ public class StateLookUI extends JFrame implements Observer {
             	}
             }
         });
-        add(sel);
-
-        del = new JButton("¿¿Ω√ √Îº“");
-        del.addActionListener(new ActionListener() {
+        
+        JButton cancel = new JButton("\uC751\uC2DC \uCDE8\uC18C");
+        cancel.setBounds(399, 514, 105, 27);
+        getContentPane().add(cancel);
+        cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(!list.isSelectionEmpty()) {
@@ -127,7 +98,13 @@ public class StateLookUI extends JFrame implements Observer {
             	}
             }
         });
-        add(del);*/
+        
+        JLabel background = new JLabel("");
+        background.setIcon(new ImageIcon(StateLookUI.class.getResource("/systemUI/image/time.jpg")));
+        background.setHorizontalAlignment(SwingConstants.CENTER);
+        background.setBounds(0, 0, 800, 620);
+        getContentPane().add(background);
+        
     }
     
     public void update(RecruitmentList mainList) {

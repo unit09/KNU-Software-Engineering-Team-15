@@ -16,6 +16,8 @@ public class RecruitDeleteUI extends JFrame implements Observer{
     private JList list;
 
     public RecruitDeleteUI(RecruitmentList mainList) {
+    	super("모집공고 삭제");
+    	
     	list = new JList(mainList.printList2());  //삭제에 필요한 리스트
         list.setVisibleRowCount(20);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
