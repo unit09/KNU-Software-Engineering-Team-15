@@ -251,7 +251,7 @@ public class Client {
 				e.printStackTrace();
 			}
 			try {
-				if(fis != null)
+				if(ois != null)
 					ois.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
