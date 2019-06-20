@@ -7,20 +7,20 @@ import client.Client;
 public class CompletedCredit implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private int st_id = 0;
+	private int StudentID = 0;
 	private int year = 0;
 	private int semester = 0;
 	private String nation = null;
 	private String univ = null;
 	private String dept = null;
 	private String course = null;
-	private int accept_credit = 0;
+	private int AcceptCredit = 0;
 	private double grade = 0.0;
-	private boolean application_state = false;
+	private boolean ApplicationState = false;
 	
 	public void credit_application(Client client) throws ClassNotFoundException { // 학점 인정 신청
 		CompletedCreditList list = CompletedCreditList.get_completed_credit_list(client);
-		application_state = true;
+		ApplicationState = true;
 		
 		list.completed_credit_list_modify(client, this);
 		
@@ -33,12 +33,12 @@ public class CompletedCredit implements Serializable{
 		list.completed_credit_list_append(client, this);
 	}
 	
-	public int getSt_id() {
-		return st_id;
+	public int getStudentID() {
+		return StudentID;
 	}
 
-	public void setSt_id(int st_id) {
-		this.st_id = st_id;
+	public void setStudentID(int StudentID) {
+		this.StudentID = StudentID;
 	}
 
 	public int getYear() {
@@ -89,12 +89,12 @@ public class CompletedCredit implements Serializable{
 		this.course = course;
 	}
 
-	public int getAccept_credit() {
-		return accept_credit;
+	public int getAcceptCredit() {
+		return AcceptCredit;
 	}
 
-	public void setAccept_credit(int accept_credit) {
-		this.accept_credit = accept_credit;
+	public void setAcceptCredit(int AcceptCredit) {
+		this.AcceptCredit = AcceptCredit;
 	}
 
 	public double getGrade() {
@@ -106,11 +106,11 @@ public class CompletedCredit implements Serializable{
 	}
 
 	public boolean isApplication_state() {
-		return application_state;
+		return ApplicationState;
 	}
 
-	public void setApplication_state(boolean application_state) {
-		this.application_state = application_state;
+	public void setApplicationState(boolean ApplicationState) {
+		this.ApplicationState = ApplicationState;
 	}
 
 }
