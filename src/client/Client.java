@@ -104,7 +104,8 @@ public class Client {
 	//key와 그에 해당하는 value를 삭제한다
 	public void remove(String key) {
 		JSONObject saved = (JSONObject)readObject();
-		if(saved.get(key) != null) { //해당 key로 저장된 값이 있으면
+		
+		if(saved.get(key) != null && saved != null) { //해당 key로 저장된 값이 있으면
 			saved.remove(key);
 			this.write(saved);
 		}
@@ -141,7 +142,7 @@ public class Client {
 	
 	private void write(Object o) {
 		if(o == null) {
-			System.out.print("[경고] write(o)에서 value가 null입니다.\n");
+			System.err.print("[경고] write(o)에서 value가 null입니다.\n");
 		}
 		
 		OutputStream outputStream = null;
@@ -155,13 +156,15 @@ public class Client {
 			e.getStackTrace();
 		} finally {
 			try {
-				outputStream.close();
+				if(outputStream != null)
+					outputStream.close();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
-				objectOutputStream.close();
+				if(objectOutputStream != null)
+					objectOutputStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -182,7 +185,11 @@ public class Client {
 	//saved는 파일에 저장된 텍스트 내용이다. saved에서 key값을 가진 value를 읽어온다
 	//저장된 key 없으면 null 리턴
 	private String readString(String saved, String key) {
-		return readObject(saved, key).toString();
+		String temp = (String)readObject(saved, key);
+		if(temp == null)
+			return null;
+		else
+			return temp.toString();
 	}
 	
 	//saved는 파일에 저장된 텍스트 내용이다. saved에서 key값을 가진 value를 읽어온다
@@ -197,14 +204,22 @@ public class Client {
 	//txt 파일을 그대로 읽어오는 함수
 	private String read() {
 		byte buffer[] = null;
+		InputStream inputStream = null;
 		try {
-			InputStream inputStream = new FileInputStream(fileName);
+			inputStream = new FileInputStream(fileName);
 			buffer = new byte[inputStream.available()];
 			while(inputStream.read(buffer) != -1 && !(new String(buffer)).equals("")) {}
 			
-			inputStream.close();
 		} catch(Exception e) {
 			e.getStackTrace();
+		}
+		finally {
+			try {
+				inputStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return (buffer == null) ? "" : new String(buffer);
@@ -225,6 +240,20 @@ public class Client {
 		} catch (IOException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				fis.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return output == null ? null : output;

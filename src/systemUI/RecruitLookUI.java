@@ -20,8 +20,6 @@ public class RecruitLookUI extends JFrame implements Observer {
     private JButton select;
     private JList list;
 
-
-
     public RecruitLookUI(int userType, RecruitmentList mainList, Student user){
     	super("모집공고 조회");
         setSize(800, 620);

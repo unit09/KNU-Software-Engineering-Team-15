@@ -218,6 +218,7 @@ public class MainUI extends Observable {
         recuitB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	Observable.notifyObservers();
                 rlUI.setBounds(500, 300, 800, 650);
                 rlUI.setVisible(true);
             }
