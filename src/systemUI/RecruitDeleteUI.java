@@ -14,9 +14,13 @@ import java.awt.Color;
 public class RecruitDeleteUI extends JFrame implements Observer{
     private JButton delet;
     private JList list;
+    
+    private RecruitmentList mainList;
 
-    public RecruitDeleteUI(RecruitmentList mainList) {
+    public RecruitDeleteUI(RecruitmentList mains) {
     	super("모집공고 삭제");
+    	
+    	mainList = mains;
     	
     	list = new JList(mainList.printList2());  //삭제에 필요한 리스트
         list.setVisibleRowCount(20);
@@ -45,8 +49,10 @@ public class RecruitDeleteUI extends JFrame implements Observer{
     				result = JOptionPane.showOptionDialog(null, "등록된 모집공고를 삭제하시겠습니까?", "모집공고 삭제", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
     				if(result == 0) {
 	                    mainList.deleteList(index);
-	                    Observable.uploadData();
+	                    
+	                    Observable.uploadData(mainList);
 	                    Observable.notifyObservers();
+	                    
 	                    JOptionPane.showMessageDialog(null, "모집공고가 삭제되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);
     				}
                 }
@@ -61,7 +67,8 @@ public class RecruitDeleteUI extends JFrame implements Observer{
         add(label);
     }
     
-    public void update(RecruitmentList mainList) {
+    public void update(RecruitmentList mains) {
+    	mainList = mains;
     	list.setListData(mainList.printList2());
     }
 }

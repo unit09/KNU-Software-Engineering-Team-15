@@ -19,12 +19,15 @@ public class StateLookUI extends JFrame implements Observer {
     private JList list;
     private Student man;
     
+    private RecruitmentList mainList;
+    
     private static final String CANCEL = "¿¿Ω√ √Îº“";
     private static final String FONT1 = "∏º¿∫ ∞ÌµÒ";
 
-    public StateLookUI(RecruitmentList mainList, Student user, ArrayList<DispatchRecord> records, Client client){
+    public StateLookUI(RecruitmentList mains, Student user, ArrayList<DispatchRecord> records, Client client){
     	man = user;
-        
+        mainList = mains;
+    	
         getContentPane().setLayout(null);
         setSize(800, 620);
         
@@ -65,7 +68,7 @@ public class StateLookUI extends JFrame implements Observer {
 	            		int in = buf.indexOf(".");
 	            		buf = buf.substring(0, in);
 	            		int index = mainList.finalChoice(Integer.parseInt(buf), man.getStudentID());
-	            		Observable.uploadData();
+	            		Observable.uploadData(mainList);
 	            		Observable.notifyObservers();
 	            		list.setListData(mainList.printState(man.getStudentID()));
 	            		
@@ -108,7 +111,8 @@ public class StateLookUI extends JFrame implements Observer {
         
     }
     
-    public void update(RecruitmentList mainList) {
+    public void update(RecruitmentList mains) {
+    	mainList = mains;
     	list.setListData(mainList.printState(man.getStudentID()));
     }
 }

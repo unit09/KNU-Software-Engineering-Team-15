@@ -12,7 +12,7 @@ public class RecruitContent extends JFrame {
 	
 	private static final String FONT1 = "맑은 고딕 Semilight";
 	
-	public RecruitContent(int userType, Recruitment recruitment, Student user) {
+	public RecruitContent(int userType, Recruitment recruitment, Student user, RecruitmentList mainList) {
 		setBackground(Color.LIGHT_GRAY);
 		getContentPane().setLayout(null);
 		setSize(400, 700);
@@ -133,7 +133,7 @@ public class RecruitContent extends JFrame {
             				if(result == 0) {
                                 Application newone = user.ApplicationCreate(recruitment.getRecruitNum());
                                 recruitment.addList(newone);
-                                Observable.uploadData();
+                                Observable.uploadData(mainList);
                                 Observable.notifyObservers();
                                 
                                 JOptionPane.showMessageDialog(null, "응시원서 작성이 완료되었습니다.", "알림", JOptionPane.PLAIN_MESSAGE);

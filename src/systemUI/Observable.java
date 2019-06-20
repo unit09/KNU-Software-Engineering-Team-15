@@ -22,6 +22,7 @@ public class Observable extends JFrame {
 	}
 	
 	public static void notifyObservers() {
+		//downloadData();
 		Iterator it = observers.iterator();
 		while(it.hasNext()) {
 			Observer o = (Observer)it.next();
@@ -33,7 +34,8 @@ public class Observable extends JFrame {
 		mainList = (RecruitmentList)client.getObject("RecruitmentList");
 	}
 	
-	public static void uploadData() {
+	public static void uploadData(RecruitmentList mains) {
+		mainList = mains;
 		client.setObject("RecruitmentList", mainList);
 	}
 	

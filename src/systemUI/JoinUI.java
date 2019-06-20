@@ -257,8 +257,9 @@ public class JoinUI extends JFrame {
 			JOptionPane.showMessageDialog(null, "학번 입력이 잘못되었습니다.\n정수로 이루어진 학번을 입력해야합니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
 		else if(!checkFormat(textField_1.getText()))
 			JOptionPane.showMessageDialog(null, "학년 입력이 잘못되었습니다.\n정수를 입력해야합니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
-		else
+		else {
 			return true;
+		}
     	
     	return false;
     }

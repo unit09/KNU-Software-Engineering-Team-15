@@ -152,6 +152,8 @@ public class MainUI extends Observable {
         stateB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	Observable.downloadData();
+            	Observable.notifyObservers();
             	if(userType == 0) {
             		slUI.setBounds(500, 300, 800, 650);
                     slUI.setVisible(true);
@@ -184,6 +186,8 @@ public class MainUI extends Observable {
 					}
         		}
         		else {
+        			Observable.downloadData();
+        			Observable.notifyObservers();
         			rdUI.setBounds(500, 300, 800, 650);
                     rdUI.setVisible(true);
         		}
@@ -226,6 +230,7 @@ public class MainUI extends Observable {
         recuitB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	Observable.downloadData();
             	Observable.notifyObservers();
                 rlUI.setBounds(500, 300, 800, 650);
                 rlUI.setVisible(true);

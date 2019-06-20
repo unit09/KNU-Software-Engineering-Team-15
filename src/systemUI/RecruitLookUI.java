@@ -19,11 +19,14 @@ import java.awt.event.MouseMotionAdapter;
 public class RecruitLookUI extends JFrame implements Observer {
     private JButton select;
     private JList list;
+    private RecruitmentList mainList;
 
-    public RecruitLookUI(int userType, RecruitmentList mainList, Student user){
+    public RecruitLookUI(int userType, RecruitmentList mains, Student user){
     	super("모집공고 조회");
         setSize(800, 620);
         setLayout(null);
+        
+        mainList = mains;
         
         list = new JList(mainList.printList());
         list.setBounds(107, 122, 614, 316);
@@ -35,7 +38,7 @@ public class RecruitLookUI extends JFrame implements Observer {
                     int index = list.locationToIndex(evt.getPoint());
                     
                     if(index >= 0) {
-                    	RecruitContent window = new RecruitContent(userType, mainList.getRecruitment(index), user);
+                    	RecruitContent window = new RecruitContent(userType, mainList.getRecruitment(index), user, mainList);
                     	window.setResizable(false);
                     	window.setBounds(500, 200, 400, 730);
                         window.setVisible(true);
@@ -54,7 +57,8 @@ public class RecruitLookUI extends JFrame implements Observer {
         add(background);
     }
     
-    public void update(RecruitmentList mainList) {
+    public void update(RecruitmentList mains) {
+    	mainList = mains;
     	list.setListData(mainList.printList());
     }
 }
