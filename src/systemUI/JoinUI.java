@@ -5,8 +5,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-//import org.json.simple.JSONObject;
-
 import client.Client;
 
 import javax.swing.JFrame;

@@ -1,5 +1,6 @@
 package systemUI;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -9,7 +10,7 @@ import client.Client;
 import exchange.RecruitmentList;
 
 public class Observable extends JFrame {
-	private static Vector observers = new Vector();
+	private static ArrayList<Observer> observers = new ArrayList<Observer>();
 	protected static RecruitmentList mainList;
 	protected static Client client;
 	

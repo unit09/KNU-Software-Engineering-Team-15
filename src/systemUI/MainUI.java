@@ -231,8 +231,9 @@ public class MainUI extends Observable {
         jLabel4.setText("¦¡");
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        	@Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                jLabel4MouseClicked();
             }
         });
 
@@ -241,8 +242,9 @@ public class MainUI extends Observable {
         jLabel1.setText("x");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        	@Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                jLabel1MouseClicked();
             }
         });
         
@@ -337,22 +339,22 @@ public class MainUI extends Observable {
     private JLabel idNum;
     private JLabel name;
     
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {                                     
+    private void jPanel1MouseDragged(MouseEvent evt) {                                     
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x-xx, y-xy);
     }                                    
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {                                     
+    private void jPanel1MousePressed(MouseEvent evt) {                                     
         xx = evt.getX();
         xy = evt.getY();
     }                                    
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void jLabel1MouseClicked() {                                     
         System.exit(0);
     }                                    
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {                                     
+    private void jLabel4MouseClicked() {                                     
         setState(ICONIFIED);
     }                                   
 }
