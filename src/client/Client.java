@@ -80,7 +80,6 @@ public class Client {
 		try {
 			writeObject(key, o);
 		} catch (IOException e) {
-			e.getStackTrace();
 		}
 	}
 
@@ -121,7 +120,6 @@ public class Client {
 		try {
 			writeObject(key, (temp == null ? "" : temp) + (temp != null && addEnter ? "\n" : "") + value);
 		} catch (IOException e) {
-			e.getStackTrace();
 		}
 	}
 	
@@ -153,21 +151,16 @@ public class Client {
 			
 			objectOutputStream.writeObject(o);
 		} catch(Exception e) {
-			e.getStackTrace();
 		} finally {
 			try {
 				if(outputStream != null)
 					outputStream.close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			}
 			try {
 				if(objectOutputStream != null)
 					objectOutputStream.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
@@ -211,15 +204,12 @@ public class Client {
 			while(inputStream.read(buffer) != -1 && !(new String(buffer)).equals("")) {}
 			
 		} catch(Exception e) {
-			e.getStackTrace();
 		}
 		finally {
 			try {
 				if(inputStream != null)
 					inputStream.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 		
@@ -239,23 +229,17 @@ public class Client {
 			
 			output = ois.readObject();
 		} catch (IOException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		finally {
 			try {
 				if(fis != null)
 					fis.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 			try {
 				if(ois != null)
 					ois.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 		
