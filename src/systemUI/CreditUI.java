@@ -181,8 +181,6 @@ public class CreditUI extends JFrame implements MouseListener {
 		try {
 			c_list = CompletedCreditList.get_completed_credit_list(client);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		if(c_list != null) {
