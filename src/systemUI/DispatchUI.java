@@ -27,7 +27,7 @@ public class DispatchUI extends JFrame {
 	private DrawingPanel graph;
 	
 	private static final String TOOLTIP = "선택하지 않을 경우 전체 범위로 검색합니다.";
-	private static final String PERIOD = "학기 동안";
+	private static final String PERIODS = "학기 동안";
 
 	public DispatchUI(ArrayList<DispatchRecord> records) {
 		super("파견실적 조회");
@@ -57,8 +57,8 @@ public class DispatchUI extends JFrame {
 			if(!major.contains(record.getMajor())) {
 				major.add(record.getMajor());
 			}
-			if(!period.contains(Integer.toString(record.getPeriod()) + PERIOD)) {
-				period.add(Integer.toString(record.getPeriod()) + PERIOD);
+			if(!period.contains(Integer.toString(record.getPeriod()) + PERIODS)) {
+				period.add(Integer.toString(record.getPeriod()) + PERIODS);
 			}
 		}
 		
@@ -98,7 +98,7 @@ public class DispatchUI extends JFrame {
         			if(nations.getSelectedItem().equals(record.getNation()) || nations.getSelectedIndex() == 0) {
         				if(unis.getSelectedItem().equals(record.getUniversity()) || unis.getSelectedIndex() == 0) {
         					if(majors.getSelectedItem().equals(record.getMajor()) || majors.getSelectedIndex() == 0) {
-        						if(periods.getSelectedItem().equals(Integer.toString(record.getPeriod()) + PERIOD) || periods.getSelectedIndex() == 0) {
+        						if(periods.getSelectedItem().equals(Integer.toString(record.getPeriod()) + PERIODS) || periods.getSelectedIndex() == 0) {
         							numbers[record.getStartYear() - 2014] += 1;
         						}
         					}
