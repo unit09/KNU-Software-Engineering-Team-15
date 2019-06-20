@@ -32,6 +32,7 @@ public class RecruitCreateUI extends JFrame {
     
     private static final String FONT1 = "함초롬돋움";
     private static final String YEAR = "년";
+    private static final String CAUTION = "caution";
 
     public RecruitCreateUI(RecruitmentList mainList, Administer admin) {
     	super("모집공고 작성");
@@ -325,13 +326,16 @@ public class RecruitCreateUI extends JFrame {
     
     private boolean checkAllFormat() {
     	 if(!checkFormat(startyearField.getText())) {
-         	JOptionPane.showMessageDialog(null, "시작 연도의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+         	JOptionPane.showMessageDialog(null, "시작 연도의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
     	 }
          else if(!checkFormat(deadYear.getText()) || !checkFormat(deadMonth.getText()) || !checkFormat(deadDay.getText())) {
-         	JOptionPane.showMessageDialog(null, "모집 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+         	JOptionPane.showMessageDialog(null, "모집 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
          }
          else if(!checkFormat(selectYear.getText()) || !checkFormat(selectMonth.getText()) || !checkFormat(selectDay.getText())) {
-         	JOptionPane.showMessageDialog(null, "최종 등록 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", "오류!", JOptionPane.ERROR_MESSAGE);
+         	JOptionPane.showMessageDialog(null, "최종 등록 마감 시기의 형식이 잘못되었습니다.\n정수를 입력해야합니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
+         }
+         else if(titleField.getText().equals("") || nationField.getText().equals("") || univField.getText().equals("") || majorField.getText().equals("")) {
+        	JOptionPane.showMessageDialog(null, "입력하지 않은 부분이 있습니다.", CAUTION, JOptionPane.ERROR_MESSAGE);
          }
          else {
         	 return true;
