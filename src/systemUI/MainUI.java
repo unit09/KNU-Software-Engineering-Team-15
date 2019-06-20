@@ -181,8 +181,6 @@ public class MainUI extends Observable {
 						CRUI.setVisible(true);
 						CRUI.setResizable(false);
 					} catch (ClassNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
         		}
         		else {
