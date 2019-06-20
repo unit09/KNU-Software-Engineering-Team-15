@@ -179,9 +179,7 @@ public class QnAUI extends JPanel{
 					result = JOptionPane.showOptionDialog(null, "작성하시겠습니까?", "QnA 등록", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
 					if(result == 0) {
 						String titleTemp = titleFormat.getText();
-						System.out.println(titleTemp);
 						String contextTemp = contextFormat.getText();
-						System.out.println(contextTemp);
 						
 						try
 						{
@@ -190,7 +188,7 @@ public class QnAUI extends JPanel{
 							QnAList.saveQnaList(client);
 						} catch (IOException e1)
 						{
-							e1.printStackTrace();
+							//e1.printStackTrace();
 						}					
 						
 						Qna q = QnAList.getQnaList().get(QnAList.getQnaList().size() - 1);
@@ -363,11 +361,9 @@ public class QnAUI extends JPanel{
 					
 					if(result == 0) {
 						String titleTemp = title2Format.getText();
-						//System.out.println(titleTemp);
 						String contextTemp = context2Format.getText();
-						//System.out.println(contextTemp);
 						String context2Temp = context3Format.getText();
-						//System.out.println(context2Temp);
+
 						
 						QnAList.createFaq(titleTemp, contextTemp, context2Temp);
 						
@@ -464,7 +460,6 @@ public class QnAUI extends JPanel{
 		createButton2Display.add(create2);
 		if(id_type != -1) {
 			create2.setVisible(true);
-			//create.setVisible(false);
 		}
 		
 		
