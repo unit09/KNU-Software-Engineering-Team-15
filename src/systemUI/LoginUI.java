@@ -57,9 +57,10 @@ public class LoginUI extends JFrame {
         IDField.setColumns(10);
 
         JButton LoginButton = new JButton("로그인");
+        LoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         LoginButton.setFont(new Font(FONT1, Font.PLAIN, 14));
         LoginButton.setBackground(new Color(135, 206, 250));
-        LoginButton.setBounds(177, 252, 211, 42); //195 49 79 23
+        LoginButton.setBounds(177, 274, 211, 42); //195 49 79 23
         contentPane.add(LoginButton);
 
         LoginButton.addActionListener(new ActionListener() {
@@ -96,25 +97,9 @@ public class LoginUI extends JFrame {
         };
         pwdPassword.addActionListener( action ); 
         IDField.addActionListener( action );
-       
-        
-        JButton button = new JButton("비회원 로그인");
-        button.setFont(new Font(FONT1, Font.PLAIN, 14));
-        button.setBackground(new Color(135, 206, 250));
-        button.setBounds(177, 305, 211, 42);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose(); //종료하는것
- 
-                MainUI UI = new MainUI(new Student(-2,"guest", " ", 0, 0, " ", " "), client);
-                UI.setLocation((screenSize.width-700)/2, (screenSize.height-550)/2);               
-                UI.setVisible(true);
-            } 
-        });
-        contentPane.add(button);
         
         JButton button_join = new JButton("\uD68C\uC6D0\uAC00\uC785");	// 회원가입 버튼
+        button_join.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         button_join.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		// 회원가입 창 띄우기
@@ -125,7 +110,7 @@ public class LoginUI extends JFrame {
         });
         button_join.setFont(new Font(FONT1, Font.PLAIN, 14));
         button_join.setBackground(new Color(135, 206, 250));
-        button_join.setBounds(177, 359, 211, 42);
+        button_join.setBounds(177, 328, 211, 42);
         contentPane.add(button_join);
         
         JLabel ID_label = new JLabel("ID");
@@ -139,6 +124,7 @@ public class LoginUI extends JFrame {
         contentPane.add(PASSWD_label);
         
         JLabel lbl_close = new JLabel("X");
+        lbl_close.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lbl_close.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
