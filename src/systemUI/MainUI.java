@@ -197,7 +197,17 @@ public class MainUI extends Observable {
         qnaB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//qnaUI 아직 없음
+            	try {
+            		JFrame temp = new JFrame();
+					QnAUI qnaUI = new QnAUI(user.getStudentID(), client);
+					temp.setResizable(false);
+					temp.add(qnaUI);
+	            	temp.setBounds(500, 300, 472, 500);
+	                temp.setVisible(true);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         

@@ -16,8 +16,6 @@ import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 
 public class StateLookUI extends JFrame implements Observer {
-    private JButton del;
-    private JButton sel;
     private JList list;
     private Student man;
     

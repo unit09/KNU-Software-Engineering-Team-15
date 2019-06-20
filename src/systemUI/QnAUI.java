@@ -12,6 +12,7 @@ import java.util.Stack;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -27,7 +28,6 @@ import question.Qna;
 
 public class QnAUI extends JPanel{
 
-	private JPanel contentPane;
 	static Stack<JList> previousPanels = new Stack<JList>();
 	static Stack<JPanel> previousButtons = new Stack<JPanel>();
 	JList previousListTemp; //
@@ -40,7 +40,7 @@ public class QnAUI extends JPanel{
 	JButton delete;
 
 	public QnAUI(int id_type, Client client) throws ClassNotFoundException {
-		setLayout(null);
+		 setLayout(null);
 		QnAList.readQnaList(client);
 		
 		DefaultListModel dm = new DefaultListModel();
@@ -48,7 +48,7 @@ public class QnAUI extends JPanel{
 		for(Qna list1 : QnAList.getQnaList())
 		{
 			if(id_type == -1 || Integer.toString(id_type).equals(list1.getQuestioner())) {
-				String ttemp = list1.getQuestioner() + " " + list1.getQuestionName();
+				String ttemp = list1.getQuestionName();
 				
 				if(list1.getState() == 0)
 					ttemp = ttemp + " 답변 진행중";
@@ -63,13 +63,13 @@ public class QnAUI extends JPanel{
 		list2.setModel(dm);
 		JScrollPane ScrollList2 = new JScrollPane(list2);
 		ScrollList2.setBounds(40, 45, 300, 150);
-		add(ScrollList2);
+		 add(ScrollList2);
 		
 		DefaultListModel dm2 = new DefaultListModel();
 		
         JLabel faqTitle = new JLabel("<FAQ 게시판>");
-        faqTitle.setBounds(40, 210, 95, 15);
-        add(faqTitle);
+        faqTitle.setBounds(40, 210, 106, 15);
+         add(faqTitle);
 		
 		QnAList.readFaqList(client);
 		
@@ -79,12 +79,16 @@ public class QnAUI extends JPanel{
 			
 			dm2.addElement(ttemp);
 		}
+		
+		JLabel label = new JLabel("<QNA \uAC8C\uC2DC\uD310>");
+		label.setBounds(40, 24, 106, 15);
+		add(label);
 			      
 		JList<String> list3 = new JList<String>();
 		list3.setModel(dm2);
 		JScrollPane ScrollList3 = new JScrollPane(list3);
 		ScrollList3.setBounds(40, 230, 300, 150);
-		add(ScrollList3);
+		 add(ScrollList3);
 		
 		JPanel createButtonDisplay = new JPanel(new BorderLayout());
 		createButtonDisplay.setBounds(365, 48, 85, 30);
@@ -124,11 +128,11 @@ public class QnAUI extends JPanel{
 				
 		        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 		        qnaTitle.setBounds(40, 25, 95, 15);
-		        add(qnaTitle);
+		         add(qnaTitle);
 				
 				createDisplay.setBounds(40, 45, 300, 250);
 				createDisplay.setBackground(Color.WHITE);
-				add(createDisplay);
+				 add(createDisplay);
 				createDisplay.setLayout(null);
 		        
 		        JLabel title = new JLabel("<글 제목>");
@@ -148,7 +152,7 @@ public class QnAUI extends JPanel{
 				
 				JPanel writeButtonDisplay = new JPanel(new BorderLayout());
 				writeButtonDisplay.setBounds(365, 48, 85, 30);
-				add(writeButtonDisplay, BorderLayout.EAST);
+				 add(writeButtonDisplay, BorderLayout.EAST);
 				
 				write = new JButton("Write");
 				write.addActionListener(writeButtonPressHandler);
@@ -156,7 +160,7 @@ public class QnAUI extends JPanel{
 			
 				JPanel backButtonDisplay = new JPanel(new BorderLayout());
 				backButtonDisplay.setBounds(365, 85, 85, 30);
-				add(backButtonDisplay, BorderLayout.EAST);
+				 add(backButtonDisplay, BorderLayout.EAST);
 				
 				back = new JButton("Back");
 				back.addActionListener(backButtonPressHandler);
@@ -204,23 +208,23 @@ public class QnAUI extends JPanel{
 						
 				        previousListTemp = previousPanels.pop();
 				        previousListTemp.setBounds(40, 230, 300, 150);
-				        add(previousListTemp);	
+				         add(previousListTemp);	
 				        
 						previousListTemp = previousPanels.pop();									
 						previousListTemp.setBounds(40, 45, 300, 150);
-						add(previousListTemp);
+						 add(previousListTemp);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 233, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
+						 add(previousPanelTemp, BorderLayout.EAST);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 48, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
+						 add(previousPanelTemp, BorderLayout.EAST);
 						
 				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 				        qnaTitle.setBounds(40, 25, 95, 15);
-				        add(qnaTitle);
+				         add(qnaTitle);
 				        
 						revalidate();
 						repaint();
@@ -243,27 +247,27 @@ public class QnAUI extends JPanel{
 							
 					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 					        qnaTitle.setBounds(40, 25, 95, 15);
-					        add(qnaTitle);
+					         add(qnaTitle);
 					        
 					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 					        faqTitle.setBounds(40, 210, 95, 15);
-					        add(faqTitle);
+					         add(faqTitle);
 					        
 					        previousListTemp = previousPanels.pop();
 					        previousListTemp.setBounds(40, 230, 300, 150);
-					        add(previousListTemp);			        
+					         add(previousListTemp);			        
 					        
 							previousListTemp = previousPanels.pop();
 							previousListTemp.setBounds(40, 45, 300, 150);
-							add(previousListTemp);
+							 add(previousListTemp);
 							
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 233, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
+							 add(previousPanelTemp, BorderLayout.EAST);
 							
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 48, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
+							 add(previousPanelTemp, BorderLayout.EAST);
 							
 							revalidate();
 							repaint();
@@ -300,7 +304,7 @@ public class QnAUI extends JPanel{
 				
 		        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 		        faqTitle.setBounds(40, 25, 95, 15);
-		        add(faqTitle);
+		         add(faqTitle);
 				
 				create2Display.setBounds(40, 45, 300, 350);
 				create2Display.setBackground(Color.WHITE);
@@ -331,7 +335,7 @@ public class QnAUI extends JPanel{
 	            
 				JPanel writeButtonDisplay = new JPanel(new BorderLayout());
 				writeButtonDisplay.setBounds(365, 48, 85, 30);
-				add(writeButtonDisplay, BorderLayout.EAST);
+				 add(writeButtonDisplay, BorderLayout.EAST);
 				
 				write = new JButton("Write");
 				write.addActionListener(writeButton2PressHandler);
@@ -339,7 +343,7 @@ public class QnAUI extends JPanel{
 			
 				JPanel backButtonDisplay = new JPanel(new BorderLayout());
 				backButtonDisplay.setBounds(365, 85, 85, 30);
-				add(backButtonDisplay, BorderLayout.EAST);
+				 add(backButtonDisplay, BorderLayout.EAST);
 				
 				back = new JButton("Back");
 				back.addActionListener(backButton2PressHandler);
@@ -379,27 +383,27 @@ public class QnAUI extends JPanel{
 						
 				        previousListTemp = previousPanels.pop();
 				        previousListTemp.setBounds(40, 230, 300, 150);
-				        add(previousListTemp);	
+				         add(previousListTemp);	
 				        
 						previousListTemp = previousPanels.pop();									
 						previousListTemp.setBounds(40, 45, 300, 150);
-						add(previousListTemp);
+						 add(previousListTemp);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 233, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
+						 add(previousPanelTemp, BorderLayout.EAST);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 48, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
+						 add(previousPanelTemp, BorderLayout.EAST);
 						
 				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 				        qnaTitle.setBounds(40, 25, 95, 15);
-				        add(qnaTitle);
+				         add(qnaTitle);
 				        
 				        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 				        faqTitle.setBounds(40, 210, 95, 15);
-				        add(faqTitle);
+				         add(faqTitle);
 				        
 						revalidate();
 						repaint();
@@ -421,27 +425,27 @@ public class QnAUI extends JPanel{
 							
 					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 					        qnaTitle.setBounds(40, 25, 95, 15);
-					        add(qnaTitle);
+					         add(qnaTitle);
 					        
 					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 					        faqTitle.setBounds(40, 210, 95, 15);
-					        add(faqTitle);
+					         add(faqTitle);
 					        
 					        previousListTemp = previousPanels.pop();
 					        previousListTemp.setBounds(40, 230, 300, 150);
-					        add(previousListTemp);			        
+					         add(previousListTemp);			        
 					        
 							previousListTemp = previousPanels.pop();
 							previousListTemp.setBounds(40, 45, 300, 150);
-							add(previousListTemp);
+							 add(previousListTemp);
 							
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 233, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
+							 add(previousPanelTemp, BorderLayout.EAST);
 							
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 48, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
+							 add(previousPanelTemp, BorderLayout.EAST);
 							
 							revalidate();
 							repaint();
@@ -458,8 +462,10 @@ public class QnAUI extends JPanel{
 		
 		create2.addActionListener(createButton2PressHandler);
 		createButton2Display.add(create2);
-		if(id_type != -1)
-			create2.setVisible(false);
+		if(id_type != -1) {
+			create2.setVisible(true);
+			//create.setVisible(false);
+		}
 		
 		
 		MouseListener mouseListener = new MouseAdapter()
@@ -511,13 +517,13 @@ public class QnAUI extends JPanel{
 					
 			        JLabel qnaTitle = new JLabel(temp.getQuestionName());
 			        qnaTitle.setBounds(40, 25, 205, 15);
-			        add(qnaTitle);
+			         add(qnaTitle);
 					
 					JPanel qnaDisplay = new JPanel(new BorderLayout());
 					qnaDisplay.setLayout(null);
 					qnaDisplay.setBounds(40, 45, 300, 250);
 					qnaDisplay.setBackground(Color.WHITE);
-					add(qnaDisplay);
+					 add(qnaDisplay);
 					
 					JLabel qnaContext = new JLabel();
 					
@@ -552,18 +558,18 @@ public class QnAUI extends JPanel{
 					
 					JPanel answerButtonDisplay = new JPanel(new BorderLayout());
 					answerButtonDisplay.setBounds(365, 48, 85, 30);
-					add(answerButtonDisplay, BorderLayout.EAST);
+					 add(answerButtonDisplay, BorderLayout.EAST);
 					
 					answer = new JButton("Answer");
 					answer.addActionListener(answerButtonPressHandler);
 					answerButtonDisplay.add(answer);
 					
-					if(id_type != -1)
+					if(id_type != 1)
 						answer.setVisible(false);
 					
 					JPanel deleteButtonDisplay = new JPanel(new BorderLayout());
 					deleteButtonDisplay.setBounds(365, 85, 85, 30);
-					add(deleteButtonDisplay, BorderLayout.EAST);
+					 add(deleteButtonDisplay, BorderLayout.EAST);
 					
 					delete = new JButton("Delete");
 					delete.addActionListener(deleteButtonPressHandler);
@@ -571,7 +577,7 @@ public class QnAUI extends JPanel{
 					
 					JPanel backButtonDisplay = new JPanel(new BorderLayout());
 					backButtonDisplay.setBounds(365, 122, 85, 30);
-					add(backButtonDisplay, BorderLayout.EAST);
+					 add(backButtonDisplay, BorderLayout.EAST);
 					
 					back = new JButton("Back");
 					back.addActionListener(backButtonPressHandler);
@@ -601,27 +607,27 @@ public class QnAUI extends JPanel{
 							
 					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 					        qnaTitle.setBounds(40, 25, 95, 15);
-					        add(qnaTitle);
+					         add(qnaTitle);
 					        
 					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 					        faqTitle.setBounds(40, 210, 95, 15);
-					        add(faqTitle);
+					         add(faqTitle);
 					        
 					        previousListTemp = previousPanels.pop();
 					        previousListTemp.setBounds(40, 230, 300, 150);
-					        add(previousListTemp);	
+					         add(previousListTemp);	
 					        
 							previousListTemp = previousPanels.pop();
 							previousListTemp.setBounds(40, 45, 300, 150);
-							add(previousListTemp);
+							 add(previousListTemp);
 							
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 233, 85, 30);
-							add(previousPanelTemp);
+							 add(previousPanelTemp);
 							
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 48, 85, 30);
-							add(previousPanelTemp);
+							 add(previousPanelTemp);
 							
 							revalidate();
 							repaint();
@@ -642,27 +648,27 @@ public class QnAUI extends JPanel{
 						
 				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 				        qnaTitle.setBounds(40, 25, 95, 15);
-				        add(qnaTitle);
+				         add(qnaTitle);
 				        
 				        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 				        faqTitle.setBounds(40, 210, 95, 15);
-				        add(faqTitle);
+				         add(faqTitle);
 				        
 				        previousListTemp = previousPanels.pop();
 				        previousListTemp.setBounds(40, 230, 300, 150);
-				        add(previousListTemp);	
+				         add(previousListTemp);	
 				        
 						previousListTemp = previousPanels.pop();
 						previousListTemp.setBounds(40, 45, 300, 150);
-						add(previousListTemp);
+						 add(previousListTemp);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 233, 85, 30);
-						add(previousPanelTemp);
+						 add(previousPanelTemp);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 48, 85, 30);
-						add(previousPanelTemp);
+						 add(previousPanelTemp);
 						
 						revalidate();
 						repaint();
@@ -691,12 +697,12 @@ public class QnAUI extends JPanel{
 						
 						createDisplay.setBounds(40, 45, 300, 250);
 						createDisplay.setBackground(Color.WHITE);
-						add(createDisplay);
+						 add(createDisplay);
 						createDisplay.setLayout(null);
 				        
 				        JLabel title = new JLabel("<" + temp.getQuestionName() + "에 대한 답변>");
 				        title.setBounds(40, 25, 155, 15);
-				        add(title);
+				         add(title);
 			            
 			            JLabel context = new JLabel("<글 내용>");
 				        context.setBounds(10, 20, 65, 15);
@@ -708,7 +714,7 @@ public class QnAUI extends JPanel{
 						
 						JPanel writeButtonDisplay = new JPanel(new BorderLayout());
 						writeButtonDisplay.setBounds(365, 48, 85, 30);
-						add(writeButtonDisplay, BorderLayout.EAST);
+						 add(writeButtonDisplay, BorderLayout.EAST);
 						
 						write = new JButton("Write");
 						write.addActionListener(writeButtonPressHandler);
@@ -716,7 +722,7 @@ public class QnAUI extends JPanel{
 					
 						JPanel answerBackButtonDisplay = new JPanel(new BorderLayout());
 						answerBackButtonDisplay.setBounds(365, 85, 85, 30);
-						add(answerBackButtonDisplay, BorderLayout.EAST);
+						 add(answerBackButtonDisplay, BorderLayout.EAST);
 						
 						back = new JButton("Back");
 						back.addActionListener(answerBackButtonPressHandler);
@@ -759,27 +765,27 @@ public class QnAUI extends JPanel{
 							
 					        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 					        qnaTitle.setBounds(40, 25, 95, 15);
-					        add(qnaTitle);
+					         add(qnaTitle);
 					        
 					        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 					        faqTitle.setBounds(40, 210, 95, 15);
-					        add(faqTitle);
+					         add(faqTitle);
 					        
 					        previousListTemp = previousPanels.pop();
 					        previousListTemp.setBounds(40, 230, 300, 150);
-					        add(previousListTemp);
+					         add(previousListTemp);
 							
 							previousListTemp = previousPanels.pop();										
 							previousListTemp.setBounds(40, 45, 300, 150);
-							add(previousListTemp);
+							 add(previousListTemp);
 							
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 233, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
+							 add(previousPanelTemp, BorderLayout.EAST);
 						
 							previousPanelTemp = previousButtons.pop();
 							previousPanelTemp.setBounds(365, 48, 85, 30);
-							add(previousPanelTemp, BorderLayout.EAST);
+							 add(previousPanelTemp, BorderLayout.EAST);
 							
 							revalidate();
 							repaint();
@@ -801,27 +807,27 @@ public class QnAUI extends JPanel{
 								
 						        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 						        qnaTitle.setBounds(40, 25, 95, 15);
-						        add(qnaTitle);
+						         add(qnaTitle);
 						        
 						        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 						        faqTitle.setBounds(40, 210, 95, 15);
-						        add(faqTitle);
+						         add(faqTitle);
 						        
 						        previousListTemp = previousPanels.pop();
 						        previousListTemp.setBounds(40, 230, 300, 150);
-						        add(previousListTemp);
+						         add(previousListTemp);
 						        
 						        previousListTemp = previousPanels.pop();
 						        previousListTemp.setBounds(40, 45, 300, 150);
-						        add(previousListTemp);	 
+						         add(previousListTemp);	 
 								
 								previousPanelTemp = previousButtons.pop();
 								previousPanelTemp.setBounds(365, 233, 85, 30);
-								add(previousPanelTemp, BorderLayout.EAST);
+								 add(previousPanelTemp, BorderLayout.EAST);
 								
 								previousPanelTemp = previousButtons.pop();
 								previousPanelTemp.setBounds(365, 48, 85, 30);
-								add(previousPanelTemp, BorderLayout.EAST);
+								 add(previousPanelTemp, BorderLayout.EAST);
 								
 								revalidate();
 								repaint();
@@ -867,13 +873,13 @@ public class QnAUI extends JPanel{
 					
 			        JLabel faqTitle = new JLabel(temp.getQuestionName());
 			        faqTitle.setBounds(40, 25, 205, 15);
-			        add(faqTitle);
+			         add(faqTitle);
 					
 					JPanel faqDisplay = new JPanel(new BorderLayout());
 					faqDisplay.setLayout(null);
 					faqDisplay.setBounds(40, 45, 300, 250);
 					faqDisplay.setBackground(Color.WHITE);
-					add(faqDisplay);
+					 add(faqDisplay);
 					
 					JLabel faqContext = new JLabel();
 					
@@ -899,7 +905,7 @@ public class QnAUI extends JPanel{
 						
 					JPanel backButtonDisplay = new JPanel(new BorderLayout());
 					backButtonDisplay.setBounds(365, 48, 85, 30);
-					add(backButtonDisplay, BorderLayout.EAST);
+					 add(backButtonDisplay, BorderLayout.EAST);
 					
 					back = new JButton("Back");
 					back.addActionListener(backButtonPressHandler);
@@ -922,27 +928,27 @@ public class QnAUI extends JPanel{
 						
 				        JLabel qnaTitle = new JLabel("<QnA 게시판>");
 				        qnaTitle.setBounds(40, 25, 95, 15);
-				        add(qnaTitle);
+				         add(qnaTitle);
 				        
 				        JLabel faqTitle = new JLabel("<FAQ 게시판>");
 				        faqTitle.setBounds(40, 210, 95, 15);
-				        add(faqTitle);
+				         add(faqTitle);
 				        
 				        previousListTemp = previousPanels.pop();
 				        previousListTemp.setBounds(40, 230, 300, 150);
-				        add(previousListTemp);	
+				         add(previousListTemp);	
 				        
 						previousListTemp = previousPanels.pop();
 						previousListTemp.setBounds(40, 45, 300, 150);
-						add(previousListTemp);
+						 add(previousListTemp);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 233, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
+						 add(previousPanelTemp, BorderLayout.EAST);
 						
 						previousPanelTemp = previousButtons.pop();
 						previousPanelTemp.setBounds(365, 48, 85, 30);
-						add(previousPanelTemp, BorderLayout.EAST);
+						 add(previousPanelTemp, BorderLayout.EAST);
 						
 						revalidate();
 						repaint();
