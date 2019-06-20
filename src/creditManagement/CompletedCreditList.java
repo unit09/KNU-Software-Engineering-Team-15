@@ -1,13 +1,9 @@
 package creditManagement;
 
-import java.io.*;
-
 import java.util.*;
 
 import client.Client;
-import question.Qna;
 
- 
 public class CompletedCreditList {
 	private static CompletedCreditList listInstance = null;
 	private static ArrayList<CompletedCredit> creditList;

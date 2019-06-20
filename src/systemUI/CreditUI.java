@@ -3,19 +3,16 @@ package systemUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,15 +20,10 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
 
 import client.Client;
 import creditManagement.CompletedCredit;
@@ -40,8 +32,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;
-import java.awt.SystemColor;
-import java.awt.event.MouseMotionAdapter;
 
 public class CreditUI extends JFrame implements MouseListener {
 	
