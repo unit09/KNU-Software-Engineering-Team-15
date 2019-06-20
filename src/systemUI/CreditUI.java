@@ -83,7 +83,7 @@ public class CreditUI extends JFrame implements MouseListener {
         label.setBounds(99, 119, 84, 36);
         getContentPane().add(label);
 
-		comboBox = new JComboBox(CompletedCreditList.get_completed_credit_list(client).semester_list(st_id));
+		comboBox = new JComboBox(CompletedCreditList.getCompletedCreditList(client).semesterList(st_id));
 		comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         comboBox.setBounds(197, 120, 113, 36);
         getContentPane().add(comboBox);
@@ -154,7 +154,7 @@ public class CreditUI extends JFrame implements MouseListener {
 				result = JOptionPane.showOptionDialog(null, "신청하시겠습니까?", "학점인정 신청", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, buttons, "취소");
 				if(result == 0) {
 					try {
-						list.get(selected_index - 1).credit_application(client);
+						list.get(selected_index - 1).creditApplication(client);
 						JOptionPane.showMessageDialog(null, "등록되었습니다", "알림", JOptionPane.PLAIN_MESSAGE);
 					} catch (ClassNotFoundException e1) {};
 				}
@@ -179,16 +179,16 @@ public class CreditUI extends JFrame implements MouseListener {
 		int semester = Integer.parseInt(comboBox.getSelectedItem().toString().substring(6, 7));
 		
 		try {
-			c_list = CompletedCreditList.get_completed_credit_list(client);
+			c_list = CompletedCreditList.getCompletedCreditList(client);
 		} catch (ClassNotFoundException e) {
 		}
 		
 		if(c_list != null) {
 			if(isapped) {
-				list = c_list.applicated_credit_list_print(st_id, year, semester);
+				list = c_list.applicatedCreditListPrint(st_id, year, semester);
 			}
 			else {
-				list = c_list.completed_credit_list_print(st_id, year, semester);
+				list = c_list.completedCreditListPrint(st_id, year, semester);
 			}
 		
 			DATA = new Object[list.size() + 1][7];
@@ -206,7 +206,7 @@ public class CreditUI extends JFrame implements MouseListener {
 				DATA[i + 1][3] = list.get(i).getCourse();
 				DATA[i + 1][4] = list.get(i).getAcceptCredit();
 				DATA[i + 1][5] = list.get(i).getGrade();
-				if(list.get(i).isApplication_state()) {
+				if(list.get(i).isApplicationState()) {
 					DATA[i + 1][6] = "등록완료";
 				}
 				else {
@@ -254,13 +254,13 @@ public class CreditUI extends JFrame implements MouseListener {
 
 		public CreditSemester(Client client, int st_id, boolean isapped) throws ClassNotFoundException {
 			setLayout(null);
-			c_list = CompletedCreditList.get_completed_credit_list(client);
+			c_list = CompletedCreditList.getCompletedCreditList(client);
 			String[] credit_list_string;
 			if(isapped) {
-				credit_list_string = c_list.semester_list_isapped(st_id);				
+				credit_list_string = c_list.semesterListIsapped(st_id);				
 			}
 			else {
-				credit_list_string = c_list.semester_list(st_id);
+				credit_list_string = c_list.semesterList(st_id);
 			}
 			semester_Vector = new Vector<String>();
 			if(credit_list_string != null) {
@@ -304,7 +304,7 @@ public class CreditUI extends JFrame implements MouseListener {
 	}
 	
 	public void register_button_check() {
-		if(selected_index > 0 && !list.get(selected_index - 1).isApplication_state()) {
+		if(selected_index > 0 && !list.get(selected_index - 1).isApplicationState()) {
 			register_button.setVisible(true);
 		}
 		else {
