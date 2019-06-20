@@ -48,14 +48,14 @@ public class CompletedCreditList {
 		try{
 			// 중복검사 - 한 학생이 수강한 것에서는 학번, 학년도, 학기, 과목은 중복이 될 수 없기에 이것으로 중복검사 (object끼리 비교가 안먹혀서 ㅠㅠ)
 
-			int st_id = input.getSt_id();
+			int st_id = input.getStudentID();
 			int year = input.getYear();
 			int semester = input.getSemester();
 			String univ = input.getUniv();
 			String course = input.getCourse();
 			boolean overlap = false;
 			for(CompletedCredit one : CreditList) {
-				if(one.getSt_id() == st_id && one.getUniv().equals(univ) && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
+				if(one.getStudentID() == st_id && one.getUniv().equals(univ) && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
 					overlap = true;
 				}
 			}
@@ -77,14 +77,14 @@ public class CompletedCreditList {
 		boolean ischanged = false;
 		try{
 			// 수정된 사항을 저장하기 위해 리스트의 인스턴스 내에 바뀌지 않을 데이터로 기존 값 찾음. 인덱스 쓰기에는 더 복잡해짐.
-			int st_id = input.getSt_id();
+			int st_id = input.getStudentID();
 			int year = input.getYear();
 			int semester = input.getSemester();
 			String course = input.getCourse();
 			String univ = input.getUniv();
 			int i = 0;
 			for(CompletedCredit one : CreditList) {
-				if(one.getSt_id() == st_id && one.getUniv().equals(univ) && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
+				if(one.getStudentID() == st_id && one.getUniv().equals(univ) && one.getYear() == year && one.getSemester() == semester && one.getCourse().equals(course)) {
 					one = input;
 					ischanged = true;
 					// 바꾸고 업데이트
@@ -101,7 +101,7 @@ public class CompletedCreditList {
 	public int count_std_term_credit(int st_id, int year, int semester) {
 		int count = 0;
 		for(CompletedCredit one : CreditList) {
-			if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester) {
+			if(one.getStudentID() == st_id && one.getYear() == year && one.getSemester() == semester) {
 				count ++;
 			}
 		}
@@ -110,7 +110,7 @@ public class CompletedCreditList {
 	public int count_std_term_credit_isapped(int st_id, int year, int semester) {
 		int count = 0;
 		for(CompletedCredit one : CreditList) {
-			if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
+			if(one.getStudentID() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
 				count ++;
 			}
 		}
@@ -127,7 +127,7 @@ public class CompletedCreditList {
 			int[][] temp = new int[CreditList.size()][2];
 			
 			for(int i = 0; i < CreditList.size(); i++) {
-				if(CreditList.get(i).getSt_id() == st_id) {
+				if(CreditList.get(i).getStudentID() == st_id) {
 					boolean judge = true;
 					for(int j = 0; j < CreditList.size(); j++) {
 						if(temp[j][0] == CreditList.get(i).getYear() && temp[j][1] == CreditList.get(i).getSemester()) {
@@ -161,7 +161,7 @@ public class CompletedCreditList {
 		int[][] temp = new int[CreditList.size()][2];
 		
 		for(int i = 0; i < CreditList.size(); i++) {
-			if(CreditList.get(i).getSt_id() == st_id && CreditList.get(i).isApplication_state()) {
+			if(CreditList.get(i).getStudentID() == st_id && CreditList.get(i).isApplication_state()) {
 				boolean judge = true;
 				for(int j = 0; j < CreditList.size(); j++) {
 					if(temp[j][0] == CreditList.get(i).getYear() && temp[j][1] == CreditList.get(i).getSemester()) {
@@ -191,7 +191,7 @@ public class CompletedCreditList {
 		
 		if(count > 0) {
 			for(CompletedCredit one : CreditList) {
-				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester) {
+				if(one.getStudentID() == st_id && one.getYear() == year && one.getSemester() == semester) {
 					CCLP.add(one);
 				}
 			}
@@ -205,7 +205,7 @@ public class CompletedCreditList {
 		
 		if(count > 0) {
 			for(CompletedCredit one : CreditList) {
-				if(one.getSt_id() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
+				if(one.getStudentID() == st_id && one.getYear() == year && one.getSemester() == semester && one.isApplication_state()) {
 					ACLP.add(one);
 				}
 			}

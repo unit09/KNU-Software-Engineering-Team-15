@@ -206,7 +206,7 @@ public class CreditUI extends JFrame implements MouseListener {
 				DATA[i + 1][1] = list.get(i).getUniv();
 				DATA[i + 1][2] = list.get(i).getDept();
 				DATA[i + 1][3] = list.get(i).getCourse();
-				DATA[i + 1][4] = list.get(i).getAccept_credit();
+				DATA[i + 1][4] = list.get(i).getAcceptCredit();
 				DATA[i + 1][5] = list.get(i).getGrade();
 				if(list.get(i).isApplication_state()) {
 					DATA[i + 1][6] = "등록완료";
