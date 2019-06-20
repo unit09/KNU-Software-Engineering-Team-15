@@ -105,7 +105,7 @@ public class Client {
 	public void remove(String key) {
 		JSONObject saved = (JSONObject)readObject();
 		
-		if(saved.get(key) != null && saved != null) { //해당 key로 저장된 값이 있으면
+		if(saved != null && saved.get(key) != null) { //해당 key로 저장된 값이 있으면
 			saved.remove(key);
 			this.write(saved);
 		}
@@ -215,7 +215,8 @@ public class Client {
 		}
 		finally {
 			try {
-				inputStream.close();
+				if(inputStream != null)
+					inputStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -243,13 +244,15 @@ public class Client {
 		}
 		finally {
 			try {
-				fis.close();
+				if(fis != null)
+					fis.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
-				ois.close();
+				if(fis != null)
+					ois.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
