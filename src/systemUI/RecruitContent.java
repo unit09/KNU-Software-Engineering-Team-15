@@ -19,7 +19,7 @@ public class RecruitContent extends JFrame {
 		
 		JLabel title = new JLabel(recruitment.getTitle());
 		title.setForeground(Color.WHITE);
-		title.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		title.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
 		title.setBounds(14, 36, 372, 44);
 		getContentPane().add(title);
 		
@@ -30,6 +30,7 @@ public class RecruitContent extends JFrame {
 		Color temp = new Color(255, 255, 255, 0);
 		textArea.setBackground(temp);
 		textArea.setEditable(false);
+		textArea.setLineWrap(true);
 		textArea.setBounds(103, 109, 265, 156);
 		getContentPane().add(textArea);
 		
