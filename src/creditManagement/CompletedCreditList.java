@@ -213,4 +213,7 @@ public class CompletedCreditList {
 		return ACLP;
 	}
 	
+	public static String getNoList() {
+		return noList;
+	}
 }
