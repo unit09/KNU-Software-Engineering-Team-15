@@ -7,38 +7,38 @@ import client.Client;
 public class CompletedCredit implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private int StudentID = 0;
+	private int studentID = 0;
 	private int year = 0;
 	private int semester = 0;
 	private String nation = null;
 	private String univ = null;
 	private String dept = null;
 	private String course = null;
-	private int AcceptCredit = 0;
+	private int acceptCredit = 0;
 	private double grade = 0.0;
-	private boolean ApplicationState = false;
+	private boolean applicationState = false;
 	
-	public void credit_application(Client client) throws ClassNotFoundException { // 학점 인정 신청
-		CompletedCreditList list = CompletedCreditList.get_completed_credit_list(client);
-		ApplicationState = true;
+	public void creditApplication(Client client) throws ClassNotFoundException { // 학점 인정 신청
+		CompletedCreditList list = CompletedCreditList.getCompletedCreditList(client);
+		applicationState = true;
 		
-		list.completed_credit_list_modify(client, this);
+		list.completedCreditListModify(client, this);
 		
 		// 신청완료 안내창
 	}
 	
-	public void register_credit(Client client) throws ClassNotFoundException { // 파견 이후 새로 생성되는 이수학점 목록들
-		CompletedCreditList list = CompletedCreditList.get_completed_credit_list(client);
+	public void registerCredit(Client client) throws ClassNotFoundException { // 파견 이후 새로 생성되는 이수학점 목록들
+		CompletedCreditList list = CompletedCreditList.getCompletedCreditList(client);
 		
-		list.completed_credit_list_append(client, this);
+		list.completedCreditListAppend(client, this);
 	}
 	
 	public int getStudentID() {
-		return StudentID;
+		return studentID;
 	}
 
-	public void setStudentID(int StudentID) {
-		this.StudentID = StudentID;
+	public void setStudentID(int studentID) {
+		this.studentID = studentID;
 	}
 
 	public int getYear() {
@@ -90,11 +90,11 @@ public class CompletedCredit implements Serializable{
 	}
 
 	public int getAcceptCredit() {
-		return AcceptCredit;
+		return acceptCredit;
 	}
 
-	public void setAcceptCredit(int AcceptCredit) {
-		this.AcceptCredit = AcceptCredit;
+	public void setAcceptCredit(int acceptCredit) {
+		this.acceptCredit = acceptCredit;
 	}
 
 	public double getGrade() {
@@ -105,12 +105,12 @@ public class CompletedCredit implements Serializable{
 		this.grade = grade;
 	}
 
-	public boolean isApplication_state() {
-		return ApplicationState;
+	public boolean isApplicationState() {
+		return applicationState;
 	}
 
-	public void setApplicationState(boolean ApplicationState) {
-		this.ApplicationState = ApplicationState;
+	public void setApplicationState(boolean applicationState) {
+		this.applicationState = applicationState;
 	}
 
 }
